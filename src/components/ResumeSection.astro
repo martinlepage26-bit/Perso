@@ -1,0 +1,110 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { resumeData } from '../data/site';
+
+interface Props {
+  selectedPublications: CollectionEntry<'papers'>[];
+}
+
+const { selectedPublications } = Astro.props;
+---
+
+<div class="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+  <section class="veil-panel">
+    <p class="eyebrow">Summary</p>
+    <p class="mt-4 text-lg leading-8 text-slate-200">{resumeData.summary}</p>
+
+    <div class="mt-10 space-y-8">
+      <div>
+        <h2 class="text-3xl">Experience</h2>
+        <div class="mt-6 space-y-6">
+          {resumeData.experience.map((item) => (
+            <article class="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+              <div class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <h3 class="text-2xl">{item.title}</h3>
+                  <p class="text-sm uppercase tracking-[0.2em] text-slate-400">
+                    {item.organization} · {item.location}
+                  </p>
+                </div>
+                <p class="text-sm font-medium text-aqua">{item.dates}</p>
+              </div>
+              <ul class="mt-4 ml-5 list-disc space-y-3 text-base text-slate-200">
+                {item.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-3xl">Selected publications</h2>
+        <div class="mt-6 space-y-4">
+          {selectedPublications.map((paper) => (
+            <article class="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-aqua">{paper.data.year}</p>
+              <h3 class="mt-2 text-2xl">{paper.data.title}</h3>
+              <p class="mt-2 text-sm text-slate-400">{paper.data.citation}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="space-y-8">
+    <section class="veil-panel">
+      <p class="eyebrow">Education</p>
+      <div class="mt-5 space-y-5">
+        {resumeData.education.map((item) => (
+          <article class="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+            <div class="flex items-start justify-between gap-4">
+              <h2 class="text-2xl">{item.title}</h2>
+              <span class="text-sm font-medium text-aqua">{item.dates}</span>
+            </div>
+            <p class="mt-2 text-sm uppercase tracking-[0.2em] text-slate-400">{item.organization}</p>
+            <p class="mt-3 text-base text-slate-200">{item.detail}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="veil-panel">
+      <p class="eyebrow">Skills and expertise</p>
+      <div class="mt-5 space-y-5">
+        {resumeData.expertise.map((group) => (
+          <div class="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+            <h2 class="text-2xl">{group.label}</h2>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <li class="rounded-full border border-white/10 bg-white/8 px-3 py-1 text-sm text-slate-200">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="veil-panel">
+      <p class="eyebrow">Certifications</p>
+      <ul class="mt-5 ml-5 list-disc space-y-3 text-base text-slate-200">
+        {resumeData.certifications.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="veil-panel">
+      <p class="eyebrow">Contact</p>
+      <ul class="mt-5 space-y-3 text-base text-slate-200">
+        {resumeData.contact.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</div>

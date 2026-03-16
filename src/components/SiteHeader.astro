@@ -1,0 +1,45 @@
+---
+import { navigation, siteMeta } from '../data/site';
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-[rgba(201,168,76,0.14)] bg-[rgba(11,31,46,0.74)] backdrop-blur-[16px]">
+  <div class="shell flex flex-wrap items-center justify-between gap-4 py-4">
+    <a class="group inline-flex items-center gap-3 text-sm font-semibold text-moon" href="/">
+      <span class="relative flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(201,168,76,0.28)] bg-[rgba(15,59,62,0.3)] shadow-[0_0_24px_rgba(201,168,76,0.14)]">
+        <span class="h-4 w-4 rotate-45 rounded-[3px] border border-[rgba(255,245,226,0.62)] bg-[linear-gradient(135deg,rgba(244,224,167,0.98),rgba(201,168,76,0.96))] shadow-[0_0_14px_rgba(201,168,76,0.4)]"></span>
+        <span class="absolute h-2 w-2 rounded-full bg-[rgba(61,214,200,0.6)] blur-[2px]"></span>
+      </span>
+      <span class="flex flex-col">
+        <span class="font-mono text-sm tracking-[0.18em] uppercase text-accent">Martin Lepage</span>
+        <span class="text-xs font-medium text-slate-300">{siteMeta.jobTitle}</span>
+      </span>
+    </a>
+
+    <nav aria-label="Primary" class="flex flex-wrap items-center justify-end gap-2">
+      {
+        navigation.map(({ href, label }) => {
+          const isActive =
+            href === '/'
+              ? pathname === '/'
+              : pathname === href || pathname.startsWith(`${href}`);
+
+          return (
+            <a
+              href={href}
+              class:list={[
+                'rounded-full px-4 py-2 text-sm font-medium transition',
+                isActive
+                  ? 'border border-[rgba(201,168,76,0.3)] bg-[linear-gradient(135deg,rgba(184,129,31,0.92),rgba(201,168,76,0.88))] font-mono text-[0.74rem] uppercase tracking-[0.14em] text-night shadow-[0_0_24px_rgba(201,168,76,0.18)]'
+                  : 'text-slate-100 hover:bg-[rgba(15,59,62,0.3)] hover:text-moon',
+              ]}
+            >
+              {label}
+            </a>
+          );
+        })
+      }
+    </nav>
+  </div>
+</header>

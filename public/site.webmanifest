@@ -1,0 +1,23 @@
+{
+  "name": "Martin Lepage",
+  "short_name": "Martin Lepage",
+  "description": "Scholar, writer, and AI governance consultant based in Montreal.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f2ea",
+  "theme_color": "#11131a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/ml-monogram-navy.png",
+      "sizes": "1419x1586",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

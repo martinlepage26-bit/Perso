@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Martin Lepage social image</title>
+  <desc id="desc">Editorial social card with a dark threshold path and atmospheric geometry.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#11131a" />
+      <stop offset="100%" stop-color="#1d2230" />
+    </linearGradient>
+    <radialGradient id="mist" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="rgba(104,114,170,.55)" />
+      <stop offset="50%" stop-color="rgba(104,114,170,.10)" />
+      <stop offset="100%" stop-color="rgba(104,114,170,0)" />
+    </radialGradient>
+    <linearGradient id="path" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="rgba(110,123,190,.65)" />
+      <stop offset="100%" stop-color="rgba(110,123,190,0)" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#mist)" />
+  <path d="M600 30C480 160 470 380 600 620C730 380 720 160 600 30Z" fill="rgba(255,255,255,.02)" stroke="url(#path)" stroke-width="2" />
+  <path d="M600 90 905 315 600 540 295 315Z" fill="none" stroke="rgba(233,238,244,.18)" stroke-width="2" />
+  <path d="M370 315c60-90 140-130 230-130s170 40 230 130c-60 90-140 130-230 130s-170-40-230-130Z" fill="none" stroke="rgba(106,117,170,.76)" stroke-width="5" />
+  <circle cx="600" cy="315" r="48" fill="#eef1f5" />
+  <circle cx="600" cy="315" r="16" fill="#1d2230" />
+  <g fill="#eef1f5" font-family="Georgia, serif">
+    <text x="110" y="160" font-size="26" letter-spacing="8" opacity=".76">MONTREAL • SCHOLAR • WRITER • GOVERNANCE</text>
+    <text x="110" y="312" font-size="88" font-weight="700">Martin Lepage</text>
+    <text x="110" y="382" font-size="34" opacity=".86">AI governance consultant, public intellectual, and independent builder.</text>
+    <text x="110" y="438" font-size="28" opacity=".76">Research, publications, essays, projects, and CV.</text>
+  </g>
+</svg>

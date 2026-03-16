@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import FilterBar from '../../components/FilterBar.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import SectionIntro from '../../components/SectionIntro.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { collectTags, sortByYear } from '../../lib/content';
+
+const projects = sortByYear(await getCollection('projects'));
+const tags = collectTags(projects);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Academic, consulting, and creative projects by Martin Lepage, including book-stage manuscripts, governance frameworks, and digital work."
+>
+  <section class="section-shell">
+    <SectionIntro
+      eyebrow="Projects"
+      title="A mixed body of work, with the project status stated plainly."
+      description="Some entries are near-publishable books. Some are governance deliverables. Some are manuscript architectures or digital experiments. The point of this index is to preserve those differences."
+    />
+
+    <div class="mt-10">
+      <FilterBar scopeId="projects" tags={tags} searchPlaceholder="Search projects, roles, and formats" />
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-2" data-filter-scope="projects">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>

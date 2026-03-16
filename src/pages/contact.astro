@@ -1,0 +1,22 @@
+---
+import ContactBlock from '../components/ContactBlock.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Martin Lepage for AI governance consulting, research collaborations, editorial inquiries, talks, and media opportunities."
+>
+  <section class="section-shell">
+    <SectionIntro
+      eyebrow="Contact"
+      title="Clear paths for consulting, collaboration, and editorial conversation."
+      description="No form theatrics here. The site keeps contact simple, direct, and static-safe."
+    />
+
+    <div class="mt-12">
+      <ContactBlock />
+    </div>
+  </section>
+</BaseLayout>

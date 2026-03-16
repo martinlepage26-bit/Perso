@@ -1,0 +1,75 @@
+---
+interface Props {
+  scopeId: string;
+  tags: string[];
+  searchPlaceholder?: string;
+}
+
+const { scopeId, tags, searchPlaceholder = 'Search by title, theme, or keyword' } = Astro.props;
+---
+
+<div class="veil-panel" data-filter-root={scopeId}>
+  <div class="flex flex-col gap-5">
+    <label class="block">
+      <span class="sr-only">Search entries</span>
+      <input
+        data-filter-search
+        class="w-full rounded-[1.2rem] border border-white/10 bg-[rgba(8,16,28,0.82)] px-4 py-3 text-base text-moon placeholder:text-slate-400 backdrop-blur-md"
+        type="search"
+        placeholder={searchPlaceholder}
+      />
+    </label>
+    <div class="flex flex-wrap gap-2">
+      <button class="filter-button" data-filter-tag="all" type="button" aria-pressed="true">All</button>
+      {tags.map((tag) => (
+        <button class="filter-button" data-filter-tag={tag.toLowerCase()} type="button" aria-pressed="false">
+          {tag}
+        </button>
+      ))}
+    </div>
+    <p class="text-sm text-slate-400">
+      Filter by theme or search across titles, descriptions, venues, and tags.
+    </p>
+  </div>
+</div>
+
+<script is:inline>
+  const script = document.currentScript;
+  const root = script?.previousElementSibling;
+  const scopeId = root?.getAttribute('data-filter-root');
+  const scope = scopeId ? document.querySelector(`[data-filter-scope="${scopeId}"]`) : null;
+
+  if (root && scope) {
+    const input = root.querySelector('[data-filter-search]');
+    const buttons = [...root.querySelectorAll('[data-filter-tag]')];
+    const items = [...scope.querySelectorAll('[data-filter-item]')];
+    let activeTag = 'all';
+
+    const applyFilters = () => {
+      const searchValue = input instanceof HTMLInputElement ? input.value.trim().toLowerCase() : '';
+
+      items.forEach((item) => {
+        const tagValue = item.getAttribute('data-tags') ?? '';
+        const searchSource = item.getAttribute('data-search') ?? '';
+        const matchesTag = activeTag === 'all' || tagValue.includes(activeTag);
+        const matchesSearch = !searchValue || searchSource.includes(searchValue);
+        const visible = matchesTag && matchesSearch;
+
+        item.toggleAttribute('hidden', !visible);
+      });
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        activeTag = button.getAttribute('data-filter-tag') ?? 'all';
+        buttons.forEach((candidate) => {
+          candidate.setAttribute('aria-pressed', String(candidate === button));
+        });
+        applyFilters();
+      });
+    });
+
+    input?.addEventListener('input', applyFilters);
+    applyFilters();
+  }
+</script>

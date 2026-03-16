@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import FilterBar from '../../components/FilterBar.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import SectionIntro from '../../components/SectionIntro.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { collectTags, sortByYear } from '../../lib/content';
+import { researchOverview, researchProfile } from '../../data/research';
+
+const papers = sortByYear(await getCollection('papers'));
+const tags = collectTags(papers);
+---
+
+<BaseLayout
+  title="Papers and Publications"
+  description="Academic papers, articles, chapters, manuscripts, and publication-stage research projects by Martin Lepage."
+>
+  <section class="section-shell">
+    <SectionIntro
+      eyebrow="Papers and publications"
+      title="Scholarship across ritual studies, queer theory, digital culture, media criticism, and governance."
+      description="This index is intentionally mixed: peer-reviewed articles, chapters, reviews, and manuscript-stage work all live here, but each entry stays honest about its publication status."
+    />
+
+    <div class="mt-8 max-w-4xl">
+      <p class="text-lg leading-8 text-slate-200">{researchProfile}</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {researchOverview.map((item) => (
+        <article class="veil-panel h-full">
+          <p class="eyebrow">Research overview</p>
+          <h2 class="mt-3 text-3xl">{item.title}</h2>
+          <p class="mt-4 text-base text-slate-200">{item.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-10">
+      <FilterBar scopeId="papers" tags={tags} searchPlaceholder="Search papers, venues, and themes" />
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-2" data-filter-scope="papers">
+      {papers.map((paper) => <PublicationCard paper={paper} />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { clampText, contentSlug } from '../lib/content';
+import TagList from './TagList.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const slug = contentSlug(project.id);
+const motifClass =
+  {
+    'breath-of-the-astral-year': 'project-motif-orbit',
+    'the-witches-road': 'project-motif-road',
+    'the-sealed-card-protocol': 'project-motif-seal',
+    'the-violet-gem': 'project-motif-gem',
+    recurso: 'project-motif-recursion',
+  }[slug] ?? 'project-motif-default';
+---
+
+<article data-filter-item data-tags={project.data.tags.join('|').toLowerCase()} data-search={`${project.data.title} ${project.data.subtitle} ${project.data.description} ${project.data.role} ${project.data.tags.join(' ')}`.toLowerCase()}>
+  <a class="group card-link" href={`/projects/${contentSlug(project.id)}/`}>
+    <div class="overflow-hidden rounded-[1.35rem] border border-white/10 bg-[rgba(255,255,255,0.03)]">
+      <div class:list={['aspect-[16/10] p-5 project-motif-shell', motifClass]}>
+        <div class="flex h-full flex-col justify-between rounded-[1.1rem] border border-accent/20 bg-[rgba(7,14,24,0.46)] p-5 backdrop-blur-md">
+          <p class="eyebrow">{project.data.status}</p>
+          <div>
+            <p class="text-sm uppercase tracking-[0.14em] text-slate-400">{project.data.year}</p>
+            <h3 class="mt-2 text-xl leading-tight md:text-2xl">{project.data.title}</h3>
+            <p class="mt-2 text-sm text-slate-200">{project.data.subtitle}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-sm uppercase tracking-[0.14em] text-slate-400">{project.data.role}</p>
+    <p class="max-w-[58ch] text-base text-slate-200">{clampText(project.data.description, 220)}</p>
+    <TagList tags={project.data.tags} />
+    <span class="mt-auto text-sm font-semibold text-aqua group-hover:text-moon">View project</span>
+  </a>
+</article>

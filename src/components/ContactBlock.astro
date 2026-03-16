@@ -1,0 +1,57 @@
+---
+import { contactAreas, siteMeta } from '../data/site';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section class="veil-panel">
+  <div class:list={['grid gap-8', !compact && 'lg:grid-cols-[minmax(0,1fr)_320px]']}>
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">For consulting, research, speaking, or editorial inquiries.</h2>
+      <p class="mt-4 max-w-2xl text-base text-slate-200">
+        The clearest way to reach Martin is by email. The wider public footprint also includes GitHub, ORCID, Substack,
+        and a creative Instagram channel.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a class="button-primary" href={`mailto:${siteMeta.email}`}>Email Martin</a>
+        <a class="button-secondary" href={siteMeta.linkedIn}>LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-aqua/80">Direct</h3>
+        <ul class="mt-3 space-y-2 text-base text-slate-200">
+          <li>{siteMeta.location}</li>
+          <li><a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-aqua/80">Public channels</h3>
+        <ul class="mt-3 space-y-2 text-base text-slate-200">
+          <li><a href={siteMeta.github}>GitHub</a></li>
+          <li><a href={siteMeta.orcid}>ORCID</a></li>
+          <li><a href={siteMeta.substack}>Substack</a></li>
+          <li><a href={siteMeta.instagram}>Instagram</a></li>
+        </ul>
+      </div>
+
+      {!compact && (
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-aqua/80">Best fits</h3>
+          <ul class="mt-3 ml-5 list-disc space-y-2 text-base text-slate-200">
+            {contactAreas.map((area) => (
+              <li>{area}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

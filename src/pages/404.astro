@@ -1,0 +1,22 @@
+---
+import BackgroundTreatment from '../components/BackgroundTreatment.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Not found" description="The page you were looking for is not here.">
+  <section class="relative overflow-hidden">
+    <BackgroundTreatment variant="hero" />
+    <div class="section-shell relative text-center">
+      <p class="eyebrow">404</p>
+      <h1 class="mt-4 text-6xl md:text-7xl">The path breaks here.</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xl leading-8 text-slate-200">
+        The page you were looking for may have moved, been renamed, or never existed. The rest of the archive is still
+        intact.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a class="button-primary" href="/">Return home</a>
+        <a class="button-secondary" href="/projects/">Browse projects</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

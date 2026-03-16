@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Breath of the Astral Year social card</title>
+  <desc id="desc">Breath of the Astral Year visual with orbiting geometry, atmospheric gradients, and Earth-bound book framing.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#09121f" />
+      <stop offset="50%" stop-color="#112539" />
+      <stop offset="100%" stop-color="#20313e" />
+    </linearGradient>
+    <radialGradient id="mistA" cx="20%" cy="18%" r="58%">
+      <stop offset="0%" stop-color="#6ee2d0" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#6ee2d0" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="mistB" cx="80%" cy="22%" r="46%">
+      <stop offset="0%" stop-color="#f0b95f" stop-opacity="0.24" />
+      <stop offset="100%" stop-color="#f0b95f" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="ring" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0b95f" stop-opacity="0.62" />
+      <stop offset="100%" stop-color="#6ee2d0" stop-opacity="0.72" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#mistA)" />
+  <rect width="1200" height="630" fill="url(#mistB)" />
+
+  <g transform="translate(878 314)">
+    <circle r="206" fill="none" stroke="url(#ring)" stroke-width="2.5" stroke-opacity="0.9" />
+    <circle r="154" fill="none" stroke="#eef4f8" stroke-opacity="0.22" stroke-width="1.5" />
+    <circle r="96" fill="none" stroke="#6ee2d0" stroke-opacity="0.34" stroke-width="1.5" />
+    <circle r="28" fill="#eef4f8" fill-opacity="0.9" />
+    <circle r="10" fill="#102538" />
+    <path d="M0-228V-252M161-161l17-17M228 0h24M161 161l17 17M0 228v24M-161 161l-17 17M-228 0h-24M-161-161l-17-17" stroke="#eef4f8" stroke-opacity="0.44" stroke-width="3" stroke-linecap="round" />
+    <g fill="#eef4f8" fill-opacity="0.92" font-family="Georgia, serif" font-size="30" text-anchor="middle">
+      <text x="0" y="-178">♈</text>
+      <text x="89" y="-154">♉</text>
+      <text x="154" y="-89">♊</text>
+      <text x="178" y="10">♋</text>
+      <text x="154" y="108">♌</text>
+      <text x="89" y="174">♍</text>
+      <text x="0" y="198">♎</text>
+      <text x="-89" y="174">♏</text>
+      <text x="-154" y="108">♐</text>
+      <text x="-178" y="10">♑</text>
+      <text x="-154" y="-89">♒</text>
+      <text x="-89" y="-154">♓</text>
+    </g>
+  </g>
+
+  <g fill="#eef4f8">
+    <text x="88" y="124" font-family="Georgia, serif" font-size="28" letter-spacing="6" opacity="0.78">GAIALOGY • A BOOK OF SIGNS AND EARTHLY WEATHER</text>
+    <text x="88" y="236" font-family="Georgia, serif" font-size="70" font-weight="700">Breath of the</text>
+    <text x="88" y="316" font-family="Georgia, serif" font-size="70" font-weight="700">Astral Year</text>
+    <text x="88" y="384" font-family="Georgia, serif" font-size="30" opacity="0.9">A book that looks for meaning on Earth,</text>
+    <text x="88" y="430" font-family="Georgia, serif" font-size="30" opacity="0.9">in weather, bodies, seasons, and the Sun.</text>
+  </g>
+
+  <g fill="#d8e5ec" font-family="Georgia, serif" font-size="24" opacity="0.8">
+    <text x="88" y="500">Grounded symbolic life, kept close to Earth.</text>
+    <text x="88" y="536">Signs as feeling, season, and Earth energy.</text>
+  </g>
+</svg>

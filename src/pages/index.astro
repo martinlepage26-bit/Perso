@@ -1,0 +1,174 @@
+---
+import { getCollection } from 'astro:content';
+import ContactBlock from '../components/ContactBlock.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import WritingCard from '../components/WritingCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { estimateReadingMinutes, sortByDate, sortByYear } from '../lib/content';
+import { biography, homeHighlights, siteMeta } from '../data/site';
+
+const papers = sortByYear(await getCollection('papers'));
+const projects = sortByYear(await getCollection('projects'));
+const writings = sortByDate(await getCollection('writings'));
+const talks = sortByDate(await getCollection('talks'));
+
+const featuredPapers = papers.filter((entry) => entry.data.featured).slice(0, 3);
+const featuredProjects = projects.filter((entry) => entry.data.featured).slice(0, 3);
+const featuredWriting = writings.filter((entry) => entry.data.featured).slice(0, 3);
+const featuredTalks = talks.filter((entry) => entry.data.featured).slice(0, 3);
+const symbolicProjectOrder = [
+  'the-violet-gem',
+  'socialcompass-agatha',
+  'from-ai-anxiety-to-recursive-governance-under-constraint',
+  'the-sealed-card-protocol',
+];
+const symbolicProjects = symbolicProjectOrder
+  .map((slug) => projects.find((entry) => entry.id.replace(/\.md$/i, '') === slug))
+  .filter((project): project is NonNullable<typeof project> => Boolean(project));
+---
+
+<BaseLayout description={siteMeta.description}>
+  <Hero />
+
+  <section class="section-shell">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+      <SectionIntro
+        eyebrow="Overview"
+        title="A public-intellectual site that still behaves like an operational dossier."
+        description={biography.intro}
+      />
+
+      <div class="veil-panel space-y-6">
+        <p class="text-lg leading-8 text-slate-200">
+          Martin’s practice links governance, research, and authorship through one recurring question: how do systems
+          authorize power, and how do people live inside those structures once they become real?
+        </p>
+        <p class="text-base text-slate-200">
+          That question shows up in AI governance work, in ritual and media analysis, in manuscripts on legitimacy and
+          containment, and in the long-form essays gathered here.
+        </p>
+        <a class="link-inline" href="/about/">Read the fuller biography</a>
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {homeHighlights.map((item) => (
+        <article class="veil-panel h-full">
+          <p class="eyebrow">Focus</p>
+          <h3 class="mt-3 text-3xl">{item.title}</h3>
+          <p class="mt-4 text-base text-slate-200">{item.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-shell border-y border-white/8 bg-white/4">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <SectionIntro
+        eyebrow="Featured publications"
+        title="Academic work rooted in queer method, ritual studies, media criticism, and digital culture."
+        description="Seeded from Martin’s publication record, with placeholder notes left visible anywhere metadata still needs verification."
+      />
+      <a class="button-secondary" href="/papers/">Browse all papers</a>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {featuredPapers.map((paper) => <PublicationCard paper={paper} />)}
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <SectionIntro
+        eyebrow="Projects"
+        title="Consulting frameworks, book-stage works, digital experiments, and research-driven builds."
+        description="The project layer preserves the difference between finished outputs, manuscript scaffolds, governance deliverables, and longer-range architectures."
+      />
+      <div class="flex flex-wrap gap-3">
+        <a class="button-primary" href="/projects/agency-lotus/">View Agency LOTUS</a>
+        <a class="button-secondary" href="/projects/">See all projects</a>
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {featuredProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <section class="section-shell border-y border-white/8 bg-white/3">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <SectionIntro
+        eyebrow="Current teasers"
+        title="Four developing works are now visible on the site as teaser entries."
+        description="The Violet Gem, SocialCompass Agatha, From AI Anxiety to Recursive Governance Under Constraint, and The Sealed Card Protocol now appear as public-facing previews rather than full descriptions."
+      />
+      <a class="button-secondary" href="/projects/">Open full project index</a>
+    </div>
+
+    <div class="mt-12 grid gap-6 xl:grid-cols-4 md:grid-cols-2">
+      {symbolicProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <section class="section-shell border-y border-white/8 bg-white/4">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <SectionIntro
+        eyebrow="Writing"
+        title="Essays, reflections, and public-facing work that keep theory near the page."
+        description="These pieces hold the more elastic voice of the site: still rigorous, but open to criticism, atmosphere, and experiment."
+      />
+      <a class="button-secondary" href="/writing/">Read the archive</a>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {
+        featuredWriting.map((writing) => (
+          <WritingCard writing={writing} readingMinutes={estimateReadingMinutes(writing.body ?? '')} />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <div class="veil-panel">
+        <p class="eyebrow">Talks and media</p>
+        <h2 class="mt-3 text-3xl">Conference sessions, research presentations, and public-facing appearances.</h2>
+        <div class="mt-8 space-y-4">
+          {featuredTalks.map((talk) => (
+            <article class="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+              <p class="text-sm font-semibold uppercase tracking-[0.22em] text-aqua">
+                {talk.data.dateLabel ?? talk.data.date.getFullYear()}
+              </p>
+              <h3 class="mt-2 text-2xl">{talk.data.title}</h3>
+              <p class="mt-2 text-sm uppercase tracking-[0.2em] text-slate-400">
+                {talk.data.event} · {talk.data.format}
+              </p>
+              <p class="mt-3 text-base text-slate-200">{talk.data.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="veil-panel">
+        <p class="eyebrow">Resume and CV</p>
+        <h2 class="mt-3 text-3xl">Downloadable, readable, and aligned with the consulting-facing profile.</h2>
+        <p class="mt-4 text-base text-slate-200">
+          The resume route combines AI governance, research operations, teaching, archival work, and recent clinical
+          coordination into one clean on-page document.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="button-primary" href="/resume/">Open resume</a>
+          <a class="button-secondary" href="/files/Martin-Lepage-CV-2026.pdf">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <ContactBlock compact />
+  </section>
+</BaseLayout>

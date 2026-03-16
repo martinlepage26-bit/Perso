@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import FilterBar from '../../components/FilterBar.astro';
+import SectionIntro from '../../components/SectionIntro.astro';
+import WritingCard from '../../components/WritingCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { collectTags, estimateReadingMinutes, sortByDate } from '../../lib/content';
+import { siteMeta } from '../../data/site';
+
+const writings = sortByDate(await getCollection('writings'));
+const tags = collectTags(writings);
+---
+
+<BaseLayout
+  title="Writing and Essays"
+  description="Essays, reflections, notes, and public-facing writing by Martin Lepage."
+>
+  <section class="section-shell">
+    <SectionIntro
+      eyebrow="Writing"
+      title="Public-facing essays, reflections, and experimental criticism."
+      description="This archive sits between publication and notebook: some pieces are self-contained essays, some point outward to Martin’s broader writing orbit, including the Hex A. Decimal Substack profile."
+    />
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a class="button-secondary" href={siteMeta.substack}>Visit Substack</a>
+      <a class="button-secondary" href="/rss.xml">Subscribe by RSS</a>
+    </div>
+
+    <div class="mt-10">
+      <FilterBar scopeId="writings" tags={tags} searchPlaceholder="Search essays, notes, and themes" />
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-2" data-filter-scope="writings">
+      {writings.map((writing) => (
+        <WritingCard writing={writing} readingMinutes={estimateReadingMinutes(writing.body ?? '')} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
