@@ -6,30 +6,46 @@ interface Props {
 }
 
 const { scopeId, tags, searchPlaceholder = 'Search by title, theme, or keyword' } = Astro.props;
+const seenTags = new Set<string>();
+const normalizedTags = tags.filter((tag) => {
+  const key = tag.toLowerCase();
+  if (seenTags.has(key)) {
+    return false;
+  }
+
+  seenTags.add(key);
+  return true;
+});
 ---
 
-<div class="veil-panel" data-filter-root={scopeId}>
-  <div class="flex flex-col gap-5">
-    <label class="block">
-      <span class="sr-only">Search entries</span>
-      <input
-        data-filter-search
-        class="w-full rounded-[1.2rem] border border-white/10 bg-[rgba(8,16,28,0.82)] px-4 py-3 text-base text-moon placeholder:text-slate-400 backdrop-blur-md"
-        type="search"
-        placeholder={searchPlaceholder}
-      />
-    </label>
-    <div class="flex flex-wrap gap-2">
-      <button class="filter-button" data-filter-tag="all" type="button" aria-pressed="true">All</button>
-      {tags.map((tag) => (
-        <button class="filter-button" data-filter-tag={tag.toLowerCase()} type="button" aria-pressed="false">
-          {tag}
-        </button>
-      ))}
+<div data-filter-root={scopeId}>
+  <div class="filter-shell">
+    <div class="filter-toolbar">
+      <label class="filter-field">
+        <span class="filter-label">Find</span>
+        <input
+          data-filter-search
+          class="filter-search"
+          type="search"
+          placeholder={searchPlaceholder}
+        />
+      </label>
+
+      <label class="filter-field">
+        <span class="filter-label">Theme</span>
+        <select class="filter-select" data-filter-tag>
+          <option value="all">All themes</option>
+          {normalizedTags.map((tag) => (
+            <option value={tag.toLowerCase()}>{tag}</option>
+          ))}
+        </select>
+      </label>
+
+      <div class="filter-actions">
+        <span class="filter-count" data-filter-count>0 shown</span>
+        <button class="filter-reset" data-filter-reset type="button">Clear</button>
+      </div>
     </div>
-    <p class="text-sm text-slate-400">
-      Filter by theme or search across titles, descriptions, venues, and tags.
-    </p>
   </div>
 </div>
 
@@ -41,12 +57,15 @@ const { scopeId, tags, searchPlaceholder = 'Search by title, theme, or keyword' 
 
   if (root && scope) {
     const input = root.querySelector('[data-filter-search]');
-    const buttons = [...root.querySelectorAll('[data-filter-tag]')];
+    const select = root.querySelector('[data-filter-tag]');
+    const reset = root.querySelector('[data-filter-reset]');
+    const count = root.querySelector('[data-filter-count]');
     const items = [...scope.querySelectorAll('[data-filter-item]')];
     let activeTag = 'all';
 
     const applyFilters = () => {
       const searchValue = input instanceof HTMLInputElement ? input.value.trim().toLowerCase() : '';
+      let visibleCount = 0;
 
       items.forEach((item) => {
         const tagValue = item.getAttribute('data-tags') ?? '';
@@ -56,20 +75,32 @@ const { scopeId, tags, searchPlaceholder = 'Search by title, theme, or keyword' 
         const visible = matchesTag && matchesSearch;
 
         item.toggleAttribute('hidden', !visible);
+        if (visible) visibleCount += 1;
       });
+
+      if (count instanceof HTMLElement) {
+        count.textContent = `${visibleCount} shown`;
+      }
     };
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        activeTag = button.getAttribute('data-filter-tag') ?? 'all';
-        buttons.forEach((candidate) => {
-          candidate.setAttribute('aria-pressed', String(candidate === button));
-        });
-        applyFilters();
-      });
+    select?.addEventListener('change', () => {
+      activeTag = select instanceof HTMLSelectElement ? select.value : 'all';
+      applyFilters();
     });
 
     input?.addEventListener('input', applyFilters);
+    reset?.addEventListener('click', () => {
+      if (input instanceof HTMLInputElement) {
+        input.value = '';
+      }
+
+      if (select instanceof HTMLSelectElement) {
+        select.value = 'all';
+      }
+
+      activeTag = 'all';
+      applyFilters();
+    });
     applyFilters();
   }
 </script>

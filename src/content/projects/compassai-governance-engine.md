@@ -16,7 +16,7 @@ tags:
   - Oversight
 featured: false
 image: "/assets/isometric-grid-corner.png"
-imageAlt: "A grid-based placeholder for a directional governance engine."
+imageAlt: "A grid-based motif suggesting directional governance, oversight, and systems design."
 links:
   - label: "GitHub"
     url: "https://github.com/martinlepage26-bit/CompassAI"
@@ -24,4 +24,4 @@ links:
 
 *CompassAI* extends the governance side of the portfolio into a more explicitly product-shaped prototype. The title suggests direction, navigation, and institutional orientation, which makes it a useful companion to the more documentation-heavy practice work.
 
-If screenshots, a demo, or a fuller README become publicly presentable, add them here to strengthen the project page.
+As public materials expand, this page can grow to include screenshots, a demo, or a fuller README.

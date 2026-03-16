@@ -1,6 +1,6 @@
 # Martin Lepage Personal Website
 
-A deployment-ready Astro site for **Martin Lepage**: scholar, writer, and AI governance consultant based in Montreal.
+A deployment-ready Astro site for **Martin Lepage**: scholar, writer, and AI governance strategist based in Montreal.
 
 ## Why Astro
 
@@ -12,10 +12,10 @@ Next.js was not materially better for this case. The site does not need authenti
 
 The visual system translates the **Witches' Road** brief into an editorial, trust-heavy atmosphere:
 
-- light mode by default, with dark mode support through `prefers-color-scheme`
-- off-white paper tones, dark ink, muted indigo, restrained plum
+- a dark-first presentation with violet, plum, and bone-toned contrast
+- restrained atmosphere instead of overt fantasy signaling
 - corridor/path depth, mist, and subtle geometric overlays instead of loud fantasy illustration
-- serious typography for scholarship and consulting, without collapsing into corporate SaaS styling
+- serious typography for scholarship and governance work, without collapsing into corporate SaaS styling
 - a content-first layout with symbolic atmosphere concentrated in the hero and section wrappers
 
 The design also borrows lightly from the supplied stationery kit so the site feels related to the existing AI governance identity assets.
@@ -28,7 +28,7 @@ The design also borrows lightly from the supplied stationery kit so the site fee
 - Astro content collections
 - MD/markdown content entries
 - RSS feed for writing
-- Sitemap
+- Sitemap when `PUBLIC_SITE_URL` or `SITE_URL` is configured
 
 ## Project Structure
 
@@ -81,6 +81,8 @@ npm run check
 npm run build
 ```
 
+For production-ready metadata, set `PUBLIC_SITE_URL` or `SITE_URL` before running `npm run build`.
+
 ## Editing Workflow
 
 Most updates should happen in markdown or one data file:
@@ -107,8 +109,8 @@ Current collections:
 Before launch, update these items:
 
 1. **Live domain**
-   - `astro.config.mjs`
-   - `src/data/site.ts`
+   - set `PUBLIC_SITE_URL` or `SITE_URL` before production builds
+   - use the same public origin for canonical URLs, sitemap output, and RSS metadata
 
 2. **Professional portrait**
    - replace the About page placeholder treatment with a real headshot
@@ -175,7 +177,7 @@ If deploying from Git:
 2. Create a Cloudflare Pages project from that repo.
 3. Set the build command to `npm run build`.
 4. Set the output directory to `dist`.
-5. Update the site URL in `astro.config.mjs` and `src/data/site.ts`.
+5. Set `PUBLIC_SITE_URL` to the final production origin before building.
 
 ### GitHub Pages
 

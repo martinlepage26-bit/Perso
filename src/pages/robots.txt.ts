@@ -1,7 +1,9 @@
 import { siteMeta } from '../data/site';
 
 export function GET() {
-  return new Response(`User-agent: *\nAllow: /\nSitemap: ${siteMeta.siteUrl}/sitemap-index.xml\n`, {
+  const sitemapLine = siteMeta.siteUrl ? `Sitemap: ${siteMeta.siteUrl}/sitemap-index.xml\n` : '';
+
+  return new Response(`User-agent: *\nAllow: /\n${sitemapLine}`, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
     },

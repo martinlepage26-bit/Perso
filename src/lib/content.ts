@@ -9,11 +9,20 @@ export function formatDate(input: Date | string) {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'UTC',
   }).format(value);
 }
 
 export function sortByYear<T extends { data: { year: number } }>(items: T[]) {
   return [...items].sort((a, b) => b.data.year - a.data.year);
+}
+
+export function isPublishedStatus(status: string) {
+  return /\bpublished\b/i.test(status);
+}
+
+export function isPublishedPaper<T extends { data: { status: string } }>(item: T) {
+  return isPublishedStatus(item.data.status);
 }
 
 export function sortByDate<T extends { data: { date: Date } }>(items: T[]) {

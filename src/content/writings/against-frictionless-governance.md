@@ -14,4 +14,4 @@ The fantasy of frictionless governance is attractive because it promises speed w
 
 Governance becomes useful not when it removes every pause, but when it creates the right pauses. A good review checkpoint is not a sign that the system is failing. It is a sign that the institution still knows where judgment lives.
 
-That is why documentation matters so much in Martin Lepage's consulting practice. Traceability is less about bureaucratic excess than about preserving the social memory of consequential decisions.
+That is why documentation matters so much in Martin Lepage's governance work. Traceability is less about bureaucratic excess than about preserving the social memory of consequential decisions.

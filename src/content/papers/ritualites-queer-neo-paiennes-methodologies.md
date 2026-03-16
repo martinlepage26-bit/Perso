@@ -18,4 +18,4 @@ links: []
 
 This chapter is useful for readers who want to understand the methodological spine behind Lepage's scholarship. Experience and narrative are not treated as soft supplements to analysis, but as the sites where social order becomes legible.
 
-That methodological concern also informs the site's more consulting-facing sections, where governance is framed not only as compliance work, but as a question of how experience becomes documented, reviewable, and actionable.
+That methodological concern also informs the site's governance-facing sections, where review is framed not only as compliance work, but as a question of how experience becomes documented, reviewable, and actionable.

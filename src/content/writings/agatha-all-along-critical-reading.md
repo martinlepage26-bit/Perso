@@ -9,6 +9,7 @@ tags:
   - cultural analysis
   - placeholder date
 featured: false
+draft: true
 ---
 The publications profile confirms that a critical reading of *Agatha All Along* exists within the current body of work and that it uses queer theory, ritual studies, and cultural analysis frameworks. What the available sources do not yet confirm is the final essay title, venue, or posting date.
 

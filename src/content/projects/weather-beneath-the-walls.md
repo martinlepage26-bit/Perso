@@ -16,10 +16,10 @@ tags:
   - Editorial development
 featured: true
 image: "/assets/ai-governance-eye.png"
-imageAlt: "A project placeholder image representing the manuscript's symbolic and atmospheric intensity."
+imageAlt: "An atmospheric visual treatment for a manuscript shaped by symbolic intensity and editorial confidence."
 links: []
 ---
 
-This project should be presented as the most publication-ready of the current long-form book works. The goal on the site is not to oversell what is unfinished, but to distinguish one manuscript that already has the shape and density of a real book from projects that are earlier in editorial development.
+This project is presented as the most publication-ready of the current long-form book works. The goal is not to oversell what is unfinished, but to distinguish one manuscript that already has the shape and density of a real book from projects that are earlier in editorial development.
 
-Use this entry to explain what the manuscript is doing, who it is for, and what kind of editorial attention it needs next. If a subtitle, synopsis, or sample chapter description becomes public-safe, add it here.
+It shows what the manuscript is doing, who it is for, and what kind of editorial attention it needs next. A subtitle, synopsis, or sample chapter description can be added once those materials are ready for public view.

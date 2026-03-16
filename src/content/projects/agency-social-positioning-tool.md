@@ -16,7 +16,7 @@ tags:
   - Language systems
 featured: false
 image: "/assets/geometric-motif-bottomleft.png"
-imageAlt: "A geometric motif used as a placeholder for positioning and interface patterning."
+imageAlt: "A geometric motif suggesting positioning, interfaces, and patterned social analysis."
 links:
   - label: "GitHub"
     url: "https://github.com/martinlepage26-bit/Agency"
@@ -24,4 +24,4 @@ links:
 
 This project belongs in the portfolio because it shows that Martin's governance work is not only about rules and risk. It is also about social framing: how institutions explain themselves, how users understand power, and how public language shapes trust.
 
-That makes *Agency* a useful bridge between the consulting pages and the more literary or critical parts of the site.
+That makes *Agency* a useful bridge between the governance pages and the more literary or critical parts of the site.

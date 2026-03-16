@@ -7,7 +7,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { collectTags, estimateReadingMinutes, sortByDate } from '../../lib/content';
 import { siteMeta } from '../../data/site';
 
-const writings = sortByDate(await getCollection('writings'));
+const writings = sortByDate(await getCollection('writings', ({ data }) => !data.draft));
 const tags = collectTags(writings);
 ---
 
@@ -18,17 +18,17 @@ const tags = collectTags(writings);
   <section class="section-shell">
     <SectionIntro
       eyebrow="Writing"
-      title="Public-facing essays, reflections, and experimental criticism."
-      description="This archive sits between publication and notebook: some pieces are self-contained essays, some point outward to Martin’s broader writing orbit, including the Hex A. Decimal Substack profile."
+      title="Essays, reflections, and criticism."
+      description="A public writing archive between publication and notebook, with links back to the broader Substack orbit."
     />
 
-    <div class="mt-6 flex flex-wrap gap-3">
-      <a class="button-secondary" href={siteMeta.substack}>Visit Substack</a>
-      <a class="button-secondary" href="/rss.xml">Subscribe by RSS</a>
-    </div>
+    <ul class="bullet-links mt-6">
+      <li><a class="link-inline" href={siteMeta.substack}>Visit Substack</a></li>
+      {siteMeta.siteUrl && <li><a class="link-inline" href="/rss.xml">Subscribe by RSS</a></li>}
+    </ul>
 
     <div class="mt-10">
-      <FilterBar scopeId="writings" tags={tags} searchPlaceholder="Search essays, notes, and themes" />
+      <FilterBar scopeId="writings" tags={tags} searchPlaceholder="Search writing" />
     </div>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-2" data-filter-scope="writings">

@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import ResumeSection from '../components/ResumeSection.astro';
 import SectionIntro from '../components/SectionIntro.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { sortByYear } from '../lib/content';
+import { isPublishedPaper, sortByYear } from '../lib/content';
 
 const papers = sortByYear(await getCollection('papers'));
-const selectedPublications = papers.filter((entry) => entry.data.featured).slice(0, 4);
+const selectedPublications = papers.filter((entry) => isPublishedPaper(entry)).slice(0, 4);
 ---
 
 <BaseLayout
@@ -17,14 +17,14 @@ const selectedPublications = papers.filter((entry) => entry.data.featured).slice
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <SectionIntro
         eyebrow="Resume and CV"
-        title="Readable on the page, downloadable when someone needs the file."
-        description="This route is shaped for consulting, media, and academic opportunities alike: enough detail to establish credibility, but structured so the editing workflow stays simple."
+        title="Readable online. Downloadable when needed."
+        description="A compact public-facing CV with publications, experience, and current training in one place."
       />
 
-      <div class="flex flex-wrap gap-3">
-        <a class="button-primary" href="/files/Martin-Lepage-CV-2026.pdf">Download PDF</a>
-        <a class="button-secondary" href="/files/Martin-Lepage-CV-2026.docx">Download DOCX</a>
-      </div>
+      <ul class="bullet-links">
+        <li><a class="link-inline" href="/files/Martin-Lepage-CV-2026.pdf">Download PDF</a></li>
+        <li><a class="link-inline" href="/files/Martin-Lepage-CV-2026.docx">Download DOCX</a></li>
+      </ul>
     </div>
 
     <div class="mt-12">

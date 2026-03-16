@@ -12,7 +12,7 @@ import { biography, homeHighlights, siteMeta } from '../data/site';
 
 const papers = sortByYear(await getCollection('papers'));
 const projects = sortByYear(await getCollection('projects'));
-const writings = sortByDate(await getCollection('writings'));
+const writings = sortByDate(await getCollection('writings', ({ data }) => !data.draft));
 const talks = sortByDate(await getCollection('talks'));
 
 const featuredPapers = papers.filter((entry) => entry.data.featured).slice(0, 3);
@@ -37,18 +37,18 @@ const symbolicProjects = symbolicProjectOrder
     <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
       <SectionIntro
         eyebrow="Overview"
-        title="A public-intellectual site that still behaves like an operational dossier."
+        title="A public site with operational clarity."
         description={biography.intro}
       />
 
       <div class="veil-panel space-y-6">
         <p class="text-lg leading-8 text-slate-200">
           Martin’s practice links governance, research, and authorship through one recurring question: how do systems
-          authorize power, and how do people live inside those structures once they become real?
+          authorize power, and how do people live inside them once they become real?
         </p>
         <p class="text-base text-slate-200">
-          That question shows up in AI governance work, in ritual and media analysis, in manuscripts on legitimacy and
-          containment, and in the long-form essays gathered here.
+          That question appears here in AI governance work, ritual and media analysis, book projects, and long-form
+          essays.
         </p>
         <a class="link-inline" href="/about/">Read the fuller biography</a>
       </div>
@@ -58,7 +58,7 @@ const symbolicProjects = symbolicProjectOrder
       {homeHighlights.map((item) => (
         <article class="veil-panel h-full">
           <p class="eyebrow">Focus</p>
-          <h3 class="mt-3 text-3xl">{item.title}</h3>
+          <h3 class="mt-3 text-[1.45rem] md:text-[1.62rem]">{item.title}</h3>
           <p class="mt-4 text-base text-slate-200">{item.description}</p>
         </article>
       ))}
@@ -69,10 +69,13 @@ const symbolicProjects = symbolicProjectOrder
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <SectionIntro
         eyebrow="Featured publications"
-        title="Academic work rooted in queer method, ritual studies, media criticism, and digital culture."
-        description="Seeded from Martin’s publication record, with placeholder notes left visible anywhere metadata still needs verification."
+        title="Research across ritual, gender, media, and governance."
+        description="Academic work with publication status kept visible and plain."
       />
-      <a class="button-secondary" href="/papers/">Browse all papers</a>
+    </div>
+
+    <div class="mt-3">
+      <a class="link-inline" href="/papers/">Browse all publications</a>
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
@@ -84,13 +87,13 @@ const symbolicProjects = symbolicProjectOrder
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <SectionIntro
         eyebrow="Projects"
-        title="Consulting frameworks, book-stage works, digital experiments, and research-driven builds."
-        description="The project layer preserves the difference between finished outputs, manuscript scaffolds, governance deliverables, and longer-range architectures."
+        title="Projects across books, governance, and digital work."
+        description="A mixed project archive that keeps statuses and formats distinct."
       />
-      <div class="flex flex-wrap gap-3">
-        <a class="button-primary" href="/projects/agency-lotus/">View Agency LOTUS</a>
-        <a class="button-secondary" href="/projects/">See all projects</a>
-      </div>
+    </div>
+
+    <div class="mt-3">
+      <a class="link-inline" href="/projects/">Browse all projects</a>
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
@@ -102,10 +105,13 @@ const symbolicProjects = symbolicProjectOrder
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <SectionIntro
         eyebrow="Current teasers"
-        title="Four developing works are now visible on the site as teaser entries."
-        description="The Violet Gem, SocialCompass Agatha, From AI Anxiety to Recursive Governance Under Constraint, and The Sealed Card Protocol now appear as public-facing previews rather than full descriptions."
+        title="Current teaser projects."
+        description="Four developing works now appear as public-facing previews."
       />
-      <a class="button-secondary" href="/projects/">Open full project index</a>
+    </div>
+
+    <div class="mt-3">
+      <a class="link-inline" href="/projects/">Open the full project index</a>
     </div>
 
     <div class="mt-12 grid gap-6 xl:grid-cols-4 md:grid-cols-2">
@@ -117,10 +123,13 @@ const symbolicProjects = symbolicProjectOrder
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <SectionIntro
         eyebrow="Writing"
-        title="Essays, reflections, and public-facing work that keep theory near the page."
-        description="These pieces hold the more elastic voice of the site: still rigorous, but open to criticism, atmosphere, and experiment."
+        title="Essays and public criticism."
+        description="A writing archive that keeps theory, atmosphere, and argument close together."
       />
-      <a class="button-secondary" href="/writing/">Read the archive</a>
+    </div>
+
+    <div class="mt-3">
+      <a class="link-inline" href="/writing/">Read the writing archive</a>
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
@@ -136,14 +145,14 @@ const symbolicProjects = symbolicProjectOrder
     <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
       <div class="veil-panel">
         <p class="eyebrow">Talks and media</p>
-        <h2 class="mt-3 text-3xl">Conference sessions, research presentations, and public-facing appearances.</h2>
+        <h2 class="mt-3 text-[1.68rem] md:text-[1.9rem]">Conference sessions, research presentations, and public-facing appearances.</h2>
         <div class="mt-8 space-y-4">
           {featuredTalks.map((talk) => (
             <article class="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
               <p class="text-sm font-semibold uppercase tracking-[0.22em] text-aqua">
                 {talk.data.dateLabel ?? talk.data.date.getFullYear()}
               </p>
-              <h3 class="mt-2 text-2xl">{talk.data.title}</h3>
+              <h3 class="mt-2 text-[1.28rem] md:text-[1.45rem]">{talk.data.title}</h3>
               <p class="mt-2 text-sm uppercase tracking-[0.2em] text-slate-400">
                 {talk.data.event} · {talk.data.format}
               </p>
@@ -151,19 +160,20 @@ const symbolicProjects = symbolicProjectOrder
             </article>
           ))}
         </div>
+        <div class="mt-6"><a class="link-inline" href="/talks/">View all talks</a></div>
       </div>
 
       <div class="veil-panel">
         <p class="eyebrow">Resume and CV</p>
-        <h2 class="mt-3 text-3xl">Downloadable, readable, and aligned with the consulting-facing profile.</h2>
+        <h2 class="mt-3 text-[1.68rem] md:text-[1.9rem]">Downloadable, readable, and aligned with the public profile.</h2>
         <p class="mt-4 text-base text-slate-200">
-          The resume route combines AI governance, research operations, teaching, archival work, and recent clinical
-          coordination into one clean on-page document.
+          The resume route gathers governance, research operations, teaching, archival work, and recent clinical
+          coordination into one compact document.
         </p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a class="button-primary" href="/resume/">Open resume</a>
-          <a class="button-secondary" href="/files/Martin-Lepage-CV-2026.pdf">Download PDF</a>
-        </div>
+        <ul class="bullet-links mt-6">
+          <li><a class="link-inline" href="/resume/">Open resume</a></li>
+          <li><a class="link-inline" href="/files/Martin-Lepage-CV-2026.pdf">Download PDF</a></li>
+        </ul>
       </div>
     </div>
   </section>

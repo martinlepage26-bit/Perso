@@ -20,4 +20,4 @@ This article sits near the center of Lepage's doctoral-era research. It brings q
 
 For the website, the entry is framed not only as a contribution to pagan studies, but as an early example of a method that continues into later governance work: close attention to how institutions and communities authorize belonging, difference, and decision-making.
 
-If you have the publisher abstract or DOI, add them here and update the citation accordingly.
+The entry can be expanded with publisher abstract and DOI details once they are verified.

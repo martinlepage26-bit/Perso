@@ -3,10 +3,10 @@ import { getCollection, render } from 'astro:content';
 import EntryHero from '../../components/EntryHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { contentSlug, estimateReadingMinutes, formatDate } from '../../lib/content';
-import { buildArticleSchema } from '../../lib/seo';
+import { buildArticleSchema, buildCanonical } from '../../lib/seo';
 
 export async function getStaticPaths() {
-  const writings = await getCollection('writings');
+  const writings = await getCollection('writings', ({ data }) => !data.draft);
   return writings.map((writing) => ({
     params: { slug: contentSlug(writing.id) },
     props: { writing },
@@ -20,7 +20,7 @@ const canonical = `/writing/${contentSlug(writing.id)}/`;
 const structuredData = buildArticleSchema({
   title: writing.data.title,
   description: writing.data.description,
-  url: new URL(canonical, 'https://martinlepage.example').toString(),
+  url: buildCanonical(canonical),
   datePublished: writing.data.date.toISOString(),
 });
 ---

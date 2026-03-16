@@ -1,9 +1,22 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 
+const safeUrl = z.string().refine((value) => {
+  if (value.startsWith('/')) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(value);
+    return ['http:', 'https:', 'mailto:'].includes(parsed.protocol);
+  } catch {
+    return false;
+  }
+}, 'Expected an http(s), mailto, or site-relative URL.');
+
 const linkSchema = z.object({
   label: z.string(),
-  url: z.string(),
+  url: safeUrl,
 });
 
 const papers = defineCollection({
@@ -48,7 +61,8 @@ const writings = defineCollection({
     date: z.coerce.date(),
     tags: z.array(z.string()),
     featured: z.boolean(),
-    externalUrl: z.string().optional(),
+    draft: z.boolean().optional(),
+    externalUrl: safeUrl.optional(),
     externalLabel: z.string().optional(),
   }),
 });

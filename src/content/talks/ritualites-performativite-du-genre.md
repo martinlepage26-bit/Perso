@@ -2,8 +2,8 @@
 title: "Ritualités et performativité du genre: le cas du néopaganisme à Montréal"
 event: "82nd ACFAS Congress"
 date: 2014-01-01
-dateLabel: "2014 [Exact conference date to verify]"
-location: "[Placeholder conference location]"
+dateLabel: "2014"
+location: ""
 format: "Conference presentation"
 description: "A presentation on rituality and gender performativity in the context of Montreal neopaganism."
 tags:

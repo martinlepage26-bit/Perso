@@ -1,6 +1,10 @@
 import { siteMeta } from '../data/site';
 
 export function buildCanonical(pathname: string) {
+  if (!siteMeta.siteUrl) {
+    return undefined;
+  }
+
   return new URL(pathname, siteMeta.siteUrl).toString();
 }
 
@@ -11,8 +15,7 @@ export function buildPersonSchema() {
     name: siteMeta.name,
     jobTitle: siteMeta.jobTitle,
     description: siteMeta.description,
-    url: siteMeta.siteUrl,
-    email: siteMeta.email,
+    ...(siteMeta.siteUrl ? { url: siteMeta.siteUrl } : {}),
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Montreal',
@@ -23,6 +26,7 @@ export function buildPersonSchema() {
       siteMeta.linkedIn,
       siteMeta.github,
       siteMeta.orcid,
+      siteMeta.academia,
       siteMeta.substack,
       siteMeta.instagram,
     ],
@@ -35,16 +39,18 @@ export function buildArticleSchema({
   url,
   datePublished,
   dateModified,
+  schemaType = 'Article',
 }: {
   title: string;
   description: string;
-  url: string;
+  url?: string;
   datePublished: string;
   dateModified?: string;
+  schemaType?: string;
 }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': schemaType,
     headline: title,
     description,
     author: {
@@ -55,7 +61,7 @@ export function buildArticleSchema({
       '@type': 'Person',
       name: siteMeta.name,
     },
-    mainEntityOfPage: url,
+    ...(url ? { mainEntityOfPage: url } : {}),
     datePublished,
     dateModified: dateModified ?? datePublished,
   };

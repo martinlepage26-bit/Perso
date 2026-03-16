@@ -2,8 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import EntryHero from '../../components/EntryHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { contentSlug } from '../../lib/content';
-import { buildArticleSchema } from '../../lib/seo';
+import { contentSlug, isPublishedStatus } from '../../lib/content';
+import { buildArticleSchema, buildCanonical } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const papers = await getCollection('papers');
@@ -16,12 +16,18 @@ export async function getStaticPaths() {
 const { paper } = Astro.props;
 const { Content } = await render(paper);
 const canonical = `/papers/${contentSlug(paper.id)}/`;
-const structuredData = buildArticleSchema({
-  title: paper.data.title,
-  description: paper.data.abstract,
-  url: new URL(canonical, 'https://martinlepage.example').toString(),
-  datePublished: `${paper.data.year}-01-01`,
-});
+const meta = [String(paper.data.year), paper.data.venue, paper.data.status].filter(
+  (value, index, values) => values.indexOf(value) === index,
+).join(' · ');
+const structuredData = isPublishedStatus(paper.data.status)
+  ? buildArticleSchema({
+      title: paper.data.title,
+      description: paper.data.abstract,
+      url: buildCanonical(canonical),
+      datePublished: `${paper.data.year}`,
+      schemaType: 'ScholarlyArticle',
+    })
+  : undefined;
 ---
 
 <BaseLayout title={paper.data.title} description={paper.data.abstract} canonical={canonical} structuredData={structuredData}>
@@ -29,7 +35,7 @@ const structuredData = buildArticleSchema({
     eyebrow={paper.data.type}
     title={paper.data.title}
     description={paper.data.abstract}
-    meta={`${paper.data.year} · ${paper.data.venue} · ${paper.data.status}`}
+    meta={meta}
     backHref="/papers/"
     backLabel="Back to publications"
     tags={paper.data.tags}

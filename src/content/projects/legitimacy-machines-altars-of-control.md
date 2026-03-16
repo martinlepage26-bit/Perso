@@ -2,13 +2,13 @@
 title: "Legitimacy Machines / Altars of Control"
 subtitle: "Proposal-plus-architecture project on screens, wonder, and governance training"
 year: 2026
-status: "Legitimacy Machines / Altars of Control is not yet a finished book manuscript. It is best treated as a proposal-plus-architecture project until the chapters exist in full."
+status: "Proposal and architecture project"
 description: "A developing book architecture on how screen worlds train affective recognition of authority before institutions ever justify that authority analytically."
 role: "Author and researcher"
 outputs:
   - "Proposal architecture"
   - "Working chapter on legitimacy and screen worlds"
-  - "[Placeholder sample chapter set]"
+  - "Sample chapter set in development"
 tags:
   - media studies
   - AI governance
@@ -17,7 +17,7 @@ tags:
   - proposal architecture
 featured: false
 image: "/images/placeholders/legitimacy-machines-altars-of-control.jpg"
-imageAlt: "[Placeholder cover image for Legitimacy Machines / Altars of Control]"
+imageAlt: "Concept cover treatment for Legitimacy Machines / Altars of Control."
 links: []
 ---
 This project can already be described conceptually because a working chapter inside the broader AI governance draft sets out a clear argument: authority becomes emotionally believable through wonder, ritualized recognition, dashboards, portals, and other screen forms before it becomes analytically justified.

@@ -12,17 +12,17 @@ const tags = collectTags(projects);
 
 <BaseLayout
   title="Projects"
-  description="Academic, consulting, and creative projects by Martin Lepage, including book-stage manuscripts, governance frameworks, and digital work."
+  description="Academic, advisory, and creative projects by Martin Lepage, including book-stage manuscripts, governance frameworks, and digital work."
 >
   <section class="section-shell">
     <SectionIntro
       eyebrow="Projects"
-      title="A mixed body of work, with the project status stated plainly."
-      description="Some entries are near-publishable books. Some are governance deliverables. Some are manuscript architectures or digital experiments. The point of this index is to preserve those differences."
+      title="Projects with status stated plainly."
+      description="Books, governance frameworks, manuscript architectures, and digital experiments in one index."
     />
 
     <div class="mt-10">
-      <FilterBar scopeId="projects" tags={tags} searchPlaceholder="Search projects, roles, and formats" />
+      <FilterBar scopeId="projects" tags={tags} searchPlaceholder="Search projects" />
     </div>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-2" data-filter-scope="projects">

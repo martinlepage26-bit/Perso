@@ -2,21 +2,20 @@
 import { navigation, siteMeta } from '../data/site';
 ---
 
-<footer class="border-t border-[rgba(201,168,76,0.16)] bg-[linear-gradient(180deg,rgba(11,31,46,0.72),rgba(15,59,62,0.92))]">
+<footer class="border-t border-[rgba(201,149,47,0.12)] bg-[linear-gradient(180deg,rgba(8,17,32,0.82),rgba(17,34,70,0.94))]">
   <div class="section-shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px]">
     <div class="space-y-5">
       <p class="eyebrow">Martin Lepage</p>
-      <h2 class="max-w-xl text-3xl md:text-4xl">
-        Governance, scholarship, and authorship that stays legible under pressure.
+      <h2 class="max-w-xl text-[1.72rem] md:text-[2rem]">
+        Governance, scholarship, and authorship made clear.
       </h2>
       <p class="max-w-2xl text-base text-slate-200">
-        Built in Astro with content collections so updates mostly live in markdown and simple data files. Replace
-        placeholders, update the public links, and the site stays structurally clean.
+        A compact Astro site for publications, projects, essays, and public-facing work.
       </p>
-      <div class="flex flex-wrap gap-3">
-        <a class="button-primary" href="/contact/">Get in touch</a>
-        <a class="button-secondary" href="/rss.xml">RSS feed</a>
-      </div>
+      <ul class="bullet-links">
+        <li><a class="link-inline" href="/contact/">Get in touch</a></li>
+        {siteMeta.siteUrl && <li><a class="link-inline" href="/rss.xml">RSS feed</a></li>}
+      </ul>
     </div>
 
     <div class="grid gap-8 sm:grid-cols-2">
@@ -47,8 +46,8 @@ import { navigation, siteMeta } from '../data/site';
     </div>
   </div>
 
-  <div class="shell flex flex-col gap-3 border-t border-[rgba(201,168,76,0.14)] py-5 text-sm text-slate-300 md:flex-row md:items-center md:justify-between">
-    <p>&copy; {new Date().getFullYear()} Martin Lepage. Montreal-based scholar, writer, and AI governance consultant.</p>
-    <p>Editorial atmosphere, restrained motion, and content-first architecture.</p>
+  <div class="shell flex flex-col gap-3 border-t border-[rgba(201,149,47,0.12)] py-5 text-sm text-slate-300 md:flex-row md:items-center md:justify-between">
+    <p>&copy; {new Date().getFullYear()} Martin Lepage. Montreal-based scholar, writer, and AI governance strategist.</p>
+    <p>Streamlined layout, restrained motion, content-first architecture.</p>
   </div>
 </footer>

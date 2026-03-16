@@ -16,12 +16,12 @@ tags:
   - Systems
 featured: false
 image: "/assets/ml-monogram-navy.png"
-imageAlt: "A placeholder image indicating system depth and backend structure."
+imageAlt: "An abstract systems motif suggesting backend depth, layered governance logic, and infrastructure."
 links:
   - label: "GitHub"
     url: "https://github.com/martinlepage26-bit/Governess"
 ---
 
-This entry gives the projects section some infrastructural weight. Not every governance project should read like a public essay or a consulting deliverable; some of the work is about the underlying systems that hold policy logic, traceability, and workflow behavior together.
+This entry gives the projects section some infrastructural weight. Not every governance project should read like a public essay or a polished client deliverable; some of the work is about the underlying systems that hold policy logic, traceability, and workflow behavior together.
 
-Keep this entry factual and modest unless or until the public repository includes a richer description.
+The public framing stays factual and modest while the repository remains primarily an architecture and systems artifact.

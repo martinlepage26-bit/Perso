@@ -1,17 +1,20 @@
+const configuredSiteUrl = (process.env.PUBLIC_SITE_URL ?? process.env.SITE_URL ?? '').trim();
+
 export const siteMeta = {
   name: 'Martin Lepage',
   shortName: 'Martin Lepage',
   title: 'Martin Lepage',
-  siteUrl: 'https://martinlepage.example',
+  siteUrl: configuredSiteUrl,
   description:
-    'Montreal-based scholar, writer, and AI governance consultant working across governance, digital culture, ritual and media analysis, queer theory, and experimental authorship.',
+    'Montreal-based scholar, writer, and AI governance strategist working across governance, digital culture, ritual studies, and public writing.',
   locale: 'en-CA',
   email: 'martinlepage.ai@gmail.com',
   location: 'Montreal, Quebec, Canada',
-  jobTitle: 'Scholar, writer, and AI governance consultant',
+  jobTitle: 'Scholar, writer, AI governance strategist',
   linkedIn: 'https://linkedin.com/in/martin-lepage-ai',
   github: 'https://github.com/martinlepage26-bit/',
   orcid: 'https://orcid.org/0009-0006-4320-6254',
+  academia: 'https://independent.academia.edu/MartinLepage2',
   substack: 'https://substack.com/@hexadecimalproject',
   instagram: 'https://www.instagram.com/wheelsofwill_/',
 };
@@ -22,45 +25,46 @@ export const navigation = [
   { href: '/papers/', label: 'Papers' },
   { href: '/projects/', label: 'Projects' },
   { href: '/writing/', label: 'Writing' },
+  { href: '/talks/', label: 'Talks' },
   { href: '/resume/', label: 'Resume' },
   { href: '/contact/', label: 'Contact' },
 ] as const;
 
 export const heroFacts = [
-  'PhD in Religious Sciences, UQAM',
-  'AI governance and documentation strategy',
-  'Independent scholar and public writer',
+  'PhD, Religious Sciences',
+  'AI governance strategy',
+  'Public scholarship',
   'English and French',
 ];
 
 export const homeHighlights = [
   {
-    title: 'Governance with traceability',
+    title: 'Traceable governance',
     description:
-      'Documentation-first consulting for organizations trying to map AI use cases, decisions, approvals, and accountability before a crisis or audit makes the work unavoidable.',
+      'Documentation-first governance strategy for organizations that need clearer AI use cases, approvals, and accountability.',
   },
   {
-    title: 'Research with interpretive depth',
+    title: 'Interpretive research',
     description:
-      'A qualitative and interdisciplinary practice shaped by ritual studies, queer theory, feminist analysis, media criticism, and long-form cultural interpretation.',
+      'Qualitative research shaped by ritual studies, queer theory, media criticism, and long-form cultural analysis.',
   },
   {
-    title: 'Independent projects with form',
+    title: 'Books and essays',
     description:
-      'Books, essays, archives, governance frameworks, and experimental writing projects that move between intellectual seriousness and symbolic atmosphere.',
+      'Book projects, essays, archives, and frameworks that keep intellectual rigor and atmosphere in the same frame.',
   },
 ] as const;
 
 export const biography = {
   intro:
-    'Martin Lepage is a Montreal-based scholar, writer, and AI governance consultant whose work moves between qualitative research, independent authorship, documentation-heavy operational environments, and governance design for emerging AI systems.',
+    'Martin Lepage is a Montreal-based scholar, writer, and AI governance strategist working across qualitative research, public writing, and documentation-heavy environments.',
   paragraphs: [
     'His academic background spans ritual studies, queer theory, feminist media analysis, digital culture, and contemporary spiritualities. He completed a PhD in Religious Sciences at Universite du Quebec a Montreal, following earlier degrees in literary studies at Universite Laval.',
-    'Professionally, he has worked across research operations, archival preservation, AI-assisted quality review, and clinical trial coordination. That combination gives his consulting practice an unusual shape: interpretive enough to understand messy institutional realities, and operational enough to make governance usable.',
-    'His current body of work treats governance, media, and authorship as linked problems of legitimacy, containment, narrative, and evidence. The result is a public profile designed to speak to academic audiences, consulting clients, editors, and media collaborators without splitting those worlds apart.',
+    'Professionally, he has worked across research operations, archival preservation, AI-assisted quality review, and clinical trial coordination. That combination gives his governance work an unusual shape: interpretive enough to understand messy institutional realities, and operational enough to make documentation usable.',
+    'His current body of work treats governance, media, and authorship as linked problems of legitimacy, containment, narrative, and evidence. The result is a public profile designed to speak to academic audiences, advisory partners, editors, and media collaborators without splitting those worlds apart.',
   ],
   currentWork:
-    'Current work includes AI governance frameworks and risk mapping, publication-ready scholarly writing on witchcraft and postfeminist media, and book-stage projects that range from near-finished manuscripts to proposal-level architectures.',
+    'Current work includes AI governance frameworks, scholarship on ritual and media, and book-stage projects moving from manuscript to public preview.',
 };
 
 export const researchInterests = [
@@ -206,7 +210,7 @@ export const resumeData = {
   certifications: [
     'Responsible Generative AI Specialization - University of Michigan, Coursera (Completed Jan. 2026)',
     'Responsible and Ethical AI - Northeastern University, Coursera (Completed Jan. 2026)',
-    'Strategic AI Governance - Executive-Level Risk, Ethics and Oversight (Coursera Professional Specialization)',
+    'Strategic AI Governance - Executive-Level Risk, Ethics and Oversight (Coursera Professional Specialization, in progress)',
     'Building Trustworthy AI Specialization - Coursera (Completed Jan. 2026)',
     'ICH Good Clinical Practice (GCP) E6(R3) - The Global Health Network (Completed Oct. 25, 2025)',
   ],
@@ -263,7 +267,7 @@ export const resumeData = {
 };
 
 export const contactAreas = [
-  'Consulting and governance engagements',
+  'Governance advisory and documentation engagements',
   'Editorial, interview, and media opportunities',
   'Talks, guest lectures, and panels',
   'Research collaborations and publication conversations',
