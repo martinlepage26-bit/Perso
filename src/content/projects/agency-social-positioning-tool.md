@@ -1,27 +1,27 @@
 ---
-title: "Agency"
-subtitle: "A social positioning tool for language, framing, and institutional signal"
+title: "Agency Repository"
+subtitle: "The umbrella repository that now houses Lotus and Scripto"
 year: 2026
-status: "Prototype / product build"
-description: "A project that explores social positioning, language, and the presentation layer of governance-adjacent systems."
-role: "Builder and strategist"
+status: "Repository umbrella / working archive"
+description: "The umbrella repository name for the local-first app lines currently centered on Lotus and Scripto."
+role: "Builder and maintainer"
 outputs:
-  - "Positioning tool concept"
-  - "Prototype repository"
-  - "Framing experiments"
+  - "Umbrella repository"
+  - "Lotus app home"
+  - "Scripto app home"
 tags:
-  - Strategy
-  - Positioning
-  - Prototype
-  - Language systems
+  - Repository
+  - Local-first
+  - App architecture
+  - Tooling
 featured: false
 image: "/assets/geometric-motif-bottomleft.png"
-imageAlt: "A geometric motif suggesting positioning, interfaces, and patterned social analysis."
+imageAlt: "A geometric motif suggesting repository structure, tools, and linked app lines."
 links:
   - label: "GitHub"
     url: "https://github.com/martinlepage26-bit/Agency"
 ---
 
-This project belongs in the portfolio because it shows that Martin's governance work is not only about rules and risk. It is also about social framing: how institutions explain themselves, how users understand power, and how public language shapes trust.
+The `Agency` name now matters mostly as repository infrastructure. It is the git home and umbrella frame that holds the local-first app lines, rather than the current public-facing product name of a single app.
 
-That makes *Agency* a useful bridge between the governance pages and the more literary or critical parts of the site.
+Within that repository, *Lotus* is the social agency scoring app and *Scripto* is the archive-sorting line whose current desktop surface is *Dr. Sort-Academic Helper*. Keeping `Agency` visible on the site still helps because it explains why those tools live together in one codebase, but the clearer public story is now about the separate apps rather than a single app called Agency.
