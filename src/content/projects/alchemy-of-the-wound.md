@@ -1,27 +1,26 @@
 ---
 title: "Alchemy of the Wound"
-subtitle: "Full manuscript with a field-manual structure and literary intensity"
-year: 2026
-status: "Full manuscript in development"
-description: "A book-stage manuscript that works through body memory, injury, authority, and the preservation of felt record with a deliberately literary voice."
+subtitle: "Field Manual for the Body"
+status: "Self-published book on Amazon"
+description: "A self-published book framed as a field manual for the body, documented here without inventing edition details not yet supplied."
 role: "Author"
 outputs:
-  - "Full manuscript draft"
-  - "Chapter sequence"
-  - "Field Manual for the Body framing"
+  - "Self-published book"
+  - "Amazon edition"
+  - "Public-facing title record"
 tags:
-  - manuscript
-  - literary nonfiction
-  - memoir
+  - self-published
+  - amazon
+  - published book
   - body archive
-  - book project
+  - books
 featured: true
 image: "/images/placeholders/alchemy-of-the-wound.jpg"
-imageAlt: "Concept cover treatment for Alchemy of the Wound."
-links: []
+imageAlt: "Placeholder visual treatment for Alchemy of the Wound until final cover metadata is supplied."
+links:
+  - label: "Amazon.ca"
+    url: "https://www.amazon.ca/dp/B0GSGK5X7M/"
 ---
-This project is not just a title on a list. It already contains substantial prose and a defined internal framing, including the subtitle "Field Manual for the Body" and chapters that tie injury, memory, authority, and witness tightly together.
+This entry is now presented as a self-published book available on Amazon, not as an unpublished manuscript. The site keeps its public claims narrow: title, subtitle, authorship, self-published status, and the Amazon listing are confirmed here, while publication year and fuller bibliographic details can still be added later.
 
-The writing itself is vivid and structurally ambitious, but the readiness assessment stays disciplined. The correct presentation is not "ready for publication" but "full manuscript with strong material" that still needs developmental containment and package discipline before it becomes a cleaner public-facing book.
-
-That distinction protects the project from being flattened into either hype or apology. It is clearly real work, clearly substantial, and just as clearly still in the stage where editorial shaping matters.
+The subtitle, *Field Manual for the Body*, is the clearest descriptive frame currently confirmed for the public site. Rather than inventing a broader synopsis from earlier draft-stage materials, this page keeps the book legible without overstating what has been independently checked.

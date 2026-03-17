@@ -4,45 +4,91 @@ import FilterBar from '../../components/FilterBar.astro';
 import PublicationCard from '../../components/PublicationCard.astro';
 import SectionIntro from '../../components/SectionIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { collectTags, sortByYear } from '../../lib/content';
+import { collectTags, isPublishedPaper, sortByYear } from '../../lib/content';
 import { researchOverview, researchProfile } from '../../data/research';
 import { siteMeta } from '../../data/site';
 
-const papers = sortByYear(await getCollection('papers'));
-const tags = collectTags(papers);
+const allPapers = sortByYear(await getCollection('papers'));
+const publishedPapers = allPapers.filter(isPublishedPaper);
+const manuscriptPapers = allPapers.filter((paper) => !isPublishedPaper(paper));
+const papers = [...publishedPapers, ...manuscriptPapers];
+const tags = collectTags(allPapers);
+const paperYears = allPapers.map((paper) => paper.data.year);
+const archiveStartYear = Math.min(...paperYears);
+const archiveEndYear = Math.max(...paperYears);
+const archiveSpan =
+  archiveStartYear === archiveEndYear ? `${archiveStartYear}` : `${archiveStartYear}-${archiveEndYear}`;
 ---
 
 <BaseLayout
   title="Papers and Publications"
-  description="Academic papers, articles, chapters, manuscripts, and publication-stage research projects by Martin Lepage."
+  description="A curated index of Martin Lepage's papers, chapters, and manuscript-stage research, with Academia.edu as the main public archive."
 >
   <section class="section-shell">
     <SectionIntro
       eyebrow="Papers and publications"
-      title="Research across ritual, media, gender, and governance."
-      description="Peer-reviewed work, chapters, reviews, and in-progress manuscripts, with status stated plainly."
+      title="A curated archive of papers, chapters, and manuscript-stage work."
+      description="This site offers a guided index of the research. Academia.edu remains the fuller public archive."
     />
 
-    <div class="mt-8 max-w-4xl">
-      <p class="text-lg leading-8 text-slate-200">{researchProfile}</p>
+    <div class="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)]">
+      <article class="veil-panel">
+        <p class="eyebrow">Canonical archive</p>
+        <h2 class="mt-3 text-[1.68rem] md:text-[1.9rem]">The fuller paper archive lives on Academia.edu.</h2>
+        <p class="mt-4 max-w-[58ch] text-base text-slate-200">
+          Use this page as the guided overview: published records appear first, manuscript-stage work stays visible,
+          and each entry keeps its status in plain view. For the broader public paper list and profile context, use the
+          Academia.edu archive.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="button-primary" href={siteMeta.academia}>Open Academia.edu</a>
+          <a class="button-secondary" href="#paper-archive">Browse this site index</a>
+        </div>
+      </article>
+
+      <div class="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
+        <article class="veil-panel">
+          <p class="eyebrow">Archive span</p>
+          <p class="mt-4 text-[1.7rem] font-semibold text-moon">{archiveSpan}</p>
+          <p class="mt-2 text-sm text-slate-300">Years currently covered in the on-site index.</p>
+        </article>
+        <article class="veil-panel">
+          <p class="eyebrow">Published</p>
+          <p class="mt-4 text-[1.7rem] font-semibold text-moon">{publishedPapers.length}</p>
+          <p class="mt-2 text-sm text-slate-300">Entries presented as published articles or chapters.</p>
+        </article>
+        <article class="veil-panel">
+          <p class="eyebrow">Manuscript-stage</p>
+          <p class="mt-4 text-[1.7rem] font-semibold text-moon">{manuscriptPapers.length}</p>
+          <p class="mt-2 text-sm text-slate-300">Records kept visible while circulation and publication paths develop.</p>
+        </article>
+      </div>
     </div>
 
-    <ul class="bullet-links mt-6">
-      <li><a class="link-inline" href={siteMeta.academia}>Academia.edu papers and profile</a></li>
-    </ul>
+    <div class="mt-10 max-w-4xl">
+      <p class="text-lg leading-8 text-slate-200">{researchProfile}</p>
+    </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
       {researchOverview.map((item) => (
         <article class="veil-panel h-full">
-          <p class="eyebrow">Research overview</p>
+          <p class="eyebrow">Archive guide</p>
           <h2 class="mt-3 text-[1.45rem] md:text-[1.62rem]">{item.title}</h2>
           <p class="mt-4 text-base text-slate-200">{item.body}</p>
         </article>
       ))}
     </div>
 
-    <div class="mt-10">
-      <FilterBar scopeId="papers" tags={tags} searchPlaceholder="Search papers" />
+    <div class="mt-14" id="paper-archive">
+      <SectionIntro
+        eyebrow="On-site index"
+        title="Search the curated paper record."
+        description="Published work appears first, while manuscript-stage entries remain in the archive with status stated plainly."
+      />
+    </div>
+
+    <div class="mt-8">
+      <FilterBar scopeId="papers" tags={tags} searchPlaceholder="Search papers, chapters, and manuscripts" />
     </div>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-2" data-filter-scope="papers">

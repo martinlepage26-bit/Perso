@@ -9,15 +9,15 @@ const navItems = navigation.map(({ href, label }) => ({
 }));
 ---
 
-<header class="sticky top-0 z-40 border-b border-[rgba(201,149,47,0.12)] bg-[rgba(8,17,32,0.82)] backdrop-blur-[18px]">
+<header class="sticky top-0 z-40 border-b border-[rgba(215,123,75,0.12)] bg-[rgba(22,17,15,0.84)] backdrop-blur-[18px]">
   <div class="shell flex items-center justify-between gap-4 py-3">
     <a class="group inline-flex items-center gap-3 text-sm font-semibold text-moon" href="/">
-      <span class="relative flex h-9 w-9 items-center justify-center rounded-[0.95rem] border border-[rgba(201,149,47,0.16)] bg-[linear-gradient(180deg,rgba(17,34,70,0.88),rgba(8,17,32,0.92))] shadow-[0_0_24px_rgba(53,88,157,0.12)]">
-        <span class="h-2.5 w-2.5 rounded-full bg-aqua shadow-[0_0_16px_rgba(53,88,157,0.28)]"></span>
+      <span class="relative flex h-10 min-w-10 items-center justify-center rounded-[0.45rem] border border-[rgba(215,123,75,0.22)] bg-[linear-gradient(180deg,rgba(59,34,29,0.92),rgba(27,19,17,0.94))] px-2 shadow-[0_12px_24px_rgba(11,7,6,0.18)]">
+        <span class="font-display text-[1.05rem] italic tracking-[-0.02em] text-moon">ML</span>
       </span>
       <span class="flex flex-col leading-tight">
-        <span class="font-mono text-sm tracking-[0.18em] uppercase text-fog">Martin Lepage</span>
-        <span class="hidden text-[0.68rem] font-medium uppercase tracking-[0.08em] text-slate-500 sm:block">{siteMeta.jobTitle}</span>
+        <span class="font-display text-[1.12rem] tracking-[0.01em] text-moon">Martin Lepage</span>
+        <span class="hidden text-[0.68rem] font-medium uppercase tracking-[0.12em] text-slate-500 sm:block">{siteMeta.jobTitle}</span>
       </span>
     </a>
 
@@ -31,8 +31,8 @@ const navItems = navigation.map(({ href, label }) => ({
               class:list={[
                 'border-b-2 px-0.5 py-2 transition',
                 isActive
-                  ? 'border-aqua font-mono text-[0.7rem] uppercase tracking-[0.18em] text-accent'
-                  : 'border-transparent text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-slate-400 hover:border-[rgba(108,143,202,0.28)] hover:text-moon',
+                  ? 'border-accent text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-accent'
+                  : 'border-transparent text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-slate-400 hover:border-[rgba(166,184,156,0.24)] hover:text-moon',
               ]}
             >
               {label}
@@ -43,14 +43,14 @@ const navItems = navigation.map(({ href, label }) => ({
     </nav>
 
     <details class="group relative md:hidden">
-      <summary class="flex list-none cursor-pointer items-center gap-3 rounded-full border border-[rgba(201,149,47,0.18)] bg-[rgba(17,34,70,0.72)] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-fog transition hover:border-[rgba(201,149,47,0.32)] hover:text-moon [&::-webkit-details-marker]:hidden">
+      <summary class="flex list-none cursor-pointer items-center gap-3 rounded-[0.65rem] border border-[rgba(215,123,75,0.18)] bg-[rgba(43,30,26,0.78)] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-fog transition hover:border-[rgba(215,123,75,0.32)] hover:text-moon [&::-webkit-details-marker]:hidden">
         Menu
         <span class="text-base leading-none text-slate-400 transition group-open:rotate-45 group-open:text-accent" aria-hidden="true">
           +
         </span>
       </summary>
 
-      <div class="absolute right-0 top-[calc(100%+0.75rem)] w-[min(18rem,calc(100vw-2rem))] rounded-[1.4rem] border border-[rgba(201,149,47,0.16)] bg-[linear-gradient(180deg,rgba(12,24,48,0.98),rgba(8,17,32,0.98))] p-3 shadow-[0_22px_70px_rgba(2,7,18,0.56)]">
+      <div class="absolute right-0 top-[calc(100%+0.75rem)] w-[min(18rem,calc(100vw-2rem))] rounded-[0.9rem] border border-[rgba(215,123,75,0.16)] bg-[linear-gradient(180deg,rgba(52,36,31,0.98),rgba(22,17,15,0.98))] p-3 shadow-[0_22px_70px_rgba(7,5,4,0.52)]">
         <nav aria-label="Primary mobile" class="grid gap-1">
           {
             navItems.map(({ href, isActive, label }) => (
@@ -58,9 +58,9 @@ const navItems = navigation.map(({ href, label }) => ({
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
                 class:list={[
-                  'rounded-[0.9rem] px-3 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] transition',
+                  'rounded-[0.65rem] px-3 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] transition',
                   isActive
-                    ? 'bg-white/8 font-mono text-accent'
+                    ? 'bg-white/8 text-accent'
                     : 'text-slate-300 hover:bg-white/6 hover:text-moon',
                 ]}
               >

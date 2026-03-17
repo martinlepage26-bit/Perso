@@ -9,27 +9,31 @@ const showEye = variant === 'hero';
 ---
 
 <div aria-hidden="true" class:list={['pointer-events-none absolute inset-0 overflow-hidden', className]}>
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,rgba(53,88,157,0.22),transparent_24%),radial-gradient(circle_at_18%_82%,rgba(201,149,47,0.12),transparent_20%),linear-gradient(180deg,rgba(8,17,32,0.42),rgba(8,17,32,0.06)_58%,transparent)]"></div>
-  <div class="absolute left-1/2 top-[-18%] h-[122%] w-[62%] -translate-x-1/2 rounded-[999px] border border-[rgba(201,149,47,0.12)]"></div>
-  <div class="absolute left-1/2 top-[-13%] h-[108%] w-[52%] -translate-x-1/2 rounded-[999px] bg-[linear-gradient(180deg,rgba(53,88,157,0.08),rgba(201,149,47,0.02))] blur-3xl"></div>
-  <div class="absolute bottom-[-8%] left-1/2 h-32 w-[68%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(201,149,47,0.14),rgba(201,149,47,0.03),transparent_72%)] blur-3xl"></div>
-  <div class="absolute left-[12%] right-[12%] top-[30%] h-px bg-gradient-to-r from-transparent via-[rgba(201,149,47,0.28)] to-transparent"></div>
-  <div class="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/10 to-transparent lg:block"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(215,123,75,0.18),transparent_30%),radial-gradient(circle_at_84%_12%,rgba(111,131,108,0.16),transparent_24%),linear-gradient(180deg,rgba(22,17,15,0.44),rgba(22,17,15,0.08)_62%,transparent)]"></div>
+  <div class="absolute inset-y-0 left-[9%] hidden w-px bg-gradient-to-b from-transparent via-[rgba(255,245,234,0.14)] to-transparent lg:block"></div>
+  <div class="absolute inset-y-0 right-[11%] hidden w-px bg-gradient-to-b from-transparent via-[rgba(255,245,234,0.08)] to-transparent xl:block"></div>
+  <div class="absolute left-[10%] right-[10%] top-[26%] h-px bg-gradient-to-r from-transparent via-[rgba(215,123,75,0.24)] to-transparent"></div>
+  <div class="absolute left-[16%] right-[18%] top-[58%] h-px bg-gradient-to-r from-transparent via-[rgba(166,184,156,0.18)] to-transparent"></div>
+  <div class="absolute right-[4%] top-[6%] h-[16rem] w-[16rem] rounded-full bg-[radial-gradient(circle,rgba(111,131,108,0.16),rgba(111,131,108,0.03),transparent_68%)] blur-3xl"></div>
+  <div class="absolute bottom-[-6%] left-[4%] h-[15rem] w-[15rem] rounded-full bg-[radial-gradient(circle,rgba(215,123,75,0.14),rgba(215,123,75,0.02),transparent_72%)] blur-3xl"></div>
   <img
     src="/assets/isometric-grid-corner.png"
     alt=""
-    class="absolute right-0 top-0 hidden w-64 opacity-[0.05] mix-blend-screen lg:block"
+    class="absolute right-0 top-0 hidden w-64 opacity-[0.03] mix-blend-screen lg:block"
   />
   <img
     src="/assets/geometric-motif-bottomleft.png"
     alt=""
-    class="absolute bottom-0 left-0 hidden w-64 opacity-[0.05] mix-blend-screen lg:block"
+    class="absolute bottom-0 left-0 hidden w-64 opacity-[0.03] mix-blend-screen lg:block"
   />
   {
     showEye && (
-      <div class="absolute right-[2%] top-10 hidden h-[16rem] w-[16rem] rounded-full border border-[rgba(201,149,47,0.12)] bg-[radial-gradient(circle,rgba(53,88,157,0.12),rgba(53,88,157,0.03),transparent_68%)] xl:block">
-        <div class="absolute inset-[18%] rounded-full border border-[rgba(201,149,47,0.18)]"></div>
-        <div class="absolute inset-[34%] rounded-full border border-[rgba(53,88,157,0.16)]"></div>
+      <div class="absolute right-[2%] top-10 hidden h-[14rem] w-[20rem] rounded-[1rem] border border-[rgba(215,123,75,0.14)] bg-[linear-gradient(180deg,rgba(53,36,31,0.26),rgba(22,17,15,0.08))] xl:block">
+        <div class="absolute left-8 right-8 top-10 h-px bg-[rgba(255,245,234,0.12)]"></div>
+        <div class="absolute left-8 right-12 top-16 h-px bg-[rgba(255,245,234,0.08)]"></div>
+        <div class="absolute left-8 right-10 top-22 h-px bg-[rgba(255,245,234,0.08)]"></div>
+        <div class="absolute left-8 right-14 top-28 h-px bg-[rgba(255,245,234,0.06)]"></div>
+        <div class="absolute bottom-6 right-8 font-display text-6xl italic text-[rgba(215,123,75,0.14)]">ML</div>
       </div>
     )
   }

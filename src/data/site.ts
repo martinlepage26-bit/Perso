@@ -16,7 +16,7 @@ export const siteMeta = {
   orcid: 'https://orcid.org/0009-0006-4320-6254',
   academia: 'https://independent.academia.edu/MartinLepage2',
   substack: 'https://substack.com/@hexadecimalproject',
-  instagram: 'https://www.instagram.com/wheelsofwill_/',
+  instagram: 'https://www.instagram.com/wheels_of_will/',
 };
 
 export const navigation = [
@@ -39,25 +39,25 @@ export const heroFacts = [
 
 export const homeHighlights = [
   {
-    title: 'Traceable governance',
+    title: 'Governance advisory',
     description:
-      'Documentation-first governance strategy for organizations that need clearer AI use cases, approvals, and accountability.',
+      'Documentation-first AI governance work for teams that need clearer approvals, risk framing, and decision traceability.',
   },
   {
     title: 'Interpretive research',
     description:
-      'Qualitative research shaped by ritual studies, queer theory, media criticism, and long-form cultural analysis.',
+      'Qualitative analysis across ritual, media, gender, legitimacy, and the lived texture of institutions.',
   },
   {
     title: 'Books and essays',
     description:
-      'Book projects, essays, archives, and frameworks that keep intellectual rigor and atmosphere in the same frame.',
+      'Long-form writing that keeps theory, atmosphere, and public argument in the same frame.',
   },
 ] as const;
 
 export const biography = {
   intro:
-    'Martin Lepage is a Montreal-based scholar, writer, and AI governance strategist working across qualitative research, public writing, and documentation-heavy environments.',
+    'Martin Lepage is a Montreal-based scholar, writer, and AI governance strategist whose work moves between AI governance, qualitative research, and public writing.',
   paragraphs: [
     'His academic background spans ritual studies, queer theory, feminist media analysis, digital culture, and contemporary spiritualities. He completed a PhD in Religious Sciences at Universite du Quebec a Montreal, following earlier degrees in literary studies at Universite Laval.',
     'Professionally, he has worked across research operations, archival preservation, AI-assisted quality review, and clinical trial coordination. That combination gives his governance work an unusual shape: interpretive enough to understand messy institutional realities, and operational enough to make documentation usable.',

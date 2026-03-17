@@ -13,8 +13,8 @@ export function formatDate(input: Date | string) {
   }).format(value);
 }
 
-export function sortByYear<T extends { data: { year: number } }>(items: T[]) {
-  return [...items].sort((a, b) => b.data.year - a.data.year);
+export function sortByYear<T extends { data: { year?: number } }>(items: T[]) {
+  return [...items].sort((a, b) => (b.data.year ?? -1) - (a.data.year ?? -1));
 }
 
 export function isPublishedStatus(status: string) {

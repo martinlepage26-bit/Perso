@@ -4,8 +4,8 @@
   "description": "Scholar, writer, and AI governance strategist based in Montreal.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0914",
-  "theme_color": "#0a0914",
+  "background_color": "#16110f",
+  "theme_color": "#16110f",
   "icons": [
     {
       "src": "/favicon.svg",

@@ -11,6 +11,7 @@ const slug = contentSlug(project.id);
 const motifClass =
   {
     'breath-of-the-astral-year': 'project-motif-orbit',
+    lotus: 'project-motif-recursion',
     'the-witches-road': 'project-motif-road',
     'the-sealed-card-protocol': 'project-motif-seal',
     'the-violet-gem': 'project-motif-gem',
@@ -20,11 +21,11 @@ const motifClass =
 
 <article data-filter-item data-tags={project.data.tags.join('|').toLowerCase()} data-search={`${project.data.title} ${project.data.subtitle} ${project.data.description} ${project.data.role} ${project.data.tags.join(' ')}`.toLowerCase()}>
   <a class="group card-link" href={`/projects/${contentSlug(project.id)}/`}>
-    <div class="overflow-hidden rounded-[1.2rem] border border-[rgba(201,149,47,0.12)] bg-[rgba(8,17,32,0.28)]">
+    <div class="overflow-hidden rounded-[0.85rem] border border-[rgba(215,123,75,0.14)] bg-[rgba(22,17,15,0.34)]">
       <div class:list={['aspect-[16/10] p-5 project-motif-shell', motifClass]}>
         <div class="flex h-full flex-col justify-between">
           <p class="eyebrow">{project.data.status}</p>
-          <p class="text-sm uppercase tracking-[0.14em] text-slate-400">{project.data.year}</p>
+          {project.data.year && <p class="text-sm uppercase tracking-[0.14em] text-slate-400">{project.data.year}</p>}
         </div>
       </div>
     </div>

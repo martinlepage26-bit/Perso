@@ -21,6 +21,9 @@ const canonical = `/projects/${contentSlug(project.id)}/`;
 const publicDir = fileURLToPath(new URL('../../../public/', import.meta.url));
 const projectImagePath = join(publicDir, project.data.image.replace(/^\/+/, ''));
 const hasProjectImage = existsSync(projectImagePath);
+const metaParts = [project.data.year ? String(project.data.year) : undefined, project.data.status, project.data.role].filter(
+  Boolean,
+);
 ---
 
 <BaseLayout
@@ -33,7 +36,7 @@ const hasProjectImage = existsSync(projectImagePath);
     eyebrow="Project"
     title={project.data.title}
     description={project.data.description}
-    meta={`${project.data.year} · ${project.data.status} · ${project.data.role}`}
+    meta={metaParts.join(' · ')}
     backHref="/projects/"
     backLabel="Back to projects"
     tags={project.data.tags}

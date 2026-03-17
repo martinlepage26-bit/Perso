@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import EntryHero from '../../components/EntryHero.astro';
+import { siteMeta } from '../../data/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { contentSlug, isPublishedStatus } from '../../lib/content';
 import { buildArticleSchema, buildCanonical } from '../../lib/seo';
@@ -55,6 +56,16 @@ const structuredData = isPublishedStatus(paper.data.status)
       <section class="veil-panel">
         <p class="eyebrow">Status</p>
         <p class="mt-4 text-base text-slate-200">{paper.data.status}</p>
+      </section>
+      <section class="veil-panel">
+        <p class="eyebrow">Archive</p>
+        <p class="mt-4 text-base text-slate-200">
+          The broader public paper archive lives on Academia.edu. Use it for the full profile and outward-facing paper
+          list.
+        </p>
+        <div class="mt-4">
+          <a class="link-inline" href={siteMeta.academia}>Open Academia.edu profile</a>
+        </div>
       </section>
       {paper.data.links.length > 0 && (
         <section class="veil-panel">
