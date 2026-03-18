@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { clampText, contentSlug, joinDistinctText } from '../lib/content';
+import { clampText, contentSlug, isPublishedPaper, joinDistinctText } from '../lib/content';
 
 interface Props {
   paper: CollectionEntry<'papers'>;
@@ -8,10 +8,11 @@ interface Props {
 
 const { paper } = Astro.props;
 const publicationMeta = joinDistinctText([paper.data.venue, paper.data.status]);
+const href = isPublishedPaper(paper) ? `/papers/${contentSlug(paper.id)}/` : `/projects/${contentSlug(paper.id)}/`;
 ---
 
 <article data-filter-item data-tags={paper.data.tags.join('|').toLowerCase()} data-search={`${paper.data.title} ${paper.data.venue} ${paper.data.abstract} ${paper.data.tags.join(' ')}`.toLowerCase()}>
-  <a class="group card-link" href={`/papers/${contentSlug(paper.id)}/`}>
+  <a class="group card-link" href={href}>
     <div class="flex items-start justify-between gap-4">
       <div>
         <p class="eyebrow">{paper.data.type}</p>
