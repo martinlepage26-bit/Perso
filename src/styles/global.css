@@ -34,21 +34,24 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   html {
-    @apply scroll-smooth bg-night text-ink antialiased;
+    @apply scroll-smooth text-ink antialiased;
+    background: #020204;
   }
 
   body {
-    @apply min-h-screen bg-night text-ink selection:text-bone;
+    @apply min-h-screen text-ink selection:text-bone;
+    position: relative;
     background:
-      radial-gradient(circle at 12% 12%, rgba(95, 95, 178, 0.1) 0%, rgba(95, 95, 178, 0) 24%),
-      radial-gradient(circle at 85% 14%, rgba(70, 104, 154, 0.12) 0%, rgba(70, 104, 154, 0) 24%),
-      linear-gradient(180deg, #f5f2ee 0%, #eeece9 54%, #e7eaef 100%);
+      radial-gradient(circle at 18% 8%, rgba(143, 62, 237, 0.16) 0%, rgba(143, 62, 237, 0) 28%),
+      radial-gradient(circle at 82% 18%, rgba(69, 190, 124, 0.12) 0%, rgba(69, 190, 124, 0) 26%),
+      linear-gradient(180deg, #090912 0%, #030306 42%, #000000 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
   }
 
   body::before,
@@ -60,27 +63,21 @@
   }
 
   body::before {
-    z-index: -2;
+    z-index: 0;
     background:
-      linear-gradient(90deg, rgba(17, 23, 38, 0.052) 0 1px, transparent 1px 124px),
-      linear-gradient(180deg, rgba(17, 23, 38, 0.028) 0 1px, transparent 1px 96px);
-    opacity: 0.42;
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 132px),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 104px);
+    opacity: 0.28;
   }
 
   body::after {
-    z-index: -1;
+    z-index: 0;
     background:
-      radial-gradient(circle at 11% 76%, rgba(95, 95, 178, 0.06), transparent 22%),
-      radial-gradient(circle at 86% 78%, rgba(34, 51, 79, 0.08), transparent 24%),
-      linear-gradient(
-        90deg,
-        transparent 0 10%,
-        rgba(17, 23, 38, 0.04) 10% 10.08%,
-        transparent 10.08% 89.92%,
-        rgba(17, 23, 38, 0.028) 89.92% 90%,
-        transparent 90%
-      );
-    opacity: 0.78;
+      radial-gradient(circle at 50% -8%, rgba(255, 255, 255, 0.08), transparent 38%),
+      radial-gradient(circle at 12% 82%, rgba(184, 85, 255, 0.1), transparent 24%),
+      radial-gradient(circle at 86% 72%, rgba(76, 196, 142, 0.1), transparent 26%),
+      linear-gradient(180deg, rgba(7, 7, 12, 0) 0%, rgba(0, 0, 0, 0.38) 72%, rgba(0, 0, 0, 0.8) 100%);
+    opacity: 0.92;
   }
 
   main {
@@ -139,6 +136,75 @@
   :focus-visible {
     outline: 0;
     box-shadow: 0 0 0 4px rgba(95, 95, 178, 0.16);
+  }
+
+  .site-negative {
+    position: relative;
+    z-index: 1;
+    filter: invert(1);
+  }
+
+  .site-aurora {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .site-aurora::before,
+  .site-aurora::after {
+    content: "";
+    position: absolute;
+    left: -14vw;
+    right: -14vw;
+    border-radius: 999px;
+    filter: blur(48px) saturate(155%);
+    transform-origin: center;
+  }
+
+  .site-aurora::before {
+    top: 8vh;
+    height: clamp(12rem, 24vw, 21rem);
+    background:
+      linear-gradient(
+        92deg,
+        rgba(255, 95, 188, 0) 0%,
+        rgba(255, 95, 188, 0.14) 7%,
+        rgba(168, 86, 255, 0.78) 18%,
+        rgba(255, 68, 194, 0.9) 34%,
+        rgba(116, 255, 171, 0.82) 52%,
+        rgba(69, 220, 160, 0.74) 66%,
+        rgba(205, 88, 255, 0.64) 80%,
+        rgba(255, 120, 199, 0.18) 92%,
+        rgba(255, 120, 199, 0) 100%
+      );
+    opacity: 0.92;
+    transform: rotate(-7deg);
+    animation: aurora-drift 20s ease-in-out infinite alternate;
+  }
+
+  .site-aurora::after {
+    top: 16vh;
+    height: clamp(8rem, 15vw, 13rem);
+    background:
+      linear-gradient(
+        100deg,
+        rgba(109, 255, 180, 0) 0%,
+        rgba(109, 255, 180, 0.1) 14%,
+        rgba(109, 255, 180, 0.54) 28%,
+        rgba(255, 92, 203, 0.7) 46%,
+        rgba(159, 88, 255, 0.62) 62%,
+        rgba(83, 213, 139, 0.56) 78%,
+        rgba(83, 213, 139, 0) 100%
+      );
+    opacity: 0.62;
+    transform: rotate(5deg);
+    animation: aurora-drift-secondary 26s ease-in-out infinite alternate;
+  }
+
+  .negative-restore-image {
+    filter: invert(1);
   }
 }
 
@@ -584,5 +650,33 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(-2%, 0, 0) rotate(-7deg) scaleX(1);
+  }
+
+  50% {
+    transform: translate3d(2%, 1.5%, 0) rotate(-4deg) scaleX(1.04);
+  }
+
+  100% {
+    transform: translate3d(5%, -1%, 0) rotate(-8deg) scaleX(0.98);
+  }
+}
+
+@keyframes aurora-drift-secondary {
+  0% {
+    transform: translate3d(1%, 0, 0) rotate(5deg) scaleX(1);
+  }
+
+  50% {
+    transform: translate3d(-2%, -1%, 0) rotate(8deg) scaleX(1.05);
+  }
+
+  100% {
+    transform: translate3d(3%, 1%, 0) rotate(3deg) scaleX(0.97);
   }
 }

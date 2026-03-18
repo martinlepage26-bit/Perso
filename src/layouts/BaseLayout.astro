@@ -38,8 +38,8 @@ const structuredPayload = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={pageDescription} />
-    <meta name="theme-color" content="#f1efed" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#020204" />
+    <meta name="color-scheme" content="dark" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -61,12 +61,15 @@ const structuredPayload = [
     <title>{pageTitle}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredPayload)} />
   </head>
-  <body>
+  <body class="site-negative-mode">
     <a class="skip-link" href="#content">Skip to content</a>
-    <SiteHeader />
-    <main id="content">
-      <slot />
-    </main>
-    <SiteFooter />
+    <div class="site-aurora" aria-hidden="true"></div>
+    <div class="site-negative">
+      <SiteHeader />
+      <main id="content">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
   </body>
 </html>
