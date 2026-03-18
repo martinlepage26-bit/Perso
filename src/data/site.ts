@@ -6,7 +6,7 @@ export const siteMeta = {
   title: 'Martin Lepage',
   siteUrl: configuredSiteUrl,
   description:
-    'Montreal-based scholar, writer, and AI governance strategist working across governance, digital culture, ritual studies, and public writing.',
+    'Montreal-based scholar, writer, and AI governance strategist focused on governance, culture, and public writing.',
   locale: 'en-CA',
   email: 'martinlepage.ai@gmail.com',
   location: 'Montreal, Quebec, Canada',
@@ -41,30 +41,30 @@ export const homeHighlights = [
   {
     title: 'Governance advisory',
     description:
-      'Documentation-first AI governance work for teams that need clearer approvals, risk framing, and decision traceability.',
+      'AI governance work for teams that need clearer decisions, better documentation, and easier review.',
   },
   {
     title: 'Interpretive research',
     description:
-      'Qualitative analysis across ritual, media, gender, legitimacy, and the lived texture of institutions.',
+      'Research on ritual, media, gender, and how institutions make power feel real.',
   },
   {
     title: 'Books and essays',
     description:
-      'Long-form writing that keeps theory, atmosphere, and public argument in the same frame.',
+      'Books and essays written for readers both inside and outside academic spaces.',
   },
 ] as const;
 
 export const biography = {
   intro:
-    'Martin Lepage is a Montreal-based scholar, writer, and AI governance strategist whose work moves between AI governance, qualitative research, and public writing.',
+    'Martin Lepage is a Montreal-based scholar, writer, and AI governance strategist. His work brings together AI governance, research, and public writing.',
   paragraphs: [
-    'His academic background spans ritual studies, queer theory, feminist media analysis, digital culture, and contemporary spiritualities. He completed a PhD in Religious Sciences at Universite du Quebec a Montreal, following earlier degrees in literary studies at Universite Laval.',
-    'Professionally, he has worked across research operations, archival preservation, AI-assisted quality review, and clinical trial coordination. That combination gives his governance work an unusual shape: interpretive enough to understand messy institutional realities, and operational enough to make documentation usable.',
-    'His current body of work treats governance, media, and authorship as linked problems of legitimacy, containment, narrative, and evidence. The result is a public profile designed to speak to academic audiences, advisory partners, editors, and media collaborators without splitting those worlds apart.',
+    'His academic background includes ritual studies, queer theory, media analysis, digital culture, and contemporary spiritualities. He completed a PhD in Religious Sciences at Universite du Quebec a Montreal after earlier degrees in literary studies at Universite Laval.',
+    'He has also worked in research operations, archives, AI-assisted quality review, and clinical trial coordination. That mix helps him understand complex institutions while still making documentation useful and practical.',
+    'Today his work connects governance, media, and authorship through a shared concern: how legitimacy is built, how authority is explained, and how people live with those systems once they are in place.',
   ],
   currentWork:
-    'Current work includes AI governance frameworks, scholarship on ritual and media, and book-stage projects moving from manuscript to public preview.',
+    'Current work includes AI governance, research on ritual and media, and books in progress.',
 };
 
 export const researchInterests = [
@@ -121,7 +121,7 @@ export const timeline = [
 
 export const resumeData = {
   summary:
-    'Business-ready AI governance and research operations professional with experience across clinical trials, AI-assisted quality evaluation, archival systems, and scholarly research. Strong at bringing structure to fast-moving work: mapping AI use cases, identifying risk, improving traceability, supporting compliance, and producing decision-ready documentation.',
+    'AI governance and research operations professional with experience in clinical trials, AI review, archives, and scholarly research. Strong at bringing order to fast-moving work through clear documentation, risk review, and practical decision support.',
   experience: [
     {
       title: 'Clinical Trial Coordinator',
@@ -267,8 +267,8 @@ export const resumeData = {
 };
 
 export const contactAreas = [
-  'Governance advisory and documentation engagements',
-  'Editorial, interview, and media opportunities',
+  'AI governance and documentation work',
+  'Editorial, interview, and media requests',
   'Talks, guest lectures, and panels',
   'Research collaborations and publication conversations',
 ];

@@ -31,23 +31,23 @@ const symbolicProjects = symbolicProjectOrder
 const homeStats = [
   {
     value: papers.length,
-    label: 'Publication entries',
-    description: 'Peer-reviewed work, chapters, and manuscript-stage research with status kept visible.',
+    label: 'Publications',
+    description: 'Published and in-progress research, with status shown clearly.',
   },
   {
     value: projects.length,
-    label: 'Project records',
-    description: 'Governance, book-stage, and digital work kept distinct instead of flattened into one category.',
+    label: 'Projects',
+    description: 'Governance work, books, and digital projects in one archive.',
   },
   {
     value: writings.length,
-    label: 'Essays and notes',
-    description: 'Public criticism and long-form writing shaped for readers outside strictly academic settings.',
+    label: 'Essays',
+    description: 'Public writing, criticism, and notes.',
   },
   {
     value: talks.length,
-    label: 'Talks and sessions',
-    description: 'Conference appearances, research presentations, and public-facing speaking gathered in one place.',
+    label: 'Talks',
+    description: 'Conference talks, presentations, and public speaking.',
   },
 ] as const;
 ---
@@ -59,18 +59,17 @@ const homeStats = [
     <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
       <SectionIntro
         eyebrow="Overview"
-        title="One public surface, several modes of work."
+        title="One site, several kinds of work."
         description={biography.intro}
       />
 
       <div class="veil-panel space-y-6">
         <p class="text-lg leading-8 text-slate-200">
-          Martin’s practice links governance, research, and authorship through one recurring question: how do systems
-          authorize power, and how do people live inside them once they become real?
+          Martin&apos;s work asks a simple question: how is power made believable, and what happens once people have to
+          live with it?
         </p>
         <p class="text-base text-slate-200">
-          That question appears here in AI governance work, ritual and media analysis, books and long-form
-          essays.
+          That question shapes the governance work, research, books, and essays gathered here.
         </p>
         <a class="link-inline" href="/about/">Read the fuller biography</a>
       </div>
@@ -101,8 +100,8 @@ const homeStats = [
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <SectionIntro
         eyebrow="Featured publications"
-        title="Research across ritual, gender, media, and governance."
-        description="Academic work with publication status kept visible and plain."
+        title="Research on ritual, gender, media, and governance."
+        description="Published and in-progress research, with status kept clear."
       />
     </div>
 
@@ -120,8 +119,8 @@ const homeStats = [
       <div>
         <SectionIntro
           eyebrow="Projects"
-          title="Selected projects across governance, books, and digital work."
-          description="A mixed archive that keeps status, format, and audience visible instead of collapsing everything into one bucket."
+          title="Projects in governance, books, and digital work."
+          description="An archive of advisory, writing, and experimental work."
         />
 
         <div class="mt-3">
@@ -135,10 +134,10 @@ const homeStats = [
 
       <aside class="veil-panel">
         <p class="eyebrow">Developing works</p>
-        <h2 class="mt-3 text-[1.42rem] md:text-[1.62rem]">Books and symbolic frameworks now in public preview.</h2>
+        <h2 class="mt-3 text-[1.42rem] md:text-[1.62rem]">Books and symbolic work in public preview.</h2>
         <p class="mt-4 text-base text-slate-200">
-          These entries hold the more atmospheric and book-stage thread of the practice without pretending they are
-          product pages or finalized publications.
+          These entries show the book and symbolic side of the practice without pretending they are finished
+          publications.
         </p>
 
         <ul class="mt-8 space-y-3">
@@ -173,8 +172,8 @@ const homeStats = [
       <div>
         <SectionIntro
           eyebrow="Writing"
-          title="Essays, criticism, and public-facing argument."
-          description="A writing archive that keeps theory, atmosphere, and argument close together without requiring academic framing to stay rigorous."
+          title="Essays and criticism."
+          description="Public writing, notes, and longer essays."
         />
 
         <div class="mt-3">
@@ -193,7 +192,7 @@ const homeStats = [
       <div class="space-y-6">
         <div class="veil-panel">
           <p class="eyebrow">Talks and media</p>
-          <h2 class="mt-3 text-[1.32rem] md:text-[1.5rem]">Conference sessions, research presentations, and public-facing appearances.</h2>
+          <h2 class="mt-3 text-[1.32rem] md:text-[1.5rem]">Talks and public appearances.</h2>
           <div class="mt-8 space-y-4">
             {featuredTalks.map((talk) => (
               <article class="border-t border-[rgba(36,27,23,0.12)] py-4">
@@ -212,10 +211,9 @@ const homeStats = [
 
         <div class="veil-panel">
           <p class="eyebrow">Resume and CV</p>
-          <h2 class="mt-3 text-[1.32rem] md:text-[1.5rem]">Downloadable, readable, and aligned with the public profile.</h2>
+          <h2 class="mt-3 text-[1.32rem] md:text-[1.5rem]">Resume and CV.</h2>
           <p class="mt-4 text-base text-slate-200">
-            The resume route gathers governance, research operations, teaching, archival work, and recent clinical
-            coordination into one compact document.
+            A short public CV covering governance, research operations, teaching, archives, and recent clinical work.
           </p>
           <ul class="bullet-links mt-6">
             <li><a class="link-inline" href="/resume/">Open resume</a></li>
