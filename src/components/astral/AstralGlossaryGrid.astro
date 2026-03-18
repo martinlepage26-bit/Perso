@@ -86,33 +86,28 @@ const groupedSigns = classicalElements
     justify-content: center;
     padding: 0.7rem 1rem;
     border-radius: 999px;
-    border: 1px solid rgba(201, 149, 47, 0.18);
-    background: rgba(17, 34, 70, 0.46);
-    color: var(--color-moon);
+    border: 1px solid rgba(36, 27, 23, 0.12);
+    background: rgba(251, 246, 239, 0.64);
+    color: var(--color-slate-300);
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    box-shadow: inset 0 1px 0 rgba(248, 243, 234, 0.05);
   }
 
   .glossary-nav-pill:hover {
-    border-color: rgba(201, 149, 47, 0.38);
-    color: var(--color-aqua);
+    border-color: rgba(157, 76, 47, 0.3);
+    color: var(--color-accent);
   }
 
   .glossary-element-group {
     --element-accent: color-mix(in srgb, var(--element-color) 34%, transparent);
-    padding: 1.2rem;
-    border: 1px solid rgba(201, 149, 47, 0.14);
-    border-radius: 1.4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(36, 27, 23, 0.12);
     background:
       radial-gradient(circle at top left, var(--element-accent) 0%, transparent 45%),
-      linear-gradient(180deg, rgba(17, 34, 70, 0.58), rgba(8, 17, 32, 0.7));
-    box-shadow:
-      0 18px 36px rgba(5, 3, 10, 0.16),
-      inset 0 1px 0 rgba(248, 243, 234, 0.04);
+      linear-gradient(180deg, rgba(251, 246, 239, 0.16), rgba(251, 246, 239, 0));
   }
 
   .glossary-element-head {
@@ -131,15 +126,11 @@ const groupedSigns = classicalElements
   .glossary-card {
     --card-accent: color-mix(in srgb, var(--sign-color) 24%, transparent);
     height: 100%;
-    padding: 1.15rem;
-    border-radius: 1.15rem;
-    border: 1px solid rgba(201, 149, 47, 0.16);
+    padding-top: 1.15rem;
+    border-top: 1px solid rgba(36, 27, 23, 0.12);
     background:
       radial-gradient(circle at top right, var(--card-accent) 0%, transparent 42%),
-      linear-gradient(180deg, rgba(14, 10, 28, 0.9), rgba(25, 16, 40, 0.92));
-    box-shadow:
-      0 14px 32px rgba(5, 3, 10, 0.16),
-      inset 0 1px 0 rgba(248, 243, 234, 0.04);
+      linear-gradient(180deg, rgba(251, 246, 239, 0.18), rgba(251, 246, 239, 0));
   }
 
   .glossary-sign-meta {
@@ -148,7 +139,7 @@ const groupedSigns = classicalElements
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-aqua);
+    color: var(--color-accent);
   }
 
   .glossary-sign-glyph {
@@ -179,10 +170,8 @@ const groupedSigns = classicalElements
   }
 
   .glossary-field {
-    border-radius: 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(255, 255, 255, 0.03);
-    padding: 0.85rem 0.9rem;
+    border-top: 1px solid rgba(36, 27, 23, 0.1);
+    padding-top: 0.85rem;
   }
 
   .glossary-field dt {
@@ -192,7 +181,7 @@ const groupedSigns = classicalElements
     letter-spacing: 0.18em;
     line-height: 1.4;
     text-transform: uppercase;
-    color: var(--color-aqua);
+    color: var(--color-slate-400);
   }
 
   .glossary-field dd {

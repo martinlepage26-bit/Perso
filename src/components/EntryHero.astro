@@ -21,7 +21,7 @@ interface Props {
 const { eyebrow, title, description, meta, backHref, backLabel, tags = [], links = [] } = Astro.props;
 ---
 
-<section class="relative overflow-hidden border-b border-white/10">
+<section class="relative overflow-hidden border-b border-[rgba(36,27,23,0.12)]">
   <BackgroundTreatment variant="panel" />
   <div class="section-shell relative">
     <a class="link-inline" href={backHref}>&larr; {backLabel}</a>

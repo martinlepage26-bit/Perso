@@ -9,23 +9,32 @@
   --font-sans: "Manrope Variable", "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Newsreader Variable", "Newsreader", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --color-bone: #f5ecdf;
-  --color-bone-deep: #b79d85;
-  --color-ink: #f4eadc;
-  --color-night: #16110f;
-  --color-slate-ink: #d0c2b4;
-  --color-fog: #ddcfbf;
-  --color-moon: #fff5ea;
-  --color-accent: #d77b4b;
-  --color-plum: #2f1d1a;
-  --color-ember: #6f836c;
-  --color-aqua: #a6b89c;
-  --color-horizon: #8f6d63;
+
+  --color-bone: #fbf6ef;
+  --color-bone-deep: #d1bdab;
+  --color-ink: #241b17;
+  --color-night: #f6efe5;
+  --color-slate-ink: #62544a;
+  --color-slate-soft: #74665d;
+  --color-fog: #87756b;
+  --color-moon: #17110d;
+  --color-accent: #9d4c2f;
+  --color-plum: #3a2923;
+  --color-ember: #667358;
+  --color-aqua: #5d705f;
+  --color-horizon: #ae9079;
+
+  --color-white: #241b17;
+  --color-slate-100: #2a201c;
+  --color-slate-200: #3f322b;
+  --color-slate-300: #64564c;
+  --color-slate-400: #87756b;
+  --color-slate-500: #a28f83;
 }
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   html {
@@ -33,11 +42,11 @@
   }
 
   body {
-    @apply min-h-screen bg-night text-ink selection:text-night;
+    @apply min-h-screen bg-night text-ink selection:text-bone;
     background:
-      radial-gradient(circle at 16% 18%, rgba(215, 123, 75, 0.18) 0%, rgba(215, 123, 75, 0) 26%),
-      radial-gradient(circle at 84% 14%, rgba(111, 131, 108, 0.16) 0%, rgba(111, 131, 108, 0) 24%),
-      linear-gradient(180deg, #16110f 0%, #1f1714 48%, #291d19 100%);
+      radial-gradient(circle at 12% 12%, rgba(157, 76, 47, 0.14) 0%, rgba(157, 76, 47, 0) 26%),
+      radial-gradient(circle at 85% 14%, rgba(102, 115, 88, 0.12) 0%, rgba(102, 115, 88, 0) 24%),
+      linear-gradient(180deg, #f7f1e7 0%, #efe7dc 56%, #ece1d4 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -53,18 +62,25 @@
   body::before {
     z-index: -2;
     background:
-      linear-gradient(90deg, rgba(255, 245, 234, 0.035) 0 1px, transparent 1px 116px),
-      linear-gradient(180deg, rgba(255, 245, 234, 0.02) 0 1px, transparent 1px 92px);
-    opacity: 0.16;
+      linear-gradient(90deg, rgba(36, 27, 23, 0.055) 0 1px, transparent 1px 124px),
+      linear-gradient(180deg, rgba(36, 27, 23, 0.03) 0 1px, transparent 1px 96px);
+    opacity: 0.44;
   }
 
   body::after {
     z-index: -1;
     background:
-      radial-gradient(circle at 10% 78%, rgba(215, 123, 75, 0.1), transparent 24%),
-      radial-gradient(circle at 88% 74%, rgba(111, 131, 108, 0.08), transparent 22%),
-      linear-gradient(90deg, transparent 0 9%, rgba(255, 245, 234, 0.03) 9% 9.08%, transparent 9.08% 90.92%, rgba(255, 245, 234, 0.02) 90.92% 91%, transparent 91%);
-    opacity: 0.48;
+      radial-gradient(circle at 9% 78%, rgba(157, 76, 47, 0.08), transparent 24%),
+      radial-gradient(circle at 88% 76%, rgba(102, 115, 88, 0.08), transparent 22%),
+      linear-gradient(
+        90deg,
+        transparent 0 10%,
+        rgba(36, 27, 23, 0.045) 10% 10.08%,
+        transparent 10.08% 89.92%,
+        rgba(36, 27, 23, 0.03) 89.92% 90%,
+        transparent 90%
+      );
+    opacity: 0.82;
   }
 
   main {
@@ -86,29 +102,29 @@
   }
 
   h1 {
-    font-size: clamp(2.25rem, 4.6vw, 4.15rem);
-    line-height: 0.96;
-    letter-spacing: -0.04em;
+    font-size: clamp(2.6rem, 5vw, 4.7rem);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
     font-weight: 500;
   }
 
   h2 {
-    font-size: clamp(1.4rem, 2.3vw, 2.2rem);
+    font-size: clamp(1.5rem, 2.6vw, 2.35rem);
     line-height: 1.02;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.032em;
     font-weight: 500;
   }
 
   h3 {
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    line-height: 1.14;
-    letter-spacing: -0.012em;
+    font-size: clamp(1.02rem, 1.6vw, 1.24rem);
+    line-height: 1.16;
+    letter-spacing: -0.014em;
     font-weight: 600;
   }
 
   p,
   li {
-    @apply text-[0.98rem] leading-7 text-slate-200;
+    @apply text-[1rem] leading-7 text-slate-200;
     text-wrap: pretty;
   }
 
@@ -117,22 +133,22 @@
   }
 
   ::selection {
-    background: rgba(215, 123, 75, 0.28);
+    background: rgba(157, 76, 47, 0.28);
   }
 
   :focus-visible {
     outline: 0;
-    box-shadow: 0 0 0 4px rgba(215, 123, 75, 0.22);
+    box-shadow: 0 0 0 4px rgba(157, 76, 47, 0.18);
   }
 }
 
 @layer components {
   .shell {
-    @apply mx-auto w-full max-w-[1040px] px-6 md:px-8;
+    @apply mx-auto w-full max-w-[1080px] px-6 md:px-8;
   }
 
   .section-shell {
-    @apply mx-auto w-full max-w-[1040px] px-6 py-12 md:px-8 md:py-16;
+    @apply mx-auto w-full max-w-[1080px] px-6 py-14 md:px-8 md:py-20;
   }
 
   .eyebrow {
@@ -145,71 +161,70 @@
     width: 1.8rem;
     height: 1px;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(215, 123, 75, 0.78), rgba(215, 123, 75, 0.14));
+    background: linear-gradient(90deg, rgba(157, 76, 47, 0.74), rgba(157, 76, 47, 0.12));
   }
 
   .section-title {
-    @apply mt-4 text-[1.5rem] leading-[1.06] text-moon md:text-[1.72rem];
-    letter-spacing: -0.02em;
+    @apply mt-4 text-[1.58rem] leading-[1.06] text-moon md:text-[1.82rem];
+    letter-spacing: -0.024em;
   }
 
   .section-copy {
-    @apply max-w-[42rem] text-[0.98rem] leading-7 text-slate-300;
+    @apply max-w-[44rem] text-[1rem] leading-7 text-slate-300;
   }
 
   .veil-panel {
-    @apply rounded-[0.8rem] border p-5;
-    border-color: rgba(215, 123, 75, 0.2);
-    background: linear-gradient(180deg, rgba(49, 34, 29, 0.92), rgba(22, 17, 15, 0.9));
-    box-shadow:
-      0 20px 40px rgba(8, 5, 4, 0.2),
-      inset 0 1px 0 rgba(255, 245, 234, 0.04);
+    @apply relative p-0;
+    border-top: 1px solid rgba(36, 27, 23, 0.14);
+    padding-top: 1.4rem;
+  }
+
+  .veil-panel::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 4rem;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(157, 76, 47, 0.75), rgba(157, 76, 47, 0));
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center rounded-[0.72rem] px-5 py-2.5 text-[0.76rem] font-semibold uppercase tracking-[0.14em] transition;
-    border: 1px solid rgba(215, 123, 75, 0.34);
-    background: linear-gradient(180deg, rgba(226, 140, 91, 0.98), rgba(191, 101, 62, 0.96));
-    color: #1b130f;
-    box-shadow:
-      0 12px 28px rgba(23, 14, 11, 0.22),
-      inset 0 1px 0 rgba(255, 245, 234, 0.1);
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] transition;
+    border: 1px solid rgba(36, 27, 23, 0.12);
+    background: #1f1713;
+    color: var(--color-bone);
+    box-shadow: 0 12px 28px rgba(36, 27, 23, 0.08);
   }
 
   .button-primary:hover {
     transform: translateY(-1px);
-    border-color: rgba(255, 210, 186, 0.42);
-    color: #0f0b09;
+    background: #17110d;
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center rounded-[0.72rem] px-5 py-2.5 text-[0.76rem] font-semibold uppercase tracking-[0.14em] transition;
-    border: 1px solid rgba(166, 184, 156, 0.24);
-    background: rgba(27, 20, 18, 0.62);
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] transition;
+    border: 1px solid rgba(36, 27, 23, 0.12);
+    background: rgba(251, 246, 239, 0.54);
     color: var(--color-moon);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 245, 234, 0.06),
-      0 0 18px rgba(111, 131, 108, 0.08);
   }
 
   .button-secondary:hover {
     transform: translateY(-1px);
-    border-color: rgba(166, 184, 156, 0.42);
-    color: var(--color-aqua);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 245, 234, 0.08),
-      0 0 24px rgba(111, 131, 108, 0.12);
+    border-color: rgba(157, 76, 47, 0.24);
+    background: rgba(251, 246, 239, 0.78);
+    color: var(--color-accent);
   }
 
   .link-inline {
-    @apply text-sm font-medium underline underline-offset-4;
+    @apply text-sm font-semibold underline underline-offset-4;
     color: var(--color-accent);
-    text-decoration-color: rgba(215, 123, 75, 0.32);
+    text-decoration-color: rgba(157, 76, 47, 0.24);
   }
 
   .link-inline:hover {
     color: var(--color-moon);
-    text-decoration-color: rgba(215, 123, 75, 0.52);
+    text-decoration-color: rgba(157, 76, 47, 0.42);
   }
 
   .bullet-tags {
@@ -217,7 +232,7 @@
   }
 
   .bullet-tags li::marker {
-    color: rgba(215, 123, 75, 0.72);
+    color: rgba(157, 76, 47, 0.72);
   }
 
   .bullet-links {
@@ -225,7 +240,7 @@
   }
 
   .bullet-links li::marker {
-    color: rgba(215, 123, 75, 0.72);
+    color: rgba(157, 76, 47, 0.72);
   }
 
   .bullet-facts {
@@ -237,66 +252,80 @@
   }
 
   .bullet-facts li::marker {
-    color: rgba(215, 123, 75, 0.72);
+    color: rgba(157, 76, 47, 0.72);
   }
 
   .card-link {
-    @apply relative flex h-full flex-col gap-4 rounded-[0.85rem] border p-5 transition duration-300 hover:-translate-y-1;
-    border-color: rgba(215, 123, 75, 0.16);
-    background: linear-gradient(180deg, rgba(47, 33, 29, 0.86), rgba(22, 17, 15, 0.78));
-    box-shadow:
-      0 14px 30px rgba(8, 5, 4, 0.18),
-      inset 0 1px 0 rgba(255, 245, 234, 0.05);
+    @apply relative flex h-full flex-col gap-4 py-5 transition duration-300;
+    border-top: 1px solid rgba(36, 27, 23, 0.12);
+  }
+
+  .card-link::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 3rem;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(157, 76, 47, 0.78), rgba(157, 76, 47, 0));
+    transition: width 180ms ease;
   }
 
   .card-link:hover {
-    border-color: rgba(215, 123, 75, 0.3);
-    box-shadow:
-      0 20px 44px rgba(8, 5, 4, 0.24),
-      0 0 20px rgba(111, 131, 108, 0.08);
+    transform: translateX(0.35rem);
+  }
+
+  .card-link:hover::before {
+    width: 4.4rem;
   }
 
   .project-motif-shell {
     background-image:
-      radial-gradient(circle at top, rgba(111, 131, 108, 0.16), transparent 34%),
-      linear-gradient(180deg, rgba(215, 123, 75, 0.08), rgba(22, 17, 15, 0.22));
+      linear-gradient(120deg, rgba(157, 76, 47, 0.08), transparent 38%),
+      linear-gradient(180deg, rgba(36, 27, 23, 0.03), rgba(36, 27, 23, 0.07));
+  }
+
+  .project-motif-default {
+    background-image:
+      radial-gradient(circle at top, rgba(102, 115, 88, 0.14), transparent 34%),
+      linear-gradient(180deg, rgba(157, 76, 47, 0.06), rgba(36, 27, 23, 0.06));
   }
 
   .project-motif-road {
     background-image:
-      radial-gradient(circle at 20% 15%, rgba(111, 131, 108, 0.18), transparent 26%),
-      linear-gradient(140deg, transparent 0 38%, rgba(255, 245, 234, 0.28) 39%, transparent 40%, transparent 52%, rgba(215, 123, 75, 0.22) 53%, transparent 54%),
-      linear-gradient(180deg, rgba(111, 131, 108, 0.08), rgba(22, 17, 15, 0.22));
+      radial-gradient(circle at 20% 15%, rgba(102, 115, 88, 0.16), transparent 26%),
+      linear-gradient(140deg, transparent 0 38%, rgba(36, 27, 23, 0.18) 39%, transparent 40%, transparent 52%, rgba(157, 76, 47, 0.18) 53%, transparent 54%),
+      linear-gradient(180deg, rgba(102, 115, 88, 0.06), rgba(36, 27, 23, 0.06));
   }
 
   .project-motif-seal {
     background-image:
-      radial-gradient(circle at 50% 24%, rgba(215, 123, 75, 0.16), transparent 24%),
-      linear-gradient(180deg, transparent 0 14%, rgba(255, 245, 234, 0.24) 14% 15%, transparent 15% 85%, rgba(255, 245, 234, 0.24) 85% 86%, transparent 86%),
-      linear-gradient(90deg, transparent 0 12%, rgba(111, 131, 108, 0.24) 12% 13%, transparent 13% 87%, rgba(111, 131, 108, 0.24) 87% 88%, transparent 88%),
-      linear-gradient(180deg, rgba(215, 123, 75, 0.08), rgba(22, 17, 15, 0.22));
+      radial-gradient(circle at 50% 24%, rgba(157, 76, 47, 0.14), transparent 24%),
+      linear-gradient(180deg, transparent 0 14%, rgba(36, 27, 23, 0.18) 14% 15%, transparent 15% 85%, rgba(36, 27, 23, 0.18) 85% 86%, transparent 86%),
+      linear-gradient(90deg, transparent 0 12%, rgba(102, 115, 88, 0.18) 12% 13%, transparent 13% 87%, rgba(102, 115, 88, 0.18) 87% 88%, transparent 88%),
+      linear-gradient(180deg, rgba(157, 76, 47, 0.05), rgba(36, 27, 23, 0.05));
   }
 
   .project-motif-gem {
     background-image:
-      radial-gradient(circle at 50% 24%, rgba(215, 123, 75, 0.18), transparent 22%),
-      linear-gradient(45deg, transparent 0 48%, rgba(255, 245, 234, 0.3) 49% 51%, transparent 52%),
-      linear-gradient(-45deg, transparent 0 48%, rgba(111, 131, 108, 0.24) 49% 51%, transparent 52%),
-      linear-gradient(180deg, rgba(215, 123, 75, 0.08), rgba(22, 17, 15, 0.22));
+      radial-gradient(circle at 50% 24%, rgba(157, 76, 47, 0.16), transparent 22%),
+      linear-gradient(45deg, transparent 0 48%, rgba(36, 27, 23, 0.2) 49% 51%, transparent 52%),
+      linear-gradient(-45deg, transparent 0 48%, rgba(102, 115, 88, 0.18) 49% 51%, transparent 52%),
+      linear-gradient(180deg, rgba(157, 76, 47, 0.05), rgba(36, 27, 23, 0.05));
   }
 
   .project-motif-recursion {
     background-image:
-      radial-gradient(circle at center, transparent 0 18%, rgba(255, 245, 234, 0.22) 18% 19%, transparent 19% 32%, rgba(111, 131, 108, 0.22) 32% 33%, transparent 33% 46%, rgba(215, 123, 75, 0.2) 46% 47%, transparent 47%),
-      linear-gradient(180deg, rgba(111, 131, 108, 0.08), rgba(22, 17, 15, 0.22));
+      radial-gradient(circle at center, transparent 0 18%, rgba(36, 27, 23, 0.18) 18% 19%, transparent 19% 32%, rgba(102, 115, 88, 0.18) 32% 33%, transparent 33% 46%, rgba(157, 76, 47, 0.18) 46% 47%, transparent 47%),
+      linear-gradient(180deg, rgba(102, 115, 88, 0.05), rgba(36, 27, 23, 0.05));
   }
 
   .project-motif-orbit {
     background-image:
-      radial-gradient(circle at center, transparent 0 22%, rgba(215, 123, 75, 0.24) 22% 23%, transparent 23% 38%, rgba(111, 131, 108, 0.2) 38% 39%, transparent 39% 55%, rgba(255, 245, 234, 0.16) 55% 56%, transparent 56%),
-      radial-gradient(circle at 35% 32%, rgba(111, 131, 108, 0.18), transparent 14%),
-      radial-gradient(circle at 68% 62%, rgba(215, 123, 75, 0.14), transparent 16%),
-      linear-gradient(180deg, rgba(111, 131, 108, 0.08), rgba(22, 17, 15, 0.22));
+      radial-gradient(circle at center, transparent 0 22%, rgba(157, 76, 47, 0.2) 22% 23%, transparent 23% 38%, rgba(102, 115, 88, 0.18) 38% 39%, transparent 39% 55%, rgba(36, 27, 23, 0.14) 55% 56%, transparent 56%),
+      radial-gradient(circle at 35% 32%, rgba(102, 115, 88, 0.16), transparent 14%),
+      radial-gradient(circle at 68% 62%, rgba(157, 76, 47, 0.12), transparent 16%),
+      linear-gradient(180deg, rgba(102, 115, 88, 0.05), rgba(36, 27, 23, 0.05));
   }
 
   .reading-flow {
@@ -308,12 +337,12 @@
   }
 
   .reading-flow h2 {
-    @apply mt-10 text-[1.42rem] leading-tight md:text-[1.62rem];
-    letter-spacing: -0.02em;
+    @apply mt-10 text-[1.42rem] leading-tight md:text-[1.66rem];
+    letter-spacing: -0.022em;
   }
 
   .reading-flow h3 {
-    @apply mt-8 text-[1.08rem] leading-tight md:text-[1.14rem];
+    @apply mt-8 text-[1.08rem] leading-tight md:text-[1.16rem];
   }
 
   .reading-flow ul,
@@ -322,30 +351,29 @@
   }
 
   .reading-flow blockquote {
-    @apply border-l-2 pl-5 text-lg italic text-slate-100;
-    border-color: rgba(215, 123, 75, 0.42);
+    @apply border-l-2 py-1 pl-5 text-lg italic text-slate-100;
+    border-color: rgba(157, 76, 47, 0.42);
+    background: rgba(36, 27, 23, 0.03);
   }
 
   .reading-flow a {
     @apply underline underline-offset-4;
     color: var(--color-accent);
-    text-decoration-color: rgba(215, 123, 75, 0.34);
+    text-decoration-color: rgba(157, 76, 47, 0.34);
   }
 
   .reading-flow a:hover {
     color: var(--color-moon);
-    text-decoration-color: rgba(215, 123, 75, 0.55);
+    text-decoration-color: rgba(157, 76, 47, 0.5);
   }
 
   .filter-shell {
-    @apply rounded-[0.8rem] border px-4 py-3 md:px-5;
-    border-color: rgba(215, 123, 75, 0.18);
-    background: linear-gradient(180deg, rgba(44, 30, 26, 0.9), rgba(22, 17, 15, 0.84));
-    box-shadow: inset 0 1px 0 rgba(255, 245, 234, 0.04);
+    @apply border-y px-0 py-4;
+    border-color: rgba(36, 27, 23, 0.12);
   }
 
   .filter-toolbar {
-    @apply grid gap-3 md:grid-cols-[minmax(0,1.2fr)_13rem_auto] md:items-end;
+    @apply grid gap-4 md:grid-cols-[minmax(0,1.2fr)_13rem_auto] md:items-end;
   }
 
   .filter-field {
@@ -353,23 +381,26 @@
   }
 
   .filter-label {
-    @apply font-mono text-[0.62rem] uppercase tracking-[0.2em] text-accent/90;
+    @apply font-mono text-[0.62rem] uppercase tracking-[0.2em];
+    color: var(--color-slate-400);
   }
 
   .filter-search,
   .filter-select {
-    @apply w-full rounded-[0.65rem] border px-4 py-[0.82rem] text-sm text-moon transition;
-    border-color: rgba(215, 123, 75, 0.16);
-    background: rgba(24, 18, 16, 0.62);
+    @apply w-full border-b px-0 py-[0.82rem] text-sm text-moon transition;
+    border-color: rgba(36, 27, 23, 0.16);
+    background: transparent;
   }
 
   .filter-search::placeholder {
-    color: rgba(217, 209, 194, 0.5);
+    color: rgba(98, 84, 74, 0.62);
   }
 
   .filter-search:hover,
-  .filter-select:hover {
-    border-color: rgba(215, 123, 75, 0.32);
+  .filter-search:focus,
+  .filter-select:hover,
+  .filter-select:focus {
+    border-color: rgba(157, 76, 47, 0.4);
   }
 
   .filter-actions {
@@ -386,16 +417,15 @@
   }
 
   .filter-count {
-    @apply inline-flex items-center rounded-[0.55rem] border px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.16em];
-    border-color: rgba(215, 123, 75, 0.16);
-    background: rgba(24, 18, 16, 0.54);
-    color: var(--color-accent);
+    @apply inline-flex items-center rounded-full border px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.16em];
+    border-color: rgba(36, 27, 23, 0.12);
+    color: var(--color-slate-300);
   }
 
   .skip-link {
     @apply absolute left-4 top-4 z-50 -translate-y-20 rounded-full px-4 py-2 text-sm font-semibold transition focus:translate-y-0;
-    background: var(--color-bone);
-    color: var(--color-night);
+    background: var(--color-moon);
+    color: var(--color-bone);
   }
 }
 

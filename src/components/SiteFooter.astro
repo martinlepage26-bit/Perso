@@ -2,7 +2,7 @@
 import { navigation, siteMeta } from '../data/site';
 ---
 
-<footer class="border-t border-[rgba(215,123,75,0.12)] bg-[linear-gradient(180deg,rgba(20,15,13,0.88),rgba(39,28,24,0.96))]">
+<footer class="border-t border-[rgba(36,27,23,0.12)]">
   <div class="section-shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px]">
     <div class="space-y-5">
       <p class="eyebrow">Martin Lepage</p>
@@ -24,7 +24,7 @@ import { navigation, siteMeta } from '../data/site';
         <ul class="mt-4 space-y-3">
           {navigation.map(({ href, label }) => (
             <li>
-              <a class="text-sm text-slate-200 hover:text-aqua" href={href}>
+              <a class="text-sm text-slate-200 hover:text-accent" href={href}>
                 {label}
               </a>
             </li>
@@ -35,18 +35,18 @@ import { navigation, siteMeta } from '../data/site';
       <div>
         <h3 class="font-mono text-sm font-semibold uppercase tracking-[0.24em] text-accent">Elsewhere</h3>
         <ul class="mt-4 space-y-3 text-sm">
-          <li><a class="text-slate-200 hover:text-aqua" href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a></li>
-          <li><a class="text-slate-200 hover:text-aqua" href={siteMeta.linkedIn}>LinkedIn</a></li>
-          <li><a class="text-slate-200 hover:text-aqua" href={siteMeta.github}>GitHub</a></li>
-          <li><a class="text-slate-200 hover:text-aqua" href={siteMeta.orcid}>ORCID</a></li>
-          <li><a class="text-slate-200 hover:text-aqua" href={siteMeta.substack}>HEXA</a></li>
-          <li><a class="text-slate-200 hover:text-aqua" href={siteMeta.instagram}>Instagram</a></li>
+          <li><a class="text-slate-200 hover:text-accent" href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a></li>
+          <li><a class="text-slate-200 hover:text-accent" href={siteMeta.linkedIn}>LinkedIn</a></li>
+          <li><a class="text-slate-200 hover:text-accent" href={siteMeta.github}>GitHub</a></li>
+          <li><a class="text-slate-200 hover:text-accent" href={siteMeta.orcid}>ORCID</a></li>
+          <li><a class="text-slate-200 hover:text-accent" href={siteMeta.substack}>HEXA</a></li>
+          <li><a class="text-slate-200 hover:text-accent" href={siteMeta.instagram}>Instagram</a></li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="shell flex flex-col gap-3 border-t border-[rgba(215,123,75,0.12)] py-5 text-sm text-slate-300 md:flex-row md:items-center md:justify-between">
+  <div class="shell flex flex-col gap-3 border-t border-[rgba(36,27,23,0.12)] py-5 text-sm text-slate-300 md:flex-row md:items-center md:justify-between">
     <p>&copy; {new Date().getFullYear()} Martin Lepage. Montreal-based scholar, writer, and AI governance strategist.</p>
     <p>Streamlined layout, restrained motion, content-first architecture.</p>
   </div>

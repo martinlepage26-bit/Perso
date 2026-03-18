@@ -23,7 +23,7 @@ const structuredData = {
   canonical="/astral-year/glossary/"
   structuredData={structuredData}
 >
-  <section class="relative overflow-hidden border-b border-white/10">
+  <section class="relative overflow-hidden border-b border-[rgba(36,27,23,0.12)]">
     <div class="section-shell relative glossary-hero-shell">
       <div class="glossary-orbit glossary-orbit-one"></div>
       <div class="glossary-orbit glossary-orbit-two"></div>
@@ -75,7 +75,7 @@ const structuredData = {
     </div>
   </section>
 
-  <section class="section-shell border-y border-white/8 bg-white/4">
+  <section class="section-shell border-y border-[rgba(36,27,23,0.08)] bg-[rgba(251,246,239,0.28)]">
     <SectionIntro
       eyebrow="Reading guide"
       title="The glossary works as a translation layer."
@@ -117,7 +117,7 @@ const structuredData = {
     </div>
   </section>
 
-  <section class="section-shell border-t border-white/8">
+  <section class="section-shell border-t border-[rgba(36,27,23,0.08)]">
     <div class="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
       <article class="veil-panel">
         <p class="eyebrow">Why it matters</p>
@@ -148,9 +148,9 @@ const structuredData = {
   .glossary-orbit {
     position: absolute;
     border-radius: 999px;
-    border: 1px solid rgba(201, 149, 47, 0.16);
+    border: 1px solid rgba(157, 76, 47, 0.12);
     pointer-events: none;
-    filter: drop-shadow(0 0 24px rgba(201, 149, 47, 0.08));
+    filter: drop-shadow(0 0 24px rgba(157, 76, 47, 0.06));
   }
 
   .glossary-orbit-one {
@@ -158,7 +158,7 @@ const structuredData = {
     height: min(74vw, 760px);
     top: -8rem;
     right: -14rem;
-    background: radial-gradient(circle, rgba(201, 149, 47, 0.12) 0%, rgba(201, 149, 47, 0) 64%);
+    background: radial-gradient(circle, rgba(157, 76, 47, 0.1) 0%, rgba(157, 76, 47, 0) 64%);
   }
 
   .glossary-orbit-two {
@@ -166,21 +166,19 @@ const structuredData = {
     height: min(44vw, 360px);
     left: -4rem;
     bottom: -5rem;
-    background: radial-gradient(circle, rgba(108, 143, 202, 0.14) 0%, rgba(108, 143, 202, 0) 58%);
+    background: radial-gradient(circle, rgba(102, 115, 88, 0.12) 0%, rgba(102, 115, 88, 0) 58%);
   }
 
   .glossary-manifest-panel {
     background:
-      radial-gradient(circle at top right, rgba(201, 149, 47, 0.12), transparent 36%),
-      linear-gradient(160deg, rgba(18, 13, 34, 0.9), rgba(36, 20, 57, 0.92));
+      radial-gradient(circle at top right, rgba(157, 76, 47, 0.1), transparent 36%),
+      linear-gradient(160deg, rgba(251, 246, 239, 0.6), rgba(251, 246, 239, 0.14));
   }
 
   .glossary-mini-card,
   .glossary-guide-card {
-    border-radius: 1.1rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.04);
-    padding: 1rem 1.05rem;
+    border-top: 1px solid rgba(36, 27, 23, 0.12);
+    padding: 1rem 0;
   }
 
   .glossary-mini-label,
@@ -190,6 +188,6 @@ const structuredData = {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-aqua);
+    color: var(--color-accent);
   }
 </style>

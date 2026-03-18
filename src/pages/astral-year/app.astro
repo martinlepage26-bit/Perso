@@ -34,7 +34,7 @@ const structuredData = {
   canonical="/astral-year/app/"
   structuredData={structuredData}
 >
-  <section class="relative overflow-hidden border-b border-white/10">
+  <section class="relative overflow-hidden border-b border-[rgba(36,27,23,0.12)]">
     <div class="section-shell relative astral-hero-shell">
       <div class="astral-ring astral-ring-one"></div>
       <div class="astral-ring astral-ring-two"></div>
@@ -92,7 +92,7 @@ const structuredData = {
     </div>
   </section>
 
-  <section class="section-shell border-y border-white/8 bg-white/4">
+  <section class="section-shell border-y border-[rgba(36,27,23,0.08)] bg-[rgba(251,246,239,0.28)]">
     <div class="grid gap-6 lg:grid-cols-3">
       <article class="veil-panel">
         <p class="eyebrow">Grounded</p>
@@ -127,7 +127,7 @@ const structuredData = {
     .astral-ring {
       position: absolute;
       border-radius: 999px;
-      border: 1px solid rgba(209, 181, 255, 0.16);
+      border: 1px solid rgba(157, 76, 47, 0.12);
       pointer-events: none;
     }
 
@@ -136,7 +136,7 @@ const structuredData = {
       height: min(74vw, 820px);
       top: -12rem;
       right: -15rem;
-      background: radial-gradient(circle, rgba(209, 181, 255, 0.12) 0%, rgba(209, 181, 255, 0) 62%);
+      background: radial-gradient(circle, rgba(157, 76, 47, 0.1) 0%, rgba(157, 76, 47, 0) 62%);
     }
 
     .astral-ring-two {
@@ -144,20 +144,18 @@ const structuredData = {
       height: min(38vw, 320px);
       left: -3rem;
       bottom: -3rem;
-      background: radial-gradient(circle, rgba(110, 200, 214, 0.14) 0%, rgba(110, 200, 214, 0) 58%);
+      background: radial-gradient(circle, rgba(102, 115, 88, 0.12) 0%, rgba(102, 115, 88, 0) 58%);
     }
 
     .astral-hero-card {
       background:
-        radial-gradient(circle at top right, rgba(110, 200, 214, 0.12), transparent 35%),
-        linear-gradient(165deg, rgba(13, 9, 27, 0.92), rgba(28, 19, 45, 0.96));
+        radial-gradient(circle at top right, rgba(102, 115, 88, 0.1), transparent 35%),
+        linear-gradient(165deg, rgba(251, 246, 239, 0.62), rgba(251, 246, 239, 0.16));
     }
 
     .astral-mini-card {
-      border-radius: 1.15rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
-      padding: 1rem 1.05rem;
+      border-top: 1px solid rgba(36, 27, 23, 0.12);
+      padding: 1rem 0;
     }
 
     .astral-mini-label {
