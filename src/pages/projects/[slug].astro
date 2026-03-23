@@ -8,6 +8,7 @@ import EntryHero from '../../components/EntryHero.astro';
 import { hiddenProjectArchiveSlugs, projectArchivePromotedPaperSlugs } from '../../data/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { contentSlug, isPublishedPaper, joinDistinctText } from '../../lib/content';
+import { buildArticleSchema, buildCanonical } from '../../lib/seo';
 
 type ProjectEntry = CollectionEntry<'projects'>;
 type PaperEntry = CollectionEntry<'papers'>;
@@ -43,9 +44,11 @@ const { entryKind, entry } = Astro.props as Props;
 const { Content } = await (entryKind === 'project'
   ? render(entry as ProjectEntry)
   : render(entry as PaperEntry));
-const canonical = `/projects/${contentSlug(entry.id)}/`;
+const slug = contentSlug(entry.id);
+const canonical = `/projects/${slug}/`;
 const project = entryKind === 'project' ? (entry as ProjectEntry) : undefined;
 const paper = entryKind === 'paper' ? (entry as PaperEntry) : undefined;
+const isSignalManuscript = slug === 'from-ai-anxiety-to-recursive-governance-under-constraint' && Boolean(project);
 const publicDir = fileURLToPath(new URL('../../../public/', import.meta.url));
 const projectImagePath = project ? join(publicDir, project.data.image.replace(/^\/+/, '')) : undefined;
 const hasProjectImage = Boolean(projectImagePath && existsSync(projectImagePath));
@@ -54,6 +57,15 @@ const meta = project
       .filter(Boolean)
       .join(' · ')
   : joinDistinctText([paper?.data.year, paper?.data.venue, paper?.data.status]);
+const structuredData = isSignalManuscript && project
+  ? buildArticleSchema({
+      title: project.data.title,
+      description: project.data.description,
+      url: buildCanonical(canonical),
+      datePublished: String(project.data.year ?? 2026),
+      schemaType: 'ScholarlyArticle',
+    })
+  : undefined;
 ---
 
 <BaseLayout
@@ -61,7 +73,8 @@ const meta = project
   description={project?.data.description ?? paper?.data.abstract ?? 'Project record'}
   image={project && hasProjectImage ? project.data.image : undefined}
   canonical={canonical}
-  ogType={paper ? 'article' : 'website'}
+  ogType={paper || isSignalManuscript ? 'article' : 'website'}
+  structuredData={structuredData}
 >
   <EntryHero
     eyebrow={project ? 'Project' : paper?.data.type ?? 'Working paper'}

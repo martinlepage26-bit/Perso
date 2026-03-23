@@ -23,6 +23,7 @@ const ogImage = siteMeta.siteUrl
   ? new URL(ogImagePath, siteMeta.siteUrl).toString()
   : ogImagePath;
 const socialImageAlt = `${pageTitle} social preview`;
+const robotsDirectives = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 
 const structuredPayload = [
   buildPersonSchema(),
@@ -41,12 +42,16 @@ const structuredPayload = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={pageDescription} />
+    <meta name="robots" content={robotsDirectives} />
+    <meta name="googlebot" content={robotsDirectives} />
     <meta name="theme-color" content="#f2ede7" />
     <meta name="color-scheme" content="light" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
     {siteMeta.siteUrl && <link rel="alternate" type="application/rss+xml" title={pageMeta.rss.title} href="/rss.xml" />}
+    <link rel="alternate" type="text/plain" title="LLMs context" href="/llms.txt" />
+    <link rel="alternate" type="text/plain" title="LLMs full context" href="/llms-full.txt" />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
