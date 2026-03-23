@@ -324,6 +324,115 @@ const cfg = {
         text-align: center;
       }
 
+      /* ── Mode toggle ── */
+      .mode-tabs {
+        display: flex;
+        gap: 4px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 3px;
+      }
+      .mode-tab {
+        font-size: 0.68rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 4px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: var(--text3);
+        border: none;
+        background: transparent;
+        transition: background 0.12s, color 0.12s;
+      }
+      .mode-tab.active {
+        background: var(--amber-dim);
+        color: var(--text);
+      }
+
+      /* ── Settings panel ── */
+      .settings-panel {
+        display: none;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border2);
+        padding: 14px 20px;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+      }
+      .settings-panel.open { display: flex; }
+      .settings-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        min-width: 160px;
+      }
+      .settings-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text3);
+      }
+      .settings-input {
+        background: var(--bg3);
+        border: 1px solid var(--border2);
+        border-radius: 6px;
+        padding: 7px 10px;
+        color: var(--text);
+        font-family: 'Georgia', serif;
+        font-size: 0.8rem;
+        outline: none;
+        width: 100%;
+        transition: border-color 0.15s;
+      }
+      .settings-input:focus { border-color: var(--amber-dim); }
+      .settings-input::placeholder { color: var(--text3); }
+      .settings-save {
+        background: var(--bg3);
+        border: 1px solid var(--border2);
+        border-radius: 6px;
+        padding: 7px 14px;
+        color: var(--amber-hi);
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: border-color 0.15s;
+        white-space: nowrap;
+      }
+      .settings-save:hover { border-color: var(--amber); }
+      .mode-badge {
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 2px 7px;
+        border-radius: 20px;
+        border: 1px solid var(--border2);
+        color: var(--text3);
+        margin-left: 6px;
+      }
+      .mode-badge.byok { color: var(--amber-hi); border-color: var(--amber-dim); }
+
+      /* ── Presets ── */
+      .preset-row {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+      .preset-chip {
+        font-size: 0.65rem;
+        padding: 3px 9px;
+        border-radius: 20px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--text3);
+        cursor: pointer;
+        transition: border-color 0.12s, color 0.12s;
+      }
+      .preset-chip:hover { border-color: var(--amber-dim); color: var(--text2); }
+
       /* ── Scrollbar ── */
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: transparent; }
@@ -336,13 +445,42 @@ const cfg = {
       <a class="h-brand" href="/hephaistos/">
         <span class="h-mark">Hephaistos</span>
         <span class="h-tagline">Oversight must be earned</span>
+        <span class="mode-badge" id="mode-badge">Hosted</span>
       </a>
-      <nav class="h-nav">
-        <a href="/projects/skill-ecosystem/">About</a>
-        <a href="/governance/tree/">Governance Tree</a>
-        <a href="/projects/">Projects</a>
-      </nav>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div class="mode-tabs">
+          <button class="mode-tab active" id="tab-hosted">Hosted</button>
+          <button class="mode-tab" id="tab-byok">Your Key</button>
+        </div>
+        <nav class="h-nav">
+          <a href="/projects/skill-ecosystem/">About</a>
+          <a href="/governance/tree/">Governance Tree</a>
+          <a href="/projects/">Projects</a>
+        </nav>
+      </div>
     </header>
+
+    <div class="settings-panel" id="settings-panel">
+      <div class="settings-field">
+        <span class="settings-label">API Key</span>
+        <input class="settings-input" id="byok-key" type="password" placeholder="gsk_… or sk-… or your provider key" />
+      </div>
+      <div class="settings-field" style="max-width:320px;">
+        <span class="settings-label">Base URL</span>
+        <input class="settings-input" id="byok-url" type="text" placeholder="https://api.groq.com/openai/v1" />
+        <div class="preset-row">
+          <span class="preset-chip" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile">Groq</span>
+          <span class="preset-chip" data-url="https://api.openai.com/v1" data-model="gpt-4o-mini">OpenAI</span>
+          <span class="preset-chip" data-url="https://openrouter.ai/api/v1" data-model="meta-llama/llama-3.3-70b-instruct">OpenRouter</span>
+          <span class="preset-chip" data-url="https://api.mistral.ai/v1" data-model="mistral-small-latest">Mistral</span>
+        </div>
+      </div>
+      <div class="settings-field" style="max-width:240px;">
+        <span class="settings-label">Model</span>
+        <input class="settings-input" id="byok-model" type="text" placeholder="llama-3.3-70b-versatile" />
+      </div>
+      <button class="settings-save" id="settings-save">Save &amp; Use</button>
+    </div>
 
     <div class="h-body">
 
@@ -473,6 +611,74 @@ When you route to a skill, lead with: [Skill: Name] and a single sentence on why
 
 Do not moralize. Do not over-explain. Be direct, precise, and accountable. Your analysis must be reconstructable.`;
 
+// ── Mode: hosted vs BYOK ───────────────────────────────────────
+const tabHosted   = document.getElementById('tab-hosted');
+const tabByok     = document.getElementById('tab-byok');
+const settingsEl  = document.getElementById('settings-panel');
+const modeBadge   = document.getElementById('mode-badge');
+const byokKeyEl   = document.getElementById('byok-key');
+const byokUrlEl   = document.getElementById('byok-url');
+const byokModelEl = document.getElementById('byok-model');
+const saveBtn     = document.getElementById('settings-save');
+
+// Load saved BYOK config
+let byokConfig = null;
+try {
+  const saved = localStorage.getItem('heph-byok');
+  if (saved) byokConfig = JSON.parse(saved);
+} catch {}
+
+function activeKey()   { return byokConfig ? byokConfig.apiKey  : API_KEY;  }
+function activeUrl()   { return byokConfig ? byokConfig.baseUrl : BASE_URL; }
+function activeModel() { return byokConfig ? byokConfig.model   : MODEL;    }
+
+function setMode(mode) {
+  if (mode === 'byok') {
+    tabByok.classList.add('active');
+    tabHosted.classList.remove('active');
+    settingsEl.classList.add('open');
+    modeBadge.textContent = 'Your Key';
+    modeBadge.classList.add('byok');
+    // Pre-fill fields
+    if (byokConfig) {
+      byokKeyEl.value   = byokConfig.apiKey  ?? '';
+      byokUrlEl.value   = byokConfig.baseUrl ?? '';
+      byokModelEl.value = byokConfig.model   ?? '';
+    }
+  } else {
+    tabHosted.classList.add('active');
+    tabByok.classList.remove('active');
+    settingsEl.classList.remove('open');
+    modeBadge.textContent = 'Hosted';
+    modeBadge.classList.remove('byok');
+  }
+}
+
+// Init: if BYOK saved, start in BYOK mode
+if (byokConfig) setMode('byok');
+
+tabHosted.addEventListener('click', () => { byokConfig = null; setMode('hosted'); });
+tabByok.addEventListener('click',   () => setMode('byok'));
+
+saveBtn.addEventListener('click', () => {
+  const k = byokKeyEl.value.trim();
+  const u = byokUrlEl.value.trim();
+  const m = byokModelEl.value.trim();
+  if (!k || !u || !m) return;
+  byokConfig = { apiKey: k, baseUrl: u, model: m };
+  try { localStorage.setItem('heph-byok', JSON.stringify(byokConfig)); } catch {}
+  modeBadge.textContent = 'Your Key';
+  modeBadge.classList.add('byok');
+});
+
+// Preset chips
+document.querySelectorAll('.preset-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    byokUrlEl.value   = chip.dataset.url   ?? '';
+    byokModelEl.value = chip.dataset.model ?? '';
+  });
+});
+
 // ── State ──────────────────────────────────────────────────────
 let history = []; // { role: 'user'|'assistant', content: string }
 let streaming = false;
@@ -561,13 +767,13 @@ async function handleSend() {
       ...history.slice(-20), // keep last 20 turns
     ];
 
-    const res = await fetch(`${BASE_URL}/chat/completions`, {
+    const res = await fetch(`${activeUrl()}/chat/completions`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${API_KEY}`,
+        'Authorization': `Bearer ${activeKey()}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ model: MODEL, messages, stream: true }),
+      body: JSON.stringify({ model: activeModel(), messages, stream: true }),
     });
 
     if (!res.ok) {
