@@ -10,7 +10,14 @@ const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const host = process.env.SMOKE_HOST ?? '127.0.0.1';
 const port = process.env.SMOKE_PORT ?? '4511';
 const baseUrl = `http://${host}:${port}`;
-const baseRoutes = ['/', '/projects/', '/writing/', '/governance/', '/governance/methods/'];
+const baseRoutes = [
+  '/',
+  '/projects/',
+  '/writing/',
+  '/governance/',
+  '/governance/methods/',
+  '/projects/from-ai-anxiety-to-recursive-governance-under-constraint/',
+];
 
 function runNpm(args) {
   return new Promise((resolve, reject) => {
