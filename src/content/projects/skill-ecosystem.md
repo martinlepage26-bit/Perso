@@ -25,6 +25,12 @@ imageAlt: "The SKILL Ecosystem: fourteen operational constitutions with philosop
 links: []
 ---
 
-The SKILL Ecosystem is the agent governance layer of the AI Governance Master Project. Each of the fourteen SKILL.md documents is an operational constitution: it defines what a bounded AI agent is permitted to do, what it must refuse, and how it accesses knowledge without hallucinating from memory.
+**Oversight must be earned. This system was built on that principle.**
 
-The philosopher skill is the sovereign meta-router. It does not perform one task. It frames every other skill, holds the Debate Engine, and routes requests across the ecosystem when a task spans multiple domains. The dual-layer architecture — prompt engineering as the brain, context engineering as the map — separates execution logic from knowledge retrieval, making each skill auditable, maintainable, and replaceable without rebuilding the ecosystem from scratch.
+*Hephaistos* is an AI agent ecosystem designed around one rule: for oversight to be legitimate, the human and the agent need equal — or defensibly comparable — expertise. Feedback is only accountable when you can push back on it. Coercion dressed as helpfulness is still coercion.
+
+The system was built from skills the creator already holds, then optimized for what machines do well: consistency, coverage, and speed. The agent does not claim authority the human does not have. It amplifies what you can already do. It does not expand your scope, and it does not substitute for your judgment where responsibility is required.
+
+> **FRAME** — Hephaistos exists to support oversight, not to replace it. It cannot dismantle the structures you're trying to work around. You have to want to. What it can do is make your existing skills faster, more systematic, and harder to talk yourself out of. User agency and consent are non-negotiable.
+
+The SKILL Ecosystem is the governance layer underneath Hephaistos. Each of the fourteen SKILL.md documents is an operational constitution: it defines what the agent is permitted to do, what it must refuse, and how it retrieves knowledge without inventing from memory. The philosopher skill is the meta-router — it does not perform one task; it frames every other skill and routes requests across the ecosystem when work spans more than one domain. The dual-layer architecture separates execution logic from knowledge retrieval, making each skill auditable, replaceable, and honest about what it is doing.
