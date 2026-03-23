@@ -20,7 +20,7 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
     slug: 'strategic',
     label: 'Strategic',
     weight: 8,
-    description: 'Direction, capability, program design, and longer-range institutional planning.',
+    description: 'How direction, options, and longer-range planning are present or absent in a situation.',
     terms: [
       'strategy',
       'strategic',
@@ -39,7 +39,7 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
     slug: 'governance',
     label: 'Governance',
     weight: 9,
-    description: 'Policy, accountability, oversight, standards, risk, and public-interest control.',
+    description: 'How accountability, oversight, and institutional structures shape what a person can access or expect.',
     terms: [
       'governance',
       'policy',
@@ -58,7 +58,7 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
     slug: 'operational',
     label: 'Operational',
     weight: 7,
-    description: 'Execution, coordination, delivery, workflow, and monitoring conditions.',
+    description: 'How practical capacity, coordination, and daily execution hold up or break down under load.',
     terms: [
       'operations',
       'workflow',
@@ -77,7 +77,7 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
     slug: 'agency',
     label: 'Agency',
     weight: 10,
-    description: 'Choice, leverage, autonomy, responsibility, and the capacity to act.',
+    description: 'How much real choice, influence, and capacity to act remain when pressure is high.',
     terms: [
       'agency',
       'autonomy',
@@ -95,7 +95,7 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
     slug: 'creative',
     label: 'Creative',
     weight: 8,
-    description: 'Aesthetic, narrative, design, and imaginative patterning inside the note.',
+    description: 'How imagination, story, and aesthetic expression are present — or suppressed — in a situation.',
     terms: [
       'creative',
       'imagination',
@@ -114,7 +114,7 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
     slug: 'meaning',
     label: 'Meaning',
     weight: 8,
-    description: 'Symbolic, ethical, cultural, developmental, and interpretive content.',
+    description: 'How identity, culture, memory, and ethical orientation hold or fragment under pressure.',
     terms: [
       'meaning',
       'interpretation',
@@ -133,49 +133,54 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
 
 export const lotusSurfaces = [
   {
-    eyebrow: 'Workbench',
-    title: 'Score a note in the browser.',
+    eyebrow: 'For people',
+    title: 'Map what is exhausting you.',
     description:
-      'Paste markdown or plain text into the public workbench and see the same six signal groups the canonical Lotus desktop logic uses.',
+      'If life feels too heavy, too confusing, or too hard to explain, LOTUS can help you see the shape of what is happening — what you are carrying, where options have closed, and what kinds of support might help.',
     href: '#lotus-workbench',
     cta: 'Open the workbench',
   },
   {
-    eyebrow: 'Framework',
-    title: 'Read the processor-side paper.',
+    eyebrow: 'For researchers',
+    title: 'Analyze constrained agency across scales.',
     description:
-      'The app line connects to the Lotus Processor framework paper on coherence, instability, regulation, and bonded intelligence under constraint.',
+      'LOTUS offers a structured, non-reductionist framework for mapping how regulatory load, perceptual narrowing, blocked access, and social legibility interact under conditions of stress, trauma, precarity, or institutional mismatch.',
+    href: '#lotus-vector',
+    cta: 'Run the vector model',
+  },
+  {
+    eyebrow: 'Framework paper',
+    title: 'Read the theoretical foundation.',
+    description:
+      'The full framework paper on coherence, instability, regulation, and bonded intelligence under constraint. Situates LOTUS within a broader theory of agency and social positioning.',
     href: '/projects/bonded-intelligence-under-constraint/',
     cta: 'Open the framework paper',
   },
   {
-    eyebrow: 'Project',
-    title: 'Open the public project record.',
+    eyebrow: 'Limits',
+    title: 'Understand what LOTUS does not do.',
     description:
-      'Return to the project archive entry that situates Lotus alongside the rest of the local-first app line in development.',
-    href: '/projects/lotus/',
-    cta: 'Open the project',
-  },
-  {
-    eyebrow: 'Boundary',
-    title: 'Keep the claim boundary visible.',
-    description:
-      'The website scores pasted text only. File ingestion, workspace review, and deeper local automation stay with the desktop and repo side.',
+      'LOTUS does not diagnose, predict fixed futures, or replace therapy, crisis care, or medical treatment. Any high-stakes use should include human judgment and appropriate ethical safeguards.',
     href: '#lotus-boundary',
-    cta: 'Read the boundary',
+    cta: 'Read the limits',
   },
 ] as const;
 
 export const lotusBoundaryCards = [
   {
-    title: 'Lotus is the public app name.',
+    title: 'LOTUS does not diagnose.',
     body:
-      'The canonical product name is Lotus. The all-caps desktop styling and the older Agency LOTUS label do not indicate separate products.',
+      'LOTUS is not a medical or diagnostic device. It is a reflective and interpretive tool. It may help identify patterns, but it does not produce clinical conclusions or replace professional assessment.',
+  },
+  {
+    title: 'The person is more than the score.',
+    body:
+      'LOTUS may generate structure, but it does not reduce a person to a number. A score reflects conditions and pressures — not character, worth, or fixed identity. Interpretation must remain revisable.',
   },
   {
     title: 'The website surface is intentionally bounded.',
     body:
-      'This browser workbench scores only the text you paste into the page. Local note libraries, imports, and workspace folders remain part of the local-first execution layer.',
+      'LOTUS should not be used to exploit or manipulate vulnerable people. It is designed to support understanding, dignity, and better pathways to care or action — not to make high-stakes decisions without human judgment.',
   },
 ] as const;
 

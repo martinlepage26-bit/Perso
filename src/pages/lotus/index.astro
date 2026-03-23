@@ -7,7 +7,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { buildCanonical } from '../../lib/seo';
 
 const pageDescription =
-  'Lotus is a local-first note-scoring app that reads text through agency, strategy, governance, operational, creative, and meaning signals.';
+  'LOTUS is a reflective support and pattern-mapping system that helps people make sense of stress, instability, isolation, blocked options, and social invisibility.';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -31,11 +31,11 @@ const structuredData = {
       <div class="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-end">
         <div class="relative z-10 max-w-4xl">
           <p class="eyebrow">Lotus</p>
-          <h1 class="mt-5">A note-scoring app for agency, governance, strategy, and meaning.</h1>
+          <h1 class="mt-5">When life gets harder to carry, LOTUS helps make the pattern clearer.</h1>
           <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-100 md:text-xl">
-            Lotus is the canonical public name for the local-first scoring line inside the Agency repo. On the website,
-            it becomes a bounded browser workbench that scores pasted text through six signal groups rather than hiding
-            the method behind a vague assistant surface.
+            LOTUS is a reflective support and pattern-mapping system. It helps people make sense of stress, instability,
+            isolation, blocked options, and social invisibility — by looking at how a person's ability to act can narrow
+            under pressure, and naming where support, clarity, and repair may be needed.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="button-primary" href="#lotus-workbench">Open the workbench</a>
@@ -46,20 +46,20 @@ const structuredData = {
         </div>
 
         <div class="veil-panel relative z-10 lotus-hero-card">
-          <p class="eyebrow">Public boundary</p>
+          <p class="eyebrow">What to expect</p>
           <div class="mt-5 grid gap-4">
             <div class="lotus-hero-mini-card">
-              <p class="lotus-hero-label">Canonical</p>
+              <p class="lotus-hero-label">Not a diagnosis</p>
               <p class="mt-2 text-base leading-7 text-slate-200">
-                <strong>Lotus</strong> is the public app. The old all-caps styling and the older Agency LOTUS label are
-                legacy naming, not separate products.
+                LOTUS does not diagnose, predict, or define who you are. It helps create a clearer map of what may be
+                happening — the pressures, gaps, and conditions shaping your options.
               </p>
             </div>
             <div class="lotus-hero-mini-card">
-              <p class="lotus-hero-label">Web layer</p>
+              <p class="lotus-hero-label">Safety note</p>
               <p class="mt-2 text-base leading-7 text-slate-200">
-                This site scores pasted text in the browser. Local note ingestion, file imports, and deeper workspace
-                review remain in the desktop and repo-side execution layer.
+                LOTUS is not crisis care. If you are in immediate danger or thinking of harming yourself, contact local
+                emergency or crisis services right away. LOTUS supports reflection, not emergency response.
               </p>
             </div>
           </div>
@@ -70,9 +70,9 @@ const structuredData = {
 
   <section class="section-shell border-y border-[rgba(36,27,23,0.08)] bg-[rgba(251,246,239,0.28)]">
     <SectionIntro
-      eyebrow="Lotus surfaces"
-      title="One public app line, several bounded surfaces."
-      description="The website makes the consolidation explicit: one canonical Lotus line, a connected framework paper, and a browser-side workbench shaped by the desktop scoring logic."
+      eyebrow="How LOTUS helps"
+      title="Four ways into a clearer picture."
+      description="LOTUS can be used as a reflective workbench, a research tool, a pattern-mapping framework, or a starting point for understanding what kinds of support might actually help."
     />
 
     <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -92,8 +92,8 @@ const structuredData = {
   <section id="lotus-workbench" class="section-shell">
     <SectionIntro
       eyebrow="Workbench"
-      title="Run the canonical signal logic in the browser."
-      description="The public surface keeps the scope narrow and explicit: score the note, inspect which signal groups fired, and export a bounded markdown summary."
+      title="Map the pressure points in your own words."
+      description="Paste text — a journal entry, a situation description, a note — and LOTUS identifies which signal groups are present. No text is uploaded or stored. The reading stays in your browser."
     />
 
     <div class="mt-12">
@@ -104,8 +104,8 @@ const structuredData = {
   <section id="lotus-vector" class="section-shell border-y border-[rgba(36,27,23,0.08)] bg-[rgba(251,246,239,0.28)]">
     <SectionIntro
       eyebrow="Vector model"
-      title="Score agency as a vector field under constraint."
-      description="The vectorized LOTUS model computes effective agency from a base state, constraint load, and scaffold availability. Enter scores for each dimension and run the full formula chain: L_eff = M·L_base − N·K + Q·G − ΔK → A_LOTUS → A_final."
+      title="Rate the pressures and supports. See where agency stands."
+      description="This tool is designed for researchers, clinicians, and practitioners. Rate each dimension of a person's situation — base state, constraints, and scaffolds — and LOTUS computes the effective agency vector using the full formula chain."
     />
     <div class="mt-12">
       <LotusVectorWorkbench />
@@ -115,8 +115,8 @@ const structuredData = {
   <section class="section-shell border-y border-[rgba(36,27,23,0.08)] bg-[rgba(251,246,239,0.28)]">
     <SectionIntro
       eyebrow="Signal library"
-      title="Six signal groups govern the current score."
-      description="The browser workbench follows the same group structure as the canonical Lotus note scorer: strategic, governance, operational, agency, creative, and meaning."
+      title="Six patterns LOTUS looks for."
+      description="LOTUS reads text for signals across six dimensions of a person's situation. Each group names a different kind of pressure, condition, or capacity — from how choices are made under stress to how meaning and identity hold under load."
     />
 
     <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -138,9 +138,9 @@ const structuredData = {
 
   <section id="lotus-boundary" class="section-shell">
     <SectionIntro
-      eyebrow="Boundary and lineage"
-      title="Consolidated without pretending the layers are identical."
-      description="The public site now presents Lotus as one coherent app line while preserving the differences between public naming, compatibility layers, and the deeper local-first execution stack."
+      eyebrow="What LOTUS does not claim"
+      title="LOTUS maps what it can. It does not define who you are."
+      description="Clarity can be a form of support. But interpretation must remain revisable. LOTUS is designed to open understanding, not close it down — and to hold both the human and the structural dimensions without collapsing either."
     />
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
