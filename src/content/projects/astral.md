@@ -18,7 +18,9 @@ tags:
 featured: false
 image: "/social/og-breath-of-the-astral-year.png"
 imageAlt: "A zodiac app in development drawn from the sign language of Breath of the Astral Year."
-links: []
+links:
+  - label: "Open Astral app (new window)"
+    url: "/astral/"
 ---
 
 *Astral* turns the sign language of *Breath of the Astral Year* into a usable app surface. It keeps astrology close to season, body, relation, and earthly pressure instead of treating it as a distant sky machine.

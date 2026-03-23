@@ -25,7 +25,7 @@ links:
   - label: "Browse the sign glossary"
     url: "/astral-year/glossary/"
   - label: "Open the Astral app"
-    url: "/astral-year/app/"
+    url: "/astral/"
 ---
 *Breath of the Astral Year* is a self-published book by Martin Lepage available on Amazon. It treats astrology as a grammar of collective life, keeping signs, seasons, and social experience in the same frame.
 

@@ -1,0 +1,309 @@
+:root {
+  --astral-night-950: #050914;
+  --astral-night-900: #0c1531;
+  --astral-night-850: #111f45;
+  --astral-night-700: #1d3270;
+  --astral-star-200: #d5e6ff;
+  --astral-star-100: #f2f7ff;
+  --astral-root-500: #4e6b3d;
+  --astral-root-400: #6d8f52;
+  --astral-root-300: #8eab72;
+  --astral-clay-200: #d2bb92;
+  --astral-border: rgba(164, 194, 255, 0.24);
+  --astral-border-soft: rgba(130, 158, 222, 0.2);
+  --astral-surface: rgba(10, 18, 43, 0.76);
+  --astral-surface-soft: rgba(17, 29, 68, 0.68);
+  --astral-shadow: 0 22px 56px rgba(2, 6, 20, 0.46);
+  --color-accent: #8eab72;
+  --color-moon: #eef4ff;
+  --font-mono: 'IBM Plex Sans', 'Space Grotesk Variable', 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.astral-standalone {
+  min-height: 100vh;
+  font-family: 'Space Grotesk Variable', 'IBM Plex Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+  color: var(--astral-star-100);
+  background:
+    radial-gradient(circle at 12% 11%, rgba(111, 141, 225, 0.4) 0%, rgba(111, 141, 225, 0) 42%),
+    radial-gradient(circle at 83% 6%, rgba(54, 178, 178, 0.18) 0%, rgba(54, 178, 178, 0) 34%),
+    radial-gradient(circle at 74% 94%, rgba(110, 146, 80, 0.3) 0%, rgba(110, 146, 80, 0) 44%),
+    linear-gradient(180deg, var(--astral-night-950) 0%, var(--astral-night-900) 42%, #101f3b 72%, #1f2a25 100%);
+}
+
+.astral-shell {
+  width: min(1180px, calc(100% - 2.2rem));
+  margin: 0 auto;
+  padding: 1rem 0 2.4rem;
+}
+
+.astral-header {
+  border: 1px solid var(--astral-border);
+  border-radius: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 1.12rem;
+  background:
+    radial-gradient(circle at top right, rgba(116, 149, 235, 0.22), rgba(116, 149, 235, 0) 42%),
+    linear-gradient(145deg, rgba(10, 20, 50, 0.9), rgba(13, 26, 62, 0.82));
+  box-shadow: var(--astral-shadow);
+}
+
+.astral-brand {
+  color: var(--astral-star-100);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.58rem;
+}
+
+.astral-mark {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.astral-tagline {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--astral-root-300);
+}
+
+.astral-nav {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.astral-nav a {
+  text-decoration: none;
+  color: var(--astral-star-200);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  padding: 0.5rem 0.8rem;
+  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.astral-nav a:hover {
+  color: #f7fbff;
+  border-color: var(--astral-border);
+  background: rgba(80, 110, 179, 0.25);
+}
+
+.astral-main {
+  margin-top: 1.05rem;
+}
+
+.astral-hero {
+  border: 1px solid var(--astral-border-soft);
+  border-radius: 1.2rem;
+  padding: 1.25rem 1.2rem;
+  background:
+    radial-gradient(circle at 86% 18%, rgba(95, 136, 232, 0.22), rgba(95, 136, 232, 0) 42%),
+    radial-gradient(circle at 14% 82%, rgba(109, 143, 82, 0.22), rgba(109, 143, 82, 0) 38%),
+    linear-gradient(155deg, rgba(13, 24, 58, 0.86), rgba(14, 30, 54, 0.72));
+  box-shadow: var(--astral-shadow);
+}
+
+.astral-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--astral-root-300);
+}
+
+.astral-hero h1 {
+  margin: 0.62rem 0 0.46rem;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  line-height: 1.05;
+  max-width: 22ch;
+}
+
+.astral-hero p {
+  margin: 0.62rem 0 0;
+  font-size: clamp(0.98rem, 2.2vw, 1.13rem);
+  line-height: 1.6;
+  color: #d9e7ff;
+  max-width: 66ch;
+}
+
+.astral-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.astral-button {
+  text-decoration: none;
+  border-radius: 0.78rem;
+  padding: 0.64rem 0.94rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.astral-button.primary {
+  color: #f7fbff;
+  background: linear-gradient(120deg, #4f6fcf, #3962c2);
+  box-shadow: 0 12px 28px rgba(19, 39, 92, 0.46);
+}
+
+.astral-button.secondary {
+  color: var(--astral-star-100);
+  border-color: var(--astral-border);
+  background: rgba(18, 34, 74, 0.66);
+}
+
+.astral-tool {
+  margin-top: 1rem;
+}
+
+body.astral-standalone .veil-panel {
+  border: 1px solid var(--astral-border-soft);
+  border-radius: 1.05rem;
+  background: var(--astral-surface);
+  box-shadow: 0 14px 35px rgba(5, 11, 28, 0.35);
+  padding: 1.15rem 1.05rem;
+}
+
+body.astral-standalone .eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--astral-root-300);
+}
+
+body.astral-standalone .button-primary,
+body.astral-standalone .button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.63rem 0.92rem;
+  border-radius: 0.74rem;
+  border: 1px solid transparent;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body.astral-standalone .button-primary {
+  color: #f7fbff;
+  background: linear-gradient(120deg, #4a6ad0, #355bb8);
+  box-shadow: 0 10px 24px rgba(31, 56, 121, 0.45);
+}
+
+body.astral-standalone .button-secondary {
+  color: #deebff;
+  border-color: var(--astral-border);
+  background: rgba(23, 37, 78, 0.72);
+}
+
+body.astral-standalone .astral-control-panel,
+body.astral-standalone .astral-result-panel {
+  background:
+    radial-gradient(circle at top right, rgba(92, 131, 221, 0.23), transparent 38%),
+    radial-gradient(circle at left bottom, rgba(109, 143, 82, 0.18), transparent 34%),
+    linear-gradient(170deg, var(--astral-surface), var(--astral-surface-soft));
+}
+
+body.astral-standalone .astral-control-panel::before,
+body.astral-standalone .astral-result-panel::before {
+  background: radial-gradient(circle, rgba(119, 154, 233, 0.26) 0%, rgba(119, 154, 233, 0) 68%);
+}
+
+body.astral-standalone .astral-input-card,
+body.astral-standalone .astral-mini-card,
+body.astral-standalone .astral-reading-card,
+body.astral-standalone .astral-shadow-card,
+body.astral-standalone .astral-ritual-card,
+body.astral-standalone .astral-guidance-strip {
+  border-top: 1px solid rgba(154, 186, 255, 0.22);
+}
+
+body.astral-standalone .astral-label,
+body.astral-standalone .astral-mini-label {
+  color: var(--astral-root-300);
+}
+
+body.astral-standalone .astral-select {
+  border-bottom: 1px solid rgba(157, 192, 255, 0.35);
+  color: #e7f0ff;
+}
+
+body.astral-standalone .astral-select option {
+  background: var(--astral-night-900);
+  color: #eff5ff;
+}
+
+body.astral-standalone .astral-select:focus-visible {
+  border-color: rgba(157, 192, 255, 0.62);
+  box-shadow: 0 3px 0 0 rgba(124, 159, 235, 0.3);
+}
+
+body.astral-standalone .astral-glyph-orbit {
+  border: 1px solid rgba(157, 192, 255, 0.34);
+  background:
+    radial-gradient(circle at center, rgba(120, 154, 232, 0.34), rgba(120, 154, 232, 0) 66%),
+    linear-gradient(180deg, rgba(26, 41, 87, 0.92), rgba(20, 33, 72, 0.78));
+}
+
+body.astral-standalone .astral-result-glyph {
+  color: var(--astral-clay-200);
+}
+
+body.astral-standalone .text-slate-400 {
+  color: #aec4ea;
+}
+
+body.astral-standalone .text-slate-300,
+body.astral-standalone .text-slate-200,
+body.astral-standalone .text-slate-100 {
+  color: #deebff;
+}
+
+@media (max-width: 760px) {
+  .astral-shell {
+    width: min(1180px, calc(100% - 1.2rem));
+  }
+
+  .astral-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0.84rem 0.9rem;
+  }
+
+  .astral-nav {
+    justify-content: flex-start;
+  }
+
+  .astral-hero {
+    padding: 0.98rem 0.88rem;
+  }
+
+  body.astral-standalone .veil-panel {
+    padding: 1rem 0.86rem;
+  }
+}

@@ -19,7 +19,8 @@ interface Props {
 }
 
 const { eyebrow, title, description, meta, backHref, backLabel, tags = [], links = [] } = Astro.props;
-const opensInNewWindow = (url: string) => url === '/echo/' || /^https?:\/\//.test(url);
+const standaloneRoutes = new Set(['/echo/', '/astral/']);
+const opensInNewWindow = (url: string) => standaloneRoutes.has(url) || /^https?:\/\//.test(url);
 ---
 
 <section class="relative overflow-hidden border-b border-[rgba(36,27,23,0.12)]">
