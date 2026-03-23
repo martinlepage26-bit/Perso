@@ -117,6 +117,7 @@ export const navigation = [
 
 export const publicProjectOrder = [
   'scriptorium',
+  'echo',
   'compassai-governance-engine',
   'aurorai',
   'from-ai-anxiety-to-recursive-governance-under-constraint',

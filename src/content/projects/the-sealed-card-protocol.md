@@ -1,19 +1,22 @@
 ---
-title: "The Sealed Card Protocol"
-subtitle: "Mediated legitimacy, charging, and governance at the seam"
+title: "Legitimacy as Pathway Authorization: Accountability, Proof Regimes, and Governance Under Consequence Pressure"
+subtitle: "Research · Experimental Governance — last phase of conceptualisation"
 year: 2026
-status: "Developing framework"
-description: "A developing framework on legitimacy, visible mediation, accountability, and traceability."
+status: "Final conceptualisation phase"
+description: "The concluding conceptual phase of the AI Governance Master Project. The Sealed Card Protocol formalises what the implementation results demand: a legibility and accountability framework for governance decisions at the point where mediation becomes visible and proof-regimes must hold."
 role: "Author and governance researcher"
 outputs:
-  - "Protocol teaser"
+  - "Final conceptualisation documents"
   - "Legitimacy and accountability framework"
   - "Governance principles for traceability"
+  - "Sealed record and proof-regime protocol"
 tags:
   - AI governance
   - legitimacy
   - traceability
   - research protocol
+  - final conceptualisation
+  - AI Governance Master Project
 featured: false
 image: "/assets/geometric-motif-bottomleft.png"
 imageAlt: "A governance research protocol focused on legitimacy, seams of mediation, and accountability under scrutiny."

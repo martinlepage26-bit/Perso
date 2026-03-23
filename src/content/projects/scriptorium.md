@@ -1,21 +1,23 @@
 ---
-title: "Scriptorium"
-subtitle: "Deterministic recursive paper builder app in development"
+title: "Automated Recursive Governance: Pipeline Implementation and Scripted Execution Protocol"
+subtitle: "Method · Automated Pipeline Implementation — hear your academic voice"
 year: 2026
-status: "App in development · deterministic recursive method"
-description: "A local-first paper builder that turns a topic or archive into bounded recursive analysis packets, evidence hierarchies, control registers, and disclosure language."
+status: "Test implementation · scripted automation"
+description: "The scripted automation test implementation of the RDAIG method. Scriptorium applies the recursive deterministic governance pipeline to automated paper-building workflows, testing whether the method holds under scripted conditions."
 role: "Creator"
 outputs:
+  - "Scripted automation test runs"
   - "Recursive analysis memo builder"
   - "Evidence hierarchy and control extraction"
   - "Disclosure and reviewer-pressure scaffolds"
 tags:
-  - App in development
-  - Local-first
+  - scripted automation
+  - test implementation
+  - RDAIG
   - Deterministic recursive method
   - Research tooling
   - Paper builder
-  - Governance writing
+  - AI Governance Master Project
 featured: false
 image: "/assets/geometric-motif-bottomleft.png"
 imageAlt: "A local-first paper builder surface shaped by recursive governance logic."
@@ -24,7 +26,9 @@ links:
     url: "/scriptorium/"
 ---
 
-*Scriptorium* is the paper-builder side of the app line in development. On the public site, it turns a topic, archive, or governance problem into a bounded writing packet grounded in artifact classes, evidence hierarchy, recursive tests, and interface-bound controls.
+**Hear your academic voice.**
+
+*Scriptorium* is the paper-builder side of the app line in development. It turns a topic, archive, or governance problem into a bounded writing packet grounded in artifact classes, evidence hierarchy, recursive tests, and interface-bound controls. The voice that comes out is yours — structured by the method, shaped by your materials.
 
 Its closest companions remain distinct. *Dr. Sort* stays with document sorting and cross-reference work. *Lotus* stays with agency scoring for notes and local text material. *Scriptorium* is the paper-builder layer: recursive analysis memos, evidence hierarchy notes, control registers, disclosure language, and reviewer-pressure scaffolds.
 

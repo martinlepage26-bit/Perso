@@ -1,25 +1,28 @@
 ---
-title: "Recurso"
-subtitle: "A recursive governance layer inside a controlled writing experiment"
+title: "Recursive Deterministic AI Governance: First Implementation and Stabilization Record"
+subtitle: "Governance Infrastructure · Operational — Phase 1 implementation and live method testing"
 year: 2026
-status: "Method and archive experiment"
-description: "A recursive governance component within a controlled writing archive, used to stabilize structure, reinsert prior outputs, and test how meaning changes under repeated transformation."
+status: "Phase 1 implementation · active"
+description: "The first implementation and testing phase of recursive deterministic AI governance. Recurso is where the RDAIG method was run against a live bounded corpus, producing the storyboard evidence that grounds the AI & Society manuscript."
 role: "Method designer and researcher"
 outputs:
-  - "Recursive governance layer"
-  - "Controlled writing archive"
-  - "Method notes on structural drift and stabilization"
+  - "Live RDAIG method runs"
+  - "Storyboard and governance drift record"
+  - "Baseline, correction, and stabilization evidence"
+  - "Recursive plateau and failure harvest data"
 tags:
   - recursive governance
+  - RDAIG
   - methodology
-  - archive experiment
-  - AI writing
+  - phase 1 implementation
+  - live testing
+  - AI Governance Master Project
 featured: false
 image: "/assets/isometric-grid-corner.png"
 imageAlt: "A recursive archive and method experiment built around reinsertion, structural control, and governance of generated writing."
 links: []
 ---
 
-In the source notes, *Recurso* appears as a named layer inside a recursive writing and governance experiment. It functions as a reinsertion mechanism: prior outputs are appended back into the process in order to test structural obedience, drift, and the effect of added stabilizers.
+*Recurso* is Phase 1 of the AI Governance Master Project: the first live implementation and testing of recursive deterministic AI governance against a real bounded corpus.
 
-That makes this project methodologically important even if it is not yet packaged as a conventional public-facing artifact. It belongs on the site because it shows governance not only as an external framework, but also as an internal discipline for managing AI-mediated writing itself.
+This is where the method was run. Recurso produced the baseline instability record, the correction and stabilization passes, the recursive plateau data, and the failure harvest evidence that the RDAIG manuscript reports as its first implementation results. It is not an experiment in writing. It is a governance method in operation.

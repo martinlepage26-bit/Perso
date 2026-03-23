@@ -1,25 +1,28 @@
 ---
-title: "The Violet Gem"
-subtitle: "A developing project organized around symbolic concentration, value, and charge"
+title: "Governance Deployment Protocol: Switchback Architecture, Voice Specification, and Operational Layer Structure"
+subtitle: "Governance Infrastructure · Operational — Switchback Architecture and Operational Layer Structure"
 year: 2026
-status: "Developing symbolic project"
-description: "A developing symbolic project on concentrated value, charge, and talismanic form."
-role: "Author and researcher"
+status: "Operational governance kit"
+description: "The operational carry-kit for the AI Governance Master Project. Contains the Witches' Road Switchback Governance Protocol, voice specification, milestone map, and layer architecture. Seven trials with four switchback reversals prevent premature closure."
+role: "Author and governance researcher"
 outputs:
-  - "Project teaser"
-  - "Symbolic concept development"
-  - "Draft framing language"
+  - "Witches' Road Switchback Governance Protocol"
+  - "Voice specification"
+  - "Milestone map"
+  - "Layer architecture"
 tags:
-  - symbolic systems
-  - creative research
-  - concept development
-  - developing project
+  - governance infrastructure
+  - operational kit
+  - Witches Road
+  - Switchback Protocol
+  - layer architecture
+  - AI Governance Master Project
 featured: false
 image: "/assets/ml-monogram-navy.png"
-imageAlt: "A developing symbolic project framed around concentration, charge, and gem-like density."
+imageAlt: "Operational governance carry-kit: Witches' Road Switchback Protocol, voice spec, milestone map, and layer architecture."
 links: []
 ---
 
-*The Violet Gem* is a compact symbolic research line organized around density, charge, value, and condensation.
+*The Violet Gem* is the operational carry-kit for the AI Governance Master Project. It holds the Witches' Road Switchback Governance Protocol, voice specification, milestone map, and layer architecture in one portable field document.
 
-It belongs to the image-bearing side of the practice: work shaped not only by analysis, but also by atmosphere, symbolic compression, and conceptual charge.
+The seven-trial structure with four switchback reversals is a deliberate governance design: it prevents premature closure by forcing the method back through contested terrain before any phase is sealed.

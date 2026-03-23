@@ -1,21 +1,26 @@
 ---
-title: "From AI Anxiety to Recursive Governance Under Constraint"
-subtitle: "Full peer-review-ready manuscript render"
+title: "Recursive Deterministic AI Governance: Extracting Workflow Controls from Recursive Transformation of a Bounded Corpus"
+subtitle: "Research · Core Method — first implementation results, peer-review-ready manuscript"
 year: 2026
 status: "Peer-review-ready manuscript"
-description: "A full manuscript arguing for an ethics of interruption in recursive, agentic AI governance under constraint."
+description: "The first implementation results of recursive deterministic AI governance, written up as a peer-review-ready methods paper. Documents what the method produced when run against a live bounded corpus: stabilization, drift, failure harvest, and extracted workflow controls."
 role: "Author and governance researcher"
 outputs:
-  - "Full manuscript render"
-  - "AI governance argument"
-  - "Recursive method framing"
-  - "Ethics of interruption framework"
+  - "First implementation results"
+  - "Full peer-review-ready manuscript"
+  - "RDAIG methods framework"
+  - "10-stage governance-control pipeline"
+  - "Editorial consolidation and line edits"
 tags:
   - AI governance
   - manuscript
   - recursive governance
-  - ethics of interruption
+  - RDAIG
+  - first implementation results
+  - bounded corpus
+  - workflow controls
   - agentic AI
+  - AI Governance Master Project
 featured: false
 image: "/assets/isometric-grid-corner.png"
 imageAlt: "A full manuscript on AI anxiety, recursive governance, and the ethics of interruption."

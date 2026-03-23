@@ -1,6 +1,6 @@
 ---
-title: "AI Governance"
-subtitle: "A project layer for readable oversight, consequence mapping, and institutional review"
+title: "AI Governance Constitutional Framework: Oversight Infrastructure and Constraint Design"
+subtitle: "Governance Infrastructure · Constitutional — Oversight Infrastructure and Constraint Design"
 year: 2026
 status: "Active governance framework project"
 description: "A governance project focused on making AI use legible, reviewable, and defensible through documentation, decision pathways, and accountability design."
@@ -14,6 +14,7 @@ tags:
   - Documentation
   - Oversight
   - Institutional design
+  - AI Governance Master Project
 featured: false
 image: "/assets/geometric-motif-bottomleft.png"
 imageAlt: "A governance-facing project organized around readable controls, review pathways, and institutional accountability."

@@ -1,0 +1,478 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="AI Governance Master Project — Structure Map"
+  description="The central documents and decision maps of the AI Governance Master Project. Start here if you want to understand how the system is structured."
+>
+  <section class="section-shell">
+
+    <div class="mb-12 max-w-2xl">
+      <p class="eyebrow">AI Governance Master Project</p>
+      <h1 class="mt-3 text-[1.6rem] md:text-[2rem] font-semibold">Structure Map</h1>
+      <p class="mt-5 text-base leading-relaxed" style="color:var(--color-text-secondary)">
+        This project is organized to help you understand complex systems without getting lost.
+      </p>
+      <p class="mt-3 text-base leading-relaxed" style="color:var(--color-text-secondary)">
+        The <strong style="color:var(--color-text-primary)">Apex Files</strong> show the overall structure — the big picture. The <strong style="color:var(--color-text-primary)">Governance Trees</strong> then break that down further, showing how decisions are made and how authority moves.
+      </p>
+      <p class="mt-3 text-base leading-relaxed" style="color:var(--color-text-secondary)">
+        You can start anywhere. If you're unsure, begin with the Apex Files and move into the Governance Trees as needed.
+      </p>
+    </div>
+
+    <div class="apex-block veil-panel mb-8">
+      <p class="eyebrow">Master Project Apex Files</p>
+      <h2 class="mt-3 text-[1.2rem] font-semibold">The big picture.</h2>
+      <div class="apex-grid mt-6">
+        <div class="apex-body">
+          <p>The Apex Files are the central documents of this project.</p>
+          <p class="mt-3">They bring everything together in one place and show how the system is structured. If you're not sure where to start, this is a good entry point.</p>
+          <p class="mt-3">You don't need to understand everything at once. These files are here to help you see the big picture first, and then explore at your own pace.</p>
+        </div>
+        <div class="apex-aside">
+          <div class="apex-card">
+            <p class="apex-card-label">For people navigating systems</p>
+            <p class="mt-2">This file helps you get oriented. You don't need prior knowledge. Start here and follow what's relevant to you.</p>
+          </div>
+          <div class="apex-card mt-3">
+            <p class="apex-card-label">For researchers and analysts</p>
+            <p class="mt-2">This document defines the system architecture at a high level. It shows how components relate and interact, and where to look for traceability.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-section veil-panel mb-8">
+      <p class="eyebrow">Governance Trees</p>
+      <h2 class="mt-3 text-[1.2rem] font-semibold">How decisions actually work inside that picture.</h2>
+      <div class="apex-grid mt-5 mb-8">
+        <div class="apex-body">
+          <p>Governance Trees show how decisions are made in a system.</p>
+          <p class="mt-3">They show who has authority, how rules are applied, and where actions come from. If you've ever felt blocked or confused by a system, this helps make that structure visible.</p>
+          <p class="mt-3">You don't need to read everything — just follow what's relevant to your situation.</p>
+        </div>
+        <div class="apex-aside">
+          <div class="apex-card">
+            <p class="apex-card-label">For people navigating institutions</p>
+            <p class="mt-2">This helps you understand what's shaping your situation. It shows where decisions come from. It can help you see where change is possible — and where it isn't.</p>
+          </div>
+          <div class="apex-card mt-3">
+            <p class="apex-card-label">For researchers and system thinkers</p>
+            <p class="mt-2">This models decision pathways and authority distribution. It helps analyze how governance operates in practice and where controls attach.</p>
+          </div>
+        </div>
+      </div>
+      <p class="eyebrow mb-4">Research, Method &amp; Governance Infrastructure</p>
+      <div id="governance-tree-mount"></div>
+    </div>
+
+    <div class="tree-section veil-panel">
+      <p class="eyebrow">Skill Ecosystem</p>
+      <h2 class="mt-3 mb-2 text-[1.2rem] font-semibold">Bounded AI Agent Governance</h2>
+      <p class="mb-6 text-sm" style="color:var(--color-text-secondary)">Fourteen operational constitutions that govern how AI agents work within this practice. Each skill has a defined role, defined limits, and a clear trigger. The philosopher skill is the entry point — it routes everything else.</p>
+      <div id="skill-tree-mount"></div>
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+/* ── Layout ── */
+.tree-section { width: 100%; }
+.apex-block { width: 100%; }
+.tree { padding: 0.25rem 0; }
+
+/* ── Apex grid ── */
+.apex-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .apex-grid { grid-template-columns: 1fr 1fr; }
+}
+.apex-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+.apex-body p strong { color: var(--color-text-primary); }
+.apex-aside { display: flex; flex-direction: column; }
+.apex-card {
+  padding: 12px 16px;
+  background: var(--color-background-tertiary);
+  border-radius: var(--border-radius-md);
+  border: 0.5px solid var(--color-border-tertiary);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.apex-card-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-tertiary);
+  margin-bottom: 2px;
+}
+
+/* ── Branch (parent) row ── */
+.branch-node { position: relative; margin-bottom: 2px; }
+.branch-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; border-radius: var(--border-radius-md);
+  cursor: pointer; transition: background 0.12s;
+  border: 0.5px solid transparent;
+}
+.branch-row:hover { background: var(--color-background-secondary); border-color: var(--color-border-tertiary); }
+
+/* ── Leaf (child) row ── */
+.leaf-node { position: relative; }
+.leaf-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 5px 10px 5px 0; border-radius: var(--border-radius-md);
+  cursor: pointer; transition: background 0.12s;
+  border: 0.5px solid transparent;
+}
+.leaf-row:hover { background: var(--color-background-secondary); border-color: var(--color-border-tertiary); }
+
+/* ── Toggle ── */
+.toggle {
+  flex-shrink: 0; width: 18px; height: 18px;
+  border-radius: 4px; border: 0.5px solid var(--color-border-secondary);
+  background: var(--color-background-secondary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--color-text-secondary);
+  font-weight: 600; line-height: 1; user-select: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.toggle.open { background: var(--color-background-info); color: var(--color-text-info); border-color: var(--color-border-info); }
+
+/* ── Arborescence: children container with vertical spine ── */
+.children {
+  position: relative;
+  margin-left: 22px;
+  padding-left: 20px;
+  border-left: 1.5px solid var(--color-border-tertiary);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+.children.open { max-height: 5000px; }
+
+/* Horizontal connector from spine to each leaf */
+.leaf-node::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 13px;
+  width: 14px;
+  height: 1.5px;
+  background: var(--color-border-tertiary);
+}
+/* Last child: clip the vertical spine below it */
+.leaf-node:last-child { position: relative; }
+.leaf-node:last-child::after {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 14px;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-background-primary, #fff);
+}
+
+/* ── Labels ── */
+.label-wrap { flex: 1; min-width: 0; }
+.branch-tag {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  padding: 1px 8px; border-radius: 20px; margin-bottom: 3px;
+  line-height: 1.6; letter-spacing: 0.02em; text-transform: uppercase;
+}
+.tag-research { background: #EEEDFE; color: #3C3489; }
+.tag-method   { background: #E1F5EE; color: #085041; }
+.tag-infra    { background: #FAEEDA; color: #633806; }
+
+.branch-title {
+  font-size: 14px; font-weight: 600; color: var(--color-text-primary);
+}
+.node-title {
+  font-size: 13px; font-weight: 500; color: var(--color-text-primary);
+  line-height: 1.4;
+}
+.node-sub {
+  font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* ── Abstract panel ── */
+.abstract-panel {
+  margin: 3px 0 8px 0; padding: 10px 14px;
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  border-left: 2px solid var(--color-border-secondary);
+  font-size: 12px; color: var(--color-text-secondary); line-height: 1.65;
+  display: none;
+}
+.abstract-panel.open { display: block; }
+.panel-title {
+  font-size: 11.5px; font-weight: 600; color: var(--color-text-primary);
+  margin-bottom: 6px; line-height: 1.5;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.tag-pill {
+  font-size: 10px; padding: 1px 7px; border-radius: 20px;
+  background: var(--color-background-tertiary); color: var(--color-text-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+}
+
+/* ── Skill badges ── */
+.badge {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  padding: 1px 8px; border-radius: 20px; margin-bottom: 3px;
+  line-height: 1.6; text-transform: uppercase; letter-spacing: 0.02em;
+}
+.b-research { background: #EEEDFE; color: #3C3489; }
+.b-write    { background: #E1F5EE; color: #085041; }
+.b-strat    { background: #FAEEDA; color: #633806; }
+.b-orch     { background: #FAECE7; color: #993C1D; }
+.b-arch     { background: #E6F1FB; color: #0C447C; }
+</style>
+
+<script>
+// @ts-nocheck
+// ── Governance Tree ──────────────────────────────────────────────
+const GOV_DATA = [
+  {
+    id: "research", label: "Research", tag: "research", tagClass: "tag-research", children: [
+      { id:"rdaig",
+        label:"RDAIG Methods Paper",
+        sub:"Core Method · First Implementation Results",
+        full:"Recursive Deterministic AI Governance: Extracting Workflow Controls from Recursive Transformation of a Bounded Corpus",
+        abstract:"Governance-control methods paper. Uses recursive transformation of a bounded corpus to identify where AI outputs stabilize, where drift enters, and where workflow controls must attach. Documents the first implementation results.",
+        tags:["recursive governance","bounded corpus","workflow controls","agentic AI","auditability"] },
+      { id:"dast",
+        label:"Discursive Authority Stress Test",
+        sub:"Experimental Governance · Authority Excess Under Recursive Pressure",
+        full:"Discursive Authority Stress Test: Evidential Warrant, Authority Excess, and Recursive Pressure in AI Systems",
+        abstract:"Subjects the recursive self-audit instrument to governance analysis. Measures how AI systems generate authority claims exceeding their evidential warrant under recursive pressure. Applies Goodhart's Law as a governance instrument.",
+        tags:["discursive authority","evidential warrant","Goodhart's Law","recursive pressure","stress testing"] },
+      { id:"ritual",
+        label:"Ritual Authority in the Digital Age",
+        sub:"Cultural Governance · Proof Regimes and Wiccan Practice",
+        full:"Ritual Authority in the Digital Age: Proof Regimes, Legitimacy, and the Recomposition of Wiccan Practice",
+        abstract:"Analyzes the recomposition of Wiccan witchcraft under digital circulation. Drawn from ethnographic fieldwork in Montréal and Québec. Shows how ritual authority becomes a governance problem when proof regimes shift from embodied community validation to digital visibility.",
+        tags:["ritual authority","Wicca","proof regimes","ethnography","Québec"] },
+      { id:"sealed",
+        label:"Legitimacy as Pathway Authorization",
+        sub:"Final Phase of Conceptualisation · Accountability Under Consequence Pressure",
+        full:"Legitimacy as Pathway Authorization: Accountability, Proof Regimes, and Governance Under Consequence Pressure",
+        abstract:"Examines how legitimacy operates as pathway authorization under consequence pressure. Develops a five-term apparatus — glitch, seam, charging, legibility, legitimacy — analyzed across art, academia, and ritual. Final conceptual phase of the AI Governance Master Project.",
+        tags:["legitimacy","pathway authorization","proof regimes","accountability","consequence pressure"] },
+      { id:"wheel",
+        label:"Process Ontology and Recursive AI Deployment",
+        sub:"Companion Study · Twenty-Two-Iteration Protocol Analysis",
+        full:"Process Ontology and Recursive AI Deployment: Companion Analysis of the Twenty-Two-Iteration Protocol Study",
+        abstract:"Companion study analyzing the 22-iteration deployment through process ontology, Buddhist philosophy, ritual theory, and STS. Examines what recursive self-interrogation reveals about the conditions and limits of AI self-knowledge.",
+        tags:["process ontology","recursive deployment","AI self-knowledge","Buddhist philosophy","STS"] },
+    ]
+  },
+  {
+    id: "method", label: "Method", tag: "method", tagClass: "tag-method", children: [
+      { id:"pipeline",
+        label:"Twelve-Stage Control Pipeline",
+        sub:"Core Pipeline · Corpus Formation Through Failure Harvesting",
+        full:"Recursive Deterministic AI Governance: Canonical Twelve-Stage Control Pipeline and Workflow Binding Specification",
+        abstract:"Canonical twelve-stage governance-control pipeline. Converts a bounded corpus into auditable workflow controls: corpus formation, intent embedding, multi-model rendering, triangulation, recursive return, control extraction, determinism hardening, deployment binding, logging, and failure harvesting. The endpoint is workflow binding, not recursive fluency.",
+        tags:["twelve stages","control extraction","workflow binding","failure harvesting","corpus formation"] },
+      { id:"mobius",
+        label:"Recursive Self-Audit Protocol",
+        sub:"Twenty-Eight-Step Adversarial Diagnostic · Forced Terminal Synthesis",
+        full:"Recursive Self-Audit Protocol: A Twenty-Eight-Step Adversarial Diagnostic Instrument for AI Reasoning Coherence",
+        abstract:"A twenty-eight-step adversarial diagnostic instrument. Each new conversation reinjects the full prior archive before the next prompt. Proceeds through recursive self-audit phases, context persistence tests, compressed archive injections, silence probes, and perturbation questions before arriving at forced terminal synthesis.",
+        tags:["self-audit","recursive interrogation","perturbation testing","forced terminal synthesis","adversarial"] },
+      { id:"triang",
+        label:"Cross-System Sequential Audit",
+        sub:"Three-Agent Recursive Evaluation · One Auditable Event",
+        full:"Cross-System Sequential Audit: Three-Agent Recursive Evaluation of Governance Framework Integrity",
+        abstract:"Three AI agents evaluate the same governance framework in sequence: Agatha (ChatGPT) performs first-order audit, Gemini performs second-order evaluation, Claude evaluates Gemini. Three agents, three passes, recursive depth collapsing into a single auditable governance event.",
+        tags:["three-agent audit","meta-evaluation","cross-system","recursive depth","sequential"] },
+      { id:"shadow",
+        label:"Adversarial Inversion Protocol",
+        sub:"Red-Team · Institutional Capture and Legitimacy Theater",
+        full:"Adversarial Inversion Protocol: Stress Testing Governance Controls Against Institutional Capture and Legitimacy Theater",
+        abstract:"Systematic adversarial inversion of every governance principle. Does not abolish governance language — colonizes it. Tests whether each control survives institutional co-optation or collapses into legitimacy theater under adversarial pressure.",
+        tags:["adversarial inversion","red team","legitimacy theater","institutional capture","co-optation"] },
+      { id:"scripto",
+        label:"Automated Pipeline Implementation",
+        sub:"Method · Scripted Execution Protocol and Recursive Paper-Builder",
+        full:"Automated Recursive Governance: Pipeline Implementation and Scripted Execution Protocol",
+        abstract:"The scripted automation test implementation of the RDAIG method. Applies the recursive deterministic governance pipeline to automated paper-building workflows, testing whether the method holds under scripted conditions. Produces recursive analysis memos, evidence hierarchy notes, control registers, disclosure language, and reviewer-pressure scaffolds.",
+        tags:["scripted automation","pipeline implementation","paper-builder","RDAIG","recursive scaffolding"] },
+    ]
+  },
+  {
+    id: "infra", label: "Governance Infrastructure", tag: "infra", tagClass: "tag-infra", children: [
+      { id:"const",
+        label:"AI Governance Constitutional Framework",
+        sub:"Constitutional · Oversight Infrastructure and Constraint Design",
+        full:"AI Governance Constitutional Framework: Oversight Infrastructure and Constraint Design",
+        abstract:"Supreme written governance instrument. Defines voice constraints, receipts doctrine, operator engine, ontology commitments, and stewardship posture. Establishes that legitimacy depends on reconstructability.",
+        tags:["constitution","voice constraints","receipts doctrine","stewardship","constraint design"] },
+      { id:"alambic",
+        label:"Constitutional Governance Architecture",
+        sub:"Constitutional · Six-Layer Precedence Hierarchy and Amendment Channel",
+        full:"Constitutional Governance Architecture: Precedence Hierarchy, Amendment Channel, and Ontological Integrity Controls",
+        abstract:"Defines what counts as law, method, implementation, and laboratory. Establishes a six-layer precedence hierarchy and a five-step amendment channel that prevents drift, tone-smuggling, and ontology betrayal across the full governance stack.",
+        tags:["precedence hierarchy","amendment channel","drift prevention","ontology","governance architecture"] },
+      { id:"violet",
+        label:"Governance Deployment Protocol",
+        sub:"Operational · Switchback Architecture and Layer Structure",
+        full:"Governance Deployment Protocol: Switchback Architecture, Voice Specification, and Operational Layer Structure",
+        abstract:"Operational carry-kit for the AI Governance Master Project. Contains the Witches' Road Switchback Governance Protocol, voice specification, milestone map, and layer architecture. Seven trials with four switchback reversals prevent premature closure.",
+        tags:["switchback protocol","voice specification","milestone map","layer architecture","operational"] },
+      { id:"recurso",
+        label:"First Implementation and Stabilization Record",
+        sub:"Operational · Phase 1 Live Testing Against Bounded Corpus",
+        full:"Recursive Deterministic AI Governance: First Implementation and Stabilization Record",
+        abstract:"First live implementation and testing of the RDAIG method against a real bounded corpus. Produced baseline instability record, correction and stabilization passes, recursive plateau data, and failure harvest evidence that the methods paper reports as its first implementation results.",
+        tags:["first implementation","live testing","stabilization","failure harvest","bounded corpus"] },
+      { id:"skill",
+        label:"Bounded AI Agent Governance",
+        sub:"Operational · Fourteen Constitutions and Dual-Layer Architecture",
+        full:"Bounded AI Agent Governance: Fourteen Operational Constitutions and Dual-Layer Architecture",
+        abstract:"Fourteen SKILL.md instruction-layer documents governing how AI agents operate within the practice. The philosopher skill functions as sovereign meta-router. Dual-layer brain-and-map architecture separates prompt engineering from context engineering.",
+        tags:["SKILL.md","philosopher skill","meta-router","agent governance","dual-layer"] },
+      { id:"arch",
+        label:"Recursive Archive Governance",
+        sub:"Operational · Thirteen-Layer Stack and Canon Management",
+        full:"Recursive Archive Governance: Meta-Documentary Control Protocol and Thirteen-Layer Stack Specification",
+        abstract:"Six meta-documents governing the RDAIG archive. Prevents recursive process logs from silently becoming the command layer for new work. Defines the thirteen-layer governance stack from root anchor through runtime operations.",
+        tags:["archive governance","canon management","thirteen-layer stack","method lock","three-agent alignment"] },
+    ]
+  }
+];
+
+function makeGovLeaf(n) {
+  const el = document.createElement('div');
+  el.className = 'leaf-node';
+  el.innerHTML = `
+    <div class="leaf-row" onclick="toggleAbs('g-${n.id}')">
+      <div class="label-wrap">
+        <div class="node-title">${n.label}</div>
+        <div class="node-sub">${n.sub}</div>
+      </div>
+    </div>
+    <div class="abstract-panel" id="g-${n.id}">
+      <div class="panel-title">${n.full}</div>
+      ${n.abstract}
+      <div class="tags-row">${n.tags.map(t=>`<span class="tag-pill">${t}</span>`).join('')}</div>
+    </div>
+  `;
+  return el;
+}
+
+function makeGovBranch(n) {
+  const el = document.createElement('div');
+  el.className = 'branch-node';
+  el.innerHTML = `
+    <div class="branch-row" onclick="toggleBr('gb-${n.id}')">
+      <span class="toggle" id="gb-${n.id}-tog">+</span>
+      <div class="label-wrap">
+        <span class="branch-tag ${n.tagClass}">${n.label}</span>
+      </div>
+    </div>
+    <div class="children" id="gb-${n.id}"></div>
+  `;
+  const ch = el.querySelector(`#gb-${n.id}`);
+  n.children.forEach(c => ch.appendChild(makeGovLeaf(c)));
+  return el;
+}
+
+// ── Skill Tree ───────────────────────────────────────────────────
+const SKILL_DATA = [
+  { id:"res", label:"Research & Analysis", badge:"b-research", tag:"Research", children:[
+    {id:"gov2",label:"Recursive Governance Method",sub:"Control extraction from mixed archives",tags:["recursive analysis","control extraction","evidence hierarchy","method lock"]},
+    {id:"trace",label:"Trace Investigator",sub:"Authority and accountability flow mapping",tags:["authority flow","definition drift","handoff mapping","bounded conclusions"]},
+    {id:"qual",label:"Qualitative Methods",sub:"Study design, coding, interpretation",tags:["thematic analysis","ethnography","discourse analysis","positionality"]},
+    {id:"red",label:"Red Team",sub:"Authorized adversarial exercise design",tags:["rules of engagement","purple team","executive reporting","adversary emulation"]},
+  ]},
+  { id:"wri", label:"Writing & Publishing", badge:"b-write", tag:"Writing", children:[
+    {id:"peer",label:"Peer-Reviewed Paper Writer",sub:"Scholarly manuscript to submission",tags:["governing claim","contribution ladder","reviewer response","evidence sufficiency"]},
+    {id:"novel",label:"Novelist",sub:"Novel planning, drafting, revision",tags:["character arc","plot momentum","POV control","scene structure"]},
+    {id:"pub",label:"Publisher",sub:"Manuscript evaluation and positioning",tags:["editorial letter","acquisitions memo","jacket copy","metadata"]},
+  ]},
+  { id:"strat", label:"Strategy & Identity", badge:"b-strat", tag:"Strategy", children:[
+    {id:"brand",label:"Brand Identity System",sub:"Diagnosis, positioning, visual direction",tags:["strategic brief","logo concepts","website direction","professional services"]},
+    {id:"hum",label:"Humanize",sub:"Compliance rules redesigned for real behavior",tags:["rule redesign","COM-B","behavioral science","compliance"]},
+  ]},
+  { id:"orch", label:"Orchestration", badge:"b-orch", tag:"Orchestration", children:[
+    {id:"pair",label:"Skill Pairing",sub:"Two-skill sequencing for one request",tags:["two-skill coordination","handoff artifact","analysis→writing"]},
+    {id:"phd",label:"PhD Guide",sub:"Doctoral program structure and dissertation",tags:["dissertation","committee","defense","academic career"]},
+  ]},
+  { id:"arch2", label:"Skill Architecture", badge:"b-arch", tag:"Architecture", children:[
+    {id:"prompt",label:"Prompt Engineering Layer",sub:"Brain: persona, logic, constraints",tags:["persona","chain-of-thought","negative constraints","few-shot"]},
+    {id:"ctx",label:"Context Engineering Layer",sub:"Map: knowledge retrieval and tool routing",tags:["knowledge retrieval","tool orchestration","memory","context pruning"]},
+  ]},
+];
+
+function makeSkillLeaf(n) {
+  const el = document.createElement('div');
+  el.className = 'leaf-node';
+  el.innerHTML = `
+    <div class="leaf-row" onclick="toggleAbs('s-${n.id}')">
+      <div class="label-wrap">
+        <div class="node-title">${n.label}</div>
+        <div class="node-sub">${n.sub}</div>
+      </div>
+    </div>
+    <div class="abstract-panel" id="s-${n.id}">
+      <div class="tags-row">${n.tags.map(t=>`<span class="tag-pill">${t}</span>`).join('')}</div>
+    </div>
+  `;
+  return el;
+}
+
+function makeSkillBranch(n) {
+  const el = document.createElement('div');
+  el.className = 'branch-node';
+  el.innerHTML = `
+    <div class="branch-row" onclick="toggleBr('sb-${n.id}')">
+      <span class="toggle" id="sb-${n.id}-tog">+</span>
+      <div class="label-wrap">
+        <span class="badge ${n.badge}">${n.tag} — ${n.label}</span>
+      </div>
+    </div>
+    <div class="children" id="sb-${n.id}"></div>
+  `;
+  const ch = el.querySelector(`#sb-${n.id}`);
+  n.children.forEach(c => ch.appendChild(makeSkillLeaf(c)));
+  return el;
+}
+
+// ── Shared helpers ───────────────────────────────────────────────
+function toggleBr(id) {
+  const ch = document.getElementById(id);
+  const tog = document.getElementById(id + '-tog');
+  if (!ch || !tog) return;
+  const open = ch.classList.toggle('open');
+  tog.textContent = open ? '−' : '+';
+  tog.classList.toggle('open', open);
+}
+function toggleAbs(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+// ── Mount ────────────────────────────────────────────────────────
+const govMount = document.getElementById('governance-tree-mount');
+const skillMount = document.getElementById('skill-tree-mount');
+const govTree = document.createElement('div'); govTree.className = 'tree';
+const skillTree = document.createElement('div'); skillTree.className = 'tree';
+GOV_DATA.forEach(n => govTree.appendChild(makeGovBranch(n)));
+SKILL_DATA.forEach(n => skillTree.appendChild(makeSkillBranch(n)));
+govMount.appendChild(govTree);
+skillMount.appendChild(skillTree);
+</script>
