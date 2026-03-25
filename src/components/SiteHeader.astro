@@ -1,5 +1,5 @@
 ---
-import { siteMeta } from '../data/site';
+import { navigation, siteMeta } from '../data/site';
 
 const pathname = Astro.url.pathname;
 
@@ -8,18 +8,13 @@ const isActivePath = (href: string) => {
   return cleanHref === '/' ? pathname === '/' : pathname === cleanHref || pathname.startsWith(cleanHref);
 };
 
-const navItems = [
-  { href: '/governance/', label: 'Governance' },
-  { href: '/papers/', label: 'Publications' },
-  { href: '/writing/', label: 'Writings' },
-  { href: '/talks/', label: 'Talks' },
-  { href: '/projects/', label: 'Projects' },
-  { href: '/about/', label: 'About' },
-].map(({ href, label }) => ({
-  href,
-  label,
-  isActive: isActivePath(href),
-}));
+const navItems = navigation
+  .filter(({ href }) => !['/', '/contact/', '/resume/'].includes(href))
+  .map(({ href, label }) => ({
+    href,
+    label,
+    isActive: isActivePath(href),
+  }));
 
 const utilityItems = [{ href: '/contact/', label: 'Contact', isActive: isActivePath('/contact/') }];
 ---

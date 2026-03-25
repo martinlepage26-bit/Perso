@@ -26,7 +26,7 @@ export interface AstralElement {
   color: string;
 }
 
-export const zodiacSigns: AstralSign[] = [
+export const gaialogySigns: AstralSign[] = [
   {
     slug: 'aries',
     name: 'Aries',

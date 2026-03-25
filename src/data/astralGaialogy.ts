@@ -1,5 +1,5 @@
 import type { AstralSign } from './astralYear';
-import { zodiacSigns } from './astralYear';
+import { gaialogySigns } from './astralYear';
 
 export type AstralSignSlug = AstralSign['slug'];
 
@@ -8,19 +8,19 @@ export interface AstralDateInput {
   day: number;
 }
 
-export interface AstralHoroscopeRequest {
+export interface AstralGaialogyRequest {
   sign?: AstralSignSlug;
   month?: number;
   day?: number;
 }
 
-export interface AstralHoroscopeGuidance {
+export interface AstralGaialogyGuidance {
   now: string;
   care: string;
   shadow: string;
 }
 
-export interface AstralHoroscopeProfile {
+export interface AstralGaialogyProfile {
   sign: AstralSign;
   keyNote: string;
   seasonMood: string;
@@ -34,7 +34,7 @@ export interface AstralHoroscopeProfile {
 }
 
 const SIGN_BY_SLUG = new Map<AstralSignSlug, AstralSign>(
-  zodiacSigns.map((sign) => [sign.slug, sign] as const),
+  gaialogySigns.map((sign) => [sign.slug, sign] as const),
 );
 
 function isValidMonthDay(month: number, day: number): boolean {
@@ -85,7 +85,7 @@ function signCoversDate(sign: AstralSign, month: number, day: number): boolean {
   return current >= start || current <= end;
 }
 
-function normalizeSign(input: AstralHoroscopeRequest): AstralSign {
+function normalizeSign(input: AstralGaialogyRequest): AstralSign {
   if (input.sign) {
     const bySlug = SIGN_BY_SLUG.get(input.sign);
     if (!bySlug) {
@@ -104,7 +104,7 @@ function normalizeSign(input: AstralHoroscopeRequest): AstralSign {
 
   const month = input.month;
   const day = input.day;
-  const match = zodiacSigns.find((sign) => signCoversDate(sign, month, day));
+  const match = gaialogySigns.find((sign) => signCoversDate(sign, month, day));
   if (!match) {
     throw new Error(`Could not resolve an Astral sign for ${month}/${day}`);
   }
@@ -112,7 +112,7 @@ function normalizeSign(input: AstralHoroscopeRequest): AstralSign {
   return match;
 }
 
-function buildGuidance(sign: AstralSign): AstralHoroscopeGuidance {
+function buildGuidance(sign: AstralSign): AstralGaialogyGuidance {
   return {
     now: `Let ${sign.civicTheme} name the weather before you try to control it.`,
     care: `Keep close to ${sign.bodyRegister}. That is the body-level signal this sign is asking you to hear.`,
@@ -140,7 +140,7 @@ export function determineAstralSign(month: number, day: number): AstralSign {
     throw new Error(`Invalid month/day pair: ${month}/${day}`);
   }
 
-  const sign = zodiacSigns.find((entry) => signCoversDate(entry, month, day));
+  const sign = gaialogySigns.find((entry) => signCoversDate(entry, month, day));
   if (!sign) {
     throw new Error(`Could not resolve an Astral sign for ${month}/${day}`);
   }
@@ -157,7 +157,7 @@ export function getAstralSignBySlug(slug: AstralSignSlug): AstralSign {
   return sign;
 }
 
-export function buildAstralHoroscopeProfile(input: AstralHoroscopeRequest): AstralHoroscopeProfile {
+export function buildAstralGaialogyProfile(input: AstralGaialogyRequest): AstralGaialogyProfile {
   const sign = normalizeSign(input);
   const guidance = buildGuidance(sign);
 
@@ -175,6 +175,6 @@ export function buildAstralHoroscopeProfile(input: AstralHoroscopeRequest): Astr
   };
 }
 
-export function buildAstralHoroscopeMessage(input: AstralHoroscopeRequest): string {
-  return buildAstralHoroscopeProfile(input).message;
+export function buildAstralGaialogyMessage(input: AstralGaialogyRequest): string {
+  return buildAstralGaialogyProfile(input).message;
 }

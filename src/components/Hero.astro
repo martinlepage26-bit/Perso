@@ -1,6 +1,17 @@
 ---
 import { heroFacts } from '../data/site';
 import BackgroundTreatment from './BackgroundTreatment.astro';
+
+const appButtons = [
+  { label: 'LOTUS', href: '/lotus/', popupName: 'mlStandaloneLotus' },
+  { label: 'ECHO', href: '/echo/', popupName: 'mlStandaloneEcho' },
+  { label: 'SCRIPTO', href: '/scripto/', popupName: 'mlStandaloneScripto' },
+  { label: 'GAIA', href: '/gaia/', popupName: 'mlStandaloneGaia' },
+  { label: 'Dr.Sort', href: '/dr-sort/', popupName: 'mlStandaloneDrSort' },
+] as const;
+
+const popupFeatures =
+  'popup=yes,width=1320,height=860,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes';
 ---
 
 <section class="relative overflow-hidden border-b border-[rgba(17,23,38,0.08)]">
@@ -9,23 +20,37 @@ import BackgroundTreatment from './BackgroundTreatment.astro';
     <div class="hero-copy-panel max-w-4xl">
       <p class="eyebrow">Martin Lepage</p>
       <h1 class="mt-5 max-w-3xl text-[2.1rem] leading-[1.02] md:text-[3.25rem]">
-        AI governance, institutional analysis, and public writing.
+        Institutional analysis, AI governance, and public writing.
       </h1>
       <p class="mt-6 max-w-3xl text-[1.08rem] leading-8 text-slate-100">
-        Martin Lepage designs governance frameworks, evidence pathways, and strategic writing that clarify how
-        decisions are made, which assumptions govern them, and where consequences land.
+        Martin Lepage analyzes institutions, legitimacy structures, and consequence pathways, then translates those
+        findings into governance design, decision documentation, and public argument.
       </p>
       <p class="mt-5 max-w-3xl text-base text-slate-200">
-        The method combines operational rigor with cultural and philosophical reading so systems remain inspectable,
-        contestable, and usable under real institutional pressure.
+        The work combines operational rigor with cultural and philosophical reading, plus autodidact app development
+        for traceability and editorial workflows under real institutional pressure.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a class="button-primary" href="/governance/">Review governance work</a>
-        <a class="button-secondary" href="/resume/">View resume and CV</a>
+        <a class="button-primary" href="/papers/">Read institutional analysis</a>
+        <a class="button-secondary" href="/governance/">Review AI governance work</a>
+      </div>
+      <div class="app-quick-row mt-4 flex flex-wrap gap-2.5">
+        {appButtons.map((app) => (
+          <a
+            class="app-quick-button"
+            href={app.href}
+            data-app={app.label}
+            data-popup="true"
+            data-popup-name={app.popupName}
+            data-popup-features={popupFeatures}
+          >
+            {app.label}
+          </a>
+        ))}
       </div>
       <ul class="bullet-links mt-6">
         <li><a class="link-inline" href="/contact/">Start a conversation</a></li>
-        <li><a class="link-inline" href="/papers/">Read publications</a></li>
+        <li><a class="link-inline" href="/writing/">Read public writing</a></li>
       </ul>
       <ul class="bullet-facts mt-8">
         {heroFacts.map((fact) => (
@@ -45,11 +70,47 @@ import BackgroundTreatment from './BackgroundTreatment.astro';
       </div>
 
       <ul class="space-y-3">
-        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">Governance engagements</li>
-        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">Research and publications</li>
-        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">Writing and media</li>
-        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">Talks and first orientation</li>
+        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">Institutional analysis and publication records</li>
+        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">AI governance engagements</li>
+        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">Public writing and commentary</li>
+        <li class="border-t border-[rgba(17,23,38,0.08)] pt-3 text-base text-slate-200">Autodidact apps and tool experiments</li>
       </ul>
     </aside>
   </div>
 </section>
+
+<script is:inline>
+  const popupLinks = document.querySelectorAll('.app-quick-button[data-popup="true"]');
+
+  popupLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const isMouseEvent = event instanceof MouseEvent;
+      if (
+        isMouseEvent &&
+        (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+      ) {
+        return;
+      }
+
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      event.preventDefault();
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      const popupName = link.getAttribute('data-popup-name') || '_blank';
+      const featureString =
+        link.getAttribute('data-popup-features') ||
+        'popup=yes,width=1320,height=860,resizable=yes,scrollbars=yes';
+
+      const popupRef = window.open(href, popupName, featureString);
+      if (!popupRef) {
+        window.location.assign(href);
+        return;
+      }
+      popupRef.focus();
+    });
+  });
+</script>

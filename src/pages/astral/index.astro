@@ -3,8 +3,8 @@ import '@fontsource-variable/space-grotesk';
 import '@fontsource/ibm-plex-sans/400.css';
 import '@fontsource/ibm-plex-sans/600.css';
 import '../../styles/astral-standalone.css';
-import AstralHoroscopeApp from '../../components/astral/AstralHoroscopeApp.astro';
-import { zodiacSigns } from '../../data/astralYear';
+import AstralGaialogyApp from '../../components/astral/AstralGaialogyApp.astro';
+import { gaialogySigns } from '../../data/astralYear';
 ---
 
 <!doctype html>
@@ -45,7 +45,7 @@ import { zodiacSigns } from '../../data/astralYear';
         </section>
 
         <section id="astral-tool" class="astral-tool">
-          <AstralHoroscopeApp signs={zodiacSigns} />
+          <AstralGaialogyApp signs={gaialogySigns} />
         </section>
       </main>
     </div>

@@ -38,11 +38,11 @@ export const siteMeta = {
   title: 'Martin Lepage',
   siteUrl: configuredSiteUrl,
   description:
-    'AI governance, institutional analysis, and public writing by Martin Lepage.',
+    'Institutional analysis, AI governance, and public writing by Martin Lepage, including autodidact app development.',
   locale: 'en-CA',
   email: 'martinlepage.ai@gmail.com',
   location: 'Montreal, Quebec, Canada',
-  jobTitle: 'AI governance strategist, researcher, and writer',
+  jobTitle: 'Institutional analyst, AI governance strategist, writer, and autodidact app developer',
   linkedIn: 'https://linkedin.com/in/martin-lepage-ai',
   github: 'https://github.com/martinlepage26-bit/',
   orcid: 'https://orcid.org/0009-0006-4320-6254',
@@ -53,9 +53,9 @@ export const siteMeta = {
 
 export const pageMeta = {
   home: {
-    title: 'AI Governance, Research, and Strategic Writing',
+    title: 'Institutional Analysis, AI Governance, and Public Writing',
     description:
-      'AI governance design, institutional analysis, publications, and public writing by Martin Lepage.',
+      'Institutional analysis, AI governance design, publications, public writing, and autodidact app development by Martin Lepage.',
   },
   governance: {
     title: 'Governance Practice',
@@ -105,11 +105,11 @@ export const pageMeta = {
 
 export const navigation = [
   { href: '/', label: 'Home' },
-  { href: '/governance/', label: 'Governance' },
-  { href: '/papers/', label: 'Publications' },
-  { href: '/writing/', label: 'Writings' },
+  { href: '/papers/', label: 'Institutional Analysis' },
+  { href: '/governance/', label: 'AI Governance' },
+  { href: '/writing/', label: 'Public Writing' },
+  { href: '/projects/', label: 'Apps' },
   { href: '/talks/', label: 'Talks' },
-  { href: '/projects/', label: 'Projects' },
   { href: '/about/', label: 'About' },
   { href: '/resume/', label: 'Resume' },
   { href: '/contact/', label: 'Contact' },
@@ -125,7 +125,7 @@ export const publicProjectOrder = [
   'legitimacy-machines-altars-of-control',
   'the-sealed-card-protocol',
   'master-annotated-thematic-bibliography',
-  'astrology-as-social-grammar',
+  'gaialogy-as-social-grammar',
   'bonded-intelligence-under-constraint',
   'lotus',
 ] as const;
@@ -143,52 +143,54 @@ export const hiddenProjectArchiveSlugs = [
 export const projectArchivePromotedPaperSlugs = [] as const;
 
 export const heroFacts = [
-  'AI governance architecture and decision traceability',
-  'PhD, Religious Sciences (UQAM)',
   'Institutional analysis across language, culture, and power',
+  'AI governance architecture and decision traceability',
+  'Public writing for contested institutional decisions',
+  'Autodidact app development for governance and writing workflows',
+  'PhD, Religious Sciences (UQAM)',
   'English and French',
 ];
 
 export const audienceRoutes = [
   {
-    eyebrow: 'Governance engagements',
-    title: 'Decision systems, accountability design, and review-ready documentation',
+    eyebrow: 'Institutional analysis',
+    title: 'Institutional analysis and publication trajectory',
     description:
-      'Start with governance structures that clarify authority, evidence, and consequence under institutional constraints.',
-    href: '/governance/',
-    cta: 'Review governance work',
-  },
-  {
-    eyebrow: 'Academic and research readers',
-    title: 'Publications and research trajectory',
-    description:
-      'Browse published work and follow the through-line from ritual studies to governance, legitimacy, and institutional analysis.',
+      'Start with analysis of legitimacy, power, and institutional consequence across published and reviewable records.',
     href: '/papers/',
-    cta: 'Read publications',
+    cta: 'Read institutional analysis',
   },
   {
-    eyebrow: 'Editors and media',
-    title: 'Essays, books, and public argument',
+    eyebrow: 'AI governance engagements',
+    title: 'Decision systems, accountability design, and review-ready governance',
     description:
-      'Move into essays and books that translate complex structures into clear public language without flattening stakes.',
+      'Move into governance structures that clarify authority, evidence pathways, escalation logic, and operational responsibility.',
+    href: '/governance/',
+    cta: 'Review AI governance work',
+  },
+  {
+    eyebrow: 'Public writing',
+    title: 'Essays, books, and institutional public argument',
+    description:
+      'Read essays and criticism that translate institutional complexity into clear language without reducing stakes or accountability.',
     href: '/writing/',
     cta: 'Open the writing archive',
   },
   {
-    eyebrow: 'Speaking and programming',
-    title: 'Talks, panels, and invited sessions',
+    eyebrow: 'Autodidact app development',
+    title: 'Governance and writing tools built in practice',
     description:
-      'Review conference and public-facing talks on governance, cultural legitimacy, and methods of interpretation.',
-    href: '/talks/',
-    cta: 'See talks',
+      'Browse self-built applications and method interfaces developed to support governance work, documentation, and interpretive workflows.',
+    href: '/projects/',
+    cta: 'Explore app and tool projects',
   },
   {
-    eyebrow: 'First-time orientation',
-    title: 'Biography, method, and working context',
+    eyebrow: 'Speaking and orientation',
+    title: 'Talks, biography, and working context',
     description:
-      'Use About for the most direct orientation to background, method, and the relation between scholarship and strategy.',
-    href: '/about/',
-    cta: 'Read the biography',
+      'Use Talks and About for first orientation to method, background, and the bridge between scholarship, governance, and public language.',
+    href: '/talks/',
+    cta: 'See talks and orientation routes',
   },
 ] as const;
 
@@ -236,14 +238,14 @@ export const governanceFit = [
 
 export const biography = {
   intro:
-    'Martin Lepage is a Montreal-based governance strategist, researcher, and writer working where institutional design, public meaning, and operational accountability meet.',
+    'Martin Lepage is a Montreal-based institutional analyst, AI governance strategist, and writer working where institutional design, public meaning, and operational accountability meet.',
   paragraphs: [
     'His academic formation spans ritual studies, queer theory, media analysis, digital culture, and contemporary spiritualities. He completed a PhD in Religious Sciences at Universite du Quebec a Montreal after earlier degrees in literary studies at Universite Laval. That trajectory trained close reading, conceptual discipline, and sensitivity to how categories shape what institutions can see.',
     'He has also worked in research operations, archives, AI-assisted quality evaluation, and clinical trial coordination. These roles demanded audit-ready documentation, multi-stakeholder judgment under pressure, and defensible decision pathways. The governance practice is grounded in that operational reality, not in abstract policy language alone.',
     'The through-line is legitimacy: how authority becomes credible, how systems distribute consequence, and how language can either clarify or conceal responsibility. The work treats governance as a lived relation between decision, evidence, institution, and affected people.',
   ],
   currentWork:
-    'Current work focuses on AI governance systems, decision traceability, and strategic writing that links institutional design to cultural and political consequence.',
+    'Current work focuses on institutional analysis, AI governance systems, public writing, and autodidact app development for decision traceability and documentation workflows.',
 };
 
 export const researchInterests = [
@@ -446,8 +448,10 @@ export const resumeData = {
 };
 
 export const contactAreas = [
+  'Institutional analysis, legitimacy mapping, and consequence tracing',
   'Governance architecture, decision traceability, and review protocols',
-  'Editorial commissions, interviews, and media requests',
+  'Public writing, editorial commissions, and media requests',
+  'Autodidact app and workflow tool development for governance contexts',
   'Talks, guest lectures, and panel programming',
   'Research collaborations and publication discussions',
 ];

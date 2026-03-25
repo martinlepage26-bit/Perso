@@ -1,6 +1,6 @@
 ---
 import type { AstralSign } from '../../data/astralYear';
-import { buildAstralHoroscopeProfile, determineAstralSign } from '../../data/astralHoroscope';
+import { buildAstralGaialogyProfile, determineAstralSign } from '../../data/astralGaialogy';
 
 interface Props {
   signs: AstralSign[];
@@ -25,7 +25,7 @@ const monthOptions = [
 
 const initialSign = signs[0];
 const profilesBySlug = Object.fromEntries(
-  signs.map((sign) => [sign.slug, buildAstralHoroscopeProfile({ sign: sign.slug })]),
+  signs.map((sign) => [sign.slug, buildAstralGaialogyProfile({ sign: sign.slug })]),
 );
 const initialProfile = profilesBySlug[initialSign.slug];
 const dateLookup = Object.fromEntries(

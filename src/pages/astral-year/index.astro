@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionIntro from '../../components/SectionIntro.astro';
-import { classicalElements, zodiacSigns } from '../../data/astralYear';
+import { classicalElements, gaialogySigns } from '../../data/astralYear';
 import { buildCanonical } from '../../lib/seo';
 
 const pageDescription =
-  'Breath of the Astral Year is a self-published book about astrology as a grammar of collective life, with signs and seasons kept close to lived experience.';
+  'Breath of the Astral Year is a self-published book about gaialogy as a grammar of collective life, with signs and seasons kept close to lived experience.';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -20,7 +20,7 @@ const structuredData = {
   genre: 'Self-published book',
 };
 
-const astralBookData = { signs: zodiacSigns };
+const astralBookData = { signs: gaialogySigns };
 ---
 
 <BaseLayout
@@ -133,7 +133,7 @@ const astralBookData = { signs: zodiacSigns };
         <p class="eyebrow">The fifth</p>
         <h3 class="mt-4 text-[1.12rem] md:text-[1.28rem]">If a fifth is named here, it is Gaia: the living field of Earth.</h3>
         <p class="mt-4 text-base leading-7 text-slate-200">
-          The book can make room for a fifth, but not as another distant astrological mechanism. Gaia is the better name
+          The book can make room for a fifth, but not as another distant gaialogy mechanism. Gaia is the better name
           for it here: the living ground that holds weather, body, season, growth, decay, and relation together.
         </p>
         <p class="mt-4 text-base leading-7 text-slate-200">
@@ -160,17 +160,17 @@ const astralBookData = { signs: zodiacSigns };
     </div>
   </section>
 
-  <section id="zodiac-architecture" class="section-shell">
+  <section id="gaialogy-architecture" class="section-shell">
     <SectionIntro
       eyebrow="The signs"
-      title="The zodiac, kept close to the ground."
+      title="The gaialogy, kept close to the ground."
       description="The elements set the weather; each sign gives it a more exact voice."
     />
 
     <div class="mt-12 grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
       <div class="veil-panel">
         <div class="astral-wheel-grid" id="sign-grid">
-          {zodiacSigns.map((sign) => (
+          {gaialogySigns.map((sign) => (
             <button
               type="button"
               class="astral-sign-chip"

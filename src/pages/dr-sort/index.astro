@@ -1,0 +1,110 @@
+---
+import '@fontsource-variable/newsreader';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '../../styles/drsort-standalone.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Dr.Sort standalone: booking-style workflow shell with a gothic interface for document triage and review."
+    />
+    <meta name="theme-color" content="#120f17" />
+    <title>Dr.Sort | Gothic Booking Board</title>
+  </head>
+  <body class="drsort-standalone">
+    <div class="drsort-shell">
+      <header class="drsort-header">
+        <a class="drsort-brand" href="/dr-sort/">
+          <span class="drsort-mark">Dr.Sort</span>
+          <span class="drsort-tagline">Gothic Booking Board</span>
+        </a>
+        <nav class="drsort-nav" aria-label="Dr.Sort navigation">
+          <a href="/projects/dr-sort/">Project record</a>
+          <a href="/projects/">All projects</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main class="drsort-main">
+        <section class="drsort-hero" aria-labelledby="drsort-title">
+          <p class="drsort-eyebrow">Desktop-first sorting app</p>
+          <h1 id="drsort-title">Reserve triage slots. Sort without losing the thread.</h1>
+          <p>
+            Dr.Sort combines a booking-style queue with a darker research atmosphere: orderly intake, structured
+            review windows, and explicit decision notes for each document set.
+          </p>
+          <ol class="drsort-steps" aria-label="Booking flow">
+            <li><span>01</span>Choose document set</li>
+            <li><span>02</span>Pick sorting window</li>
+            <li><span>03</span>Reserve and begin pass</li>
+          </ol>
+        </section>
+
+        <section class="drsort-intake" aria-labelledby="drsort-intake-title">
+          <div class="drsort-section-head">
+            <p class="drsort-kicker">Booking intake</p>
+            <h2 id="drsort-intake-title">Structured reservation console</h2>
+          </div>
+          <form class="drsort-booking-bar" aria-label="Dr.Sort booking shell">
+            <label>
+              Document set
+              <input type="text" value="Governance corpus batch A" readonly />
+            </label>
+            <label>
+              Slot
+              <input type="text" value="Tonight · 21:30" readonly />
+            </label>
+            <label>
+              Priority
+              <input type="text" value="High consequence" readonly />
+            </label>
+            <button type="button">Reserve sorting pass</button>
+          </form>
+          <p class="drsort-intake-note">
+            Queue reservations are explicit handoff points: each slot binds scope, priority, and review accountability.
+          </p>
+        </section>
+
+        <section class="drsort-board" aria-labelledby="drsort-board-title">
+          <div class="drsort-section-head">
+            <p class="drsort-kicker">Board status</p>
+            <h2 id="drsort-board-title">Current floor: queue, slots, and cabinet readiness.</h2>
+          </div>
+
+          <div class="drsort-grid" aria-label="Dr.Sort board">
+            <article class="drsort-card">
+              <h3>Incoming queue</h3>
+              <ul>
+                <li>Policy drafts awaiting first-pass clustering</li>
+                <li>Unsorted literature records with missing tags</li>
+                <li>Contradiction-heavy packets flagged for arbitration</li>
+              </ul>
+            </article>
+            <article class="drsort-card">
+              <h3>Tonight’s slots</h3>
+              <ul>
+                <li>21:30 – Category cleanup and boundary check</li>
+                <li>22:15 – Evidence confidence sweep</li>
+                <li>23:00 – Export and handoff packet</li>
+              </ul>
+            </article>
+            <article class="drsort-card">
+              <h3>Cabinet status</h3>
+              <ul>
+                <li>Sorted bins: 17</li>
+                <li>Pending bins: 5</li>
+                <li>Escalation notes: 2 active</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

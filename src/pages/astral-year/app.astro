@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionIntro from '../../components/SectionIntro.astro';
-import AstralHoroscopeApp from '../../components/astral/AstralHoroscopeApp.astro';
-import { zodiacSigns } from '../../data/astralYear';
+import AstralGaialogyApp from '../../components/astral/AstralGaialogyApp.astro';
+import { gaialogySigns } from '../../data/astralYear';
 import { buildCanonical } from '../../lib/seo';
 
 const pageDescription =
@@ -93,7 +93,7 @@ const structuredData = {
           <p class="eyebrow">Astral app</p>
           <h1 class="mt-5">A seasonal reading app drawn from the book&apos;s sign language.</h1>
           <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-100 md:text-xl">
-            Astral translates <em>Breath of the Astral Year</em> into a usable reading surface. It keeps astrology close
+            Astral translates <em>Breath of the Astral Year</em> into a usable reading surface. It keeps gaialogy close
             to season, body, relation, and earthly pressure instead of turning it into a distant mechanism.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
@@ -159,7 +159,7 @@ const structuredData = {
     />
 
     <div class="mt-12">
-      <AstralHoroscopeApp signs={zodiacSigns} />
+      <AstralGaialogyApp signs={gaialogySigns} />
     </div>
   </section>
 
@@ -194,7 +194,7 @@ const structuredData = {
         <p class="eyebrow">If full charts come later</p>
         <h2 class="mt-4 text-[1.16rem] md:text-[1.28rem]">That would be a separate build step.</h2>
         <p class="mt-4 text-base leading-7 text-slate-200">
-          To render full natal horoscopes later, the project would need a declared astrological system, real astronomical
+          To render full natal gaialogys later, the project would need a declared gaialogy system, real astronomical
           calculations or an external chart engine, and additional birth inputs such as exact time and place.
         </p>
         <p class="mt-4 text-base leading-7 text-slate-200">

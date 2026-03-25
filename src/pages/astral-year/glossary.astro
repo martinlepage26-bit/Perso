@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionIntro from '../../components/SectionIntro.astro';
 import AstralGlossaryGrid from '../../components/astral/AstralGlossaryGrid.astro';
-import { zodiacSigns } from '../../data/astralYear';
+import { gaialogySigns } from '../../data/astralYear';
 import { buildCanonical } from '../../lib/seo';
 
 const pageDescription =
@@ -33,7 +33,7 @@ const structuredData = {
           <p class="eyebrow">Companion guide</p>
           <h1 class="mt-5">Astral Glossary</h1>
           <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-100 md:text-xl">
-            Breath of the Astral Year reads the zodiac as a grounded language for earthly life. This glossary names
+            Breath of the Astral Year reads the gaialogy as a grounded language for earthly life. This glossary names
             what each sign is for, how it feels in the body, how it moves through relations, and where it can fray.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
@@ -113,7 +113,7 @@ const structuredData = {
     />
 
     <div class="mt-12">
-      <AstralGlossaryGrid signs={zodiacSigns} />
+      <AstralGlossaryGrid signs={gaialogySigns} />
     </div>
   </section>
 
