@@ -12,6 +12,9 @@
     "preview": "astro preview",
     "check": "astro check",
     "smoke": "node ./scripts/smoke.mjs",
+    "deploy:echo:worker": "cd workers/echo-tts-online && npx wrangler deploy",
+    "deploy:echo:site": "npm run build && npx wrangler pages deploy dist --project-name martin-lepage-site --branch main --commit-dirty=true",
+    "deploy:echo": "npm run deploy:echo:worker && npm run deploy:echo:site",
     "inventory:corpus": "node ./scripts/generate-corpus-inventory.mjs",
     "inventory:external": "python3 ./scripts/generate-external-corpus-inventory.py",
     "astro": "astro"

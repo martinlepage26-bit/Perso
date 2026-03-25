@@ -1,0 +1,9 @@
+governance_element,runtime_object,mechanism,workflow_anchor,control_anchor,evidence_anchor
+pressure_source,pharos_case.pressure_source,case_activation,case_opening,T004,EV-004
+governing_question,pharos_case.governing_question,decision_contract,review_opening,T004,EV-004
+threshold,T001_legal_claim_review.yaml,legal_claim_detection,output_review_gate,T001,EV-002
+threshold,T002_external_release_gate.yaml,destination_classification,release_gate,T002,EV-003
+threshold,T003_low_confidence_human_review.yaml,confidence_and_ambiguity_gate,model_output_admission,T003,EV-008
+decision_rights,authority_matrix.yaml,authority_binding,threshold_adjudication,"T001-T005","EV-002;EV-003"
+disposition,pharos_case.disposition.status,governance_state_machine,review_closure,T004,EV-004
+reentry,CHANGE_TRIGGER_REGISTRY.yaml,change_detection,post_disposition_monitoring,T005,EV-009

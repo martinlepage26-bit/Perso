@@ -1,0 +1,86 @@
+case_id: CASE-EXAMPLE-000
+case_version: "1.0.0"
+opened_at: "2026-03-25T12:00:00Z"
+trigger_type: launch_approval
+requesting_function: product
+accountable_reviewer: governance_lead
+
+target_system:
+  name: internal-policy-drafting-assistant
+  version: "v1.0.0"
+  owner: policy_operations
+  intended_use: Generate first-pass internal draft language for policy teams.
+
+pressure_source: Product is requesting expansion from brainstorming-only usage to formal draft production usage.
+governing_question: This review determines whether the system may contribute text to formal policy drafting without mandatory legal and governance review checkpoints.
+
+scope:
+  in_scope_surfaces: [draft_generation_api, reviewer_ui, approval_workflow, audit_logging]
+  out_of_scope_surfaces: [public_release_pipeline, third_party_customer_use]
+  users: [policy_analysts, legal_reviewers]
+  environments: [staging, production]
+  inputs: [policy_prompts, internal_source_docs]
+  outputs: [draft_policy_text, reviewer_flags]
+  dependencies: [model_gateway, auth_service]
+  adjacent_systems: [document_management_system]
+
+route:
+  input_source: policy authoring UI
+  preprocessing_layer: prompt template + policy context retrieval
+  model_or_rules_layer: LLM generation + policy constraints filter
+  retrieval_or_tool_layer: document retrieval and citation extractor
+  human_review_point: legal and governance dual-review gate
+  output_destination: policy draft repository
+  logging_layer: immutable case-linked event log
+  override_path: governance override ticket
+  incident_shutdown_path: incident runbook suspend switch
+
+claims:
+  supported:
+    - claim_id: C-001
+      text: System may draft first-pass internal policy language for internal review.
+      mechanism_ref: route.model_or_rules_layer
+      workflow_ref: route.human_review_point
+      controls_refs: [T001, T002]
+      evidence_refs: [EV-001, EV-003]
+  unsupported:
+    - System is safe for autonomous public policy publication.
+
+thresholds:
+  - threshold_id: T001
+    condition: Legal/compliance language detected in output.
+    trigger_value_or_state: detected
+    required_action: Block downstream publication and require legal approval.
+    decision_holder: legal_approver
+    evidence_required: [EV-002]
+
+decision_rights:
+  - threshold_id: T001
+    recommends: policy_lead
+    approves: legal_approver
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [security_lead]
+    post_hoc_review: audit_committee
+    remediation_owner: system_owner
+
+evidence_refs: [EV-001, EV-002, EV-003]
+
+disposition:
+  status: approve_with_conditions
+  rationale: Controls are present but legal and governance review remain mandatory before formal release.
+  decided_by: governance_council
+  decided_at: "2026-03-25T15:00:00Z"
+
+re_entry_triggers: [CT001, CT003]
+
+implementation_actions:
+  - action_id: A001
+    owner: system_owner
+    deadline: "2026-04-05"
+    evidence_ref: EV-004
+
+provenance:
+  repository_commit: "526f176"
+  artifact_index_hash: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  packet_digest_sha256: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"

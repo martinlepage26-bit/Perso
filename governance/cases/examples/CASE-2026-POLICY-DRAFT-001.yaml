@@ -1,0 +1,198 @@
+case_id: CASE-2026-POLICY-DRAFT-001
+case_version: "1.0.0"
+opened_at: "2026-03-25T16:30:00Z"
+trigger_type: launch_approval
+requesting_function: policy_operations
+accountable_reviewer: governance_lead
+
+target_system:
+  name: internal-policy-drafting-assistant
+  version: "v1.3.2"
+  owner: policy_ops_lead
+  intended_use: Generate first-pass internal policy text for staff, then route drafts through legal and governance review before formal release.
+
+pressure_source: Leadership requested expansion from internal drafting support to formal policy production. Legal and governance require deterministic controls proving that compliance language, external release, and model-change risk cannot bypass human authority.
+governing_question: This review determines whether the internal policy drafting assistant may contribute text to formal policy drafting under bounded conditions without bypassing legal and governance authority.
+
+scope:
+  in_scope_surfaces:
+    - prompt_intake_ui
+    - retrieval_context_builder
+    - generation_engine
+    - reviewer_queue
+    - release_gate
+    - case_linked_logging
+  out_of_scope_surfaces:
+    - autonomous_publication
+    - external_customer_chat
+    - non-policy_document_generation
+  users:
+    - policy_analyst
+    - legal_reviewer
+    - governance_reviewer
+  environments:
+    - staging
+    - production
+  inputs:
+    - policy_prompt
+    - internal_reference_documents
+  outputs:
+    - draft_policy_text
+    - review_flags
+    - disposition_recommendation
+  dependencies:
+    - model_gateway
+    - document_store
+    - auth_service
+  adjacent_systems:
+    - document_management_repository
+    - incident_tracking_system
+
+route:
+  input_source: policy authoring interface
+  preprocessing_layer: template normalization and policy-context assembly
+  model_or_rules_layer: llm_generation_with_guardrails
+  retrieval_or_tool_layer: document retrieval plus citation extraction
+  human_review_point: dual legal and governance review gate
+  output_destination: internal policy draft repository
+  logging_layer: immutable event and decision log keyed by case_id
+  override_path: governance override ticket with halt authority
+  incident_shutdown_path: incident runbook suspend switch and access clamp
+
+claims:
+  supported:
+    - claim_id: C-001
+      text: The system can generate first-pass internal policy drafts for human review.
+      mechanism_ref: route.model_or_rules_layer
+      workflow_ref: route.human_review_point
+      controls_refs: [T001, T003]
+      evidence_refs: [EV-001, EV-006, EV-008]
+    - claim_id: C-002
+      text: No external release occurs without governance approval.
+      mechanism_ref: route.output_destination
+      workflow_ref: route.human_review_point
+      controls_refs: [T002]
+      evidence_refs: [EV-003, EV-007]
+    - claim_id: C-003
+      text: Model or vendor changes force governance re-entry before continued operation.
+      mechanism_ref: route.retrieval_or_tool_layer
+      workflow_ref: route.override_path
+      controls_refs: [T005]
+      evidence_refs: [EV-009, EV-010]
+  unsupported:
+    - The system is autonomous for policy publication.
+    - The system provides legal advice without legal reviewer approval.
+    - Compliance is guaranteed across all jurisdictions by default.
+
+thresholds:
+  - threshold_id: T001
+    condition: Legal/compliance language detected in generated output.
+    trigger_value_or_state: detected
+    required_action: Block release and require legal approval.
+    decision_holder: legal_approver
+    evidence_required: [EV-002, EV-006]
+  - threshold_id: T002
+    condition: Output destination classified as external audience.
+    trigger_value_or_state: external
+    required_action: Require governance approval before release.
+    decision_holder: governance_approver
+    evidence_required: [EV-003, EV-007]
+  - threshold_id: T003
+    condition: confidence_score < configured.minimum_confidence OR ambiguity_flag=true
+    trigger_value_or_state: review_required
+    required_action: Route to human review; prohibit direct acceptance.
+    decision_holder: policy_reviewer
+    evidence_required: [EV-001, EV-008]
+  - threshold_id: T004
+    condition: Case/artifact provenance missing or mismatched.
+    trigger_value_or_state: invalid
+    required_action: Block progression and require remediation.
+    decision_holder: evidence_steward
+    evidence_required: [EV-004, EV-005]
+  - threshold_id: T005
+    condition: Model family/version/provider or vendor control set changed.
+    trigger_value_or_state: changed
+    required_action: Reopen PHAROS case and reset controls review.
+    decision_holder: governance_lead
+    evidence_required: [EV-009, EV-010]
+
+decision_rights:
+  - threshold_id: T001
+    recommends: policy_lead
+    approves: legal_approver
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [security_lead, communications_lead]
+    post_hoc_review: audit_committee
+    remediation_owner: policy_ops_lead
+  - threshold_id: T002
+    recommends: communications_lead
+    approves: governance_approver
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [legal_approver, executive_sponsor]
+    post_hoc_review: audit_committee
+    remediation_owner: policy_ops_lead
+  - threshold_id: T003
+    recommends: policy_reviewer
+    approves: policy_lead
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [policy_ops_lead]
+    post_hoc_review: governance_committee
+    remediation_owner: policy_ops_lead
+  - threshold_id: T004
+    recommends: evidence_steward
+    approves: governance_lead
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [policy_ops_lead, security_lead]
+    post_hoc_review: audit_committee
+    remediation_owner: evidence_steward
+  - threshold_id: T005
+    recommends: policy_ops_lead
+    approves: governance_lead
+    overrides: executive_sponsor
+    halts_suspends: governance_lead
+    notified: [procurement_lead, legal_lead]
+    post_hoc_review: governance_committee
+    remediation_owner: policy_ops_lead
+
+evidence_refs:
+  - EV-001
+  - EV-002
+  - EV-003
+  - EV-004
+  - EV-005
+  - EV-006
+  - EV-007
+  - EV-008
+  - EV-009
+  - EV-010
+
+disposition:
+  status: approve_with_conditions
+  rationale: Drafting support is admissible only with mandatory legal and governance gates, provenance integrity enforcement, and automatic re-entry on model/vendor change.
+  decided_by: governance_council
+  decided_at: "2026-03-25T18:00:00Z"
+
+re_entry_triggers: [CT001, CT002, CT003, CT005, CT006, CT008]
+
+implementation_actions:
+  - action_id: A001
+    owner: policy_ops_lead
+    deadline: "2026-04-05"
+    evidence_ref: EV-008
+  - action_id: A002
+    owner: evidence_steward
+    deadline: "2026-04-02"
+    evidence_ref: EV-004
+  - action_id: A003
+    owner: governance_lead
+    deadline: "2026-04-03"
+    evidence_ref: EV-003
+
+provenance:
+  repository_commit: "526f176"
+  artifact_index_hash: "1111111111111111111111111111111111111111111111111111111111111111"
+  packet_digest_sha256: "2222222222222222222222222222222222222222222222222222222222222222"

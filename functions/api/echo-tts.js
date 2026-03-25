@@ -1,248 +1,102 @@
-const DEFAULT_MODEL = "gpt-4o-mini-tts";
-const DEFAULT_VOICE = "alloy";
-const DEFAULT_FORMAT = "mp3";
-const DEFAULT_VOICES = ["alloy", "echo", "sage"];
+const DEFAULT_UPSTREAM = "https://echo-tts-online.martinlepage26.workers.dev/api/echo-tts";
 
-function corsHeaders() {
+function corsHeaders(origin = "*") {
   return {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
 }
 
-function jsonResponse(payload, status = 200) {
+function jsonResponse(payload, status = 200, origin = "*") {
   return new Response(JSON.stringify(payload), {
     status,
     headers: {
-      ...corsHeaders(),
+      ...corsHeaders(origin),
       "Content-Type": "application/json; charset=utf-8",
     },
   });
 }
 
-function parseVoices(env) {
-  const raw = (env.ECHO_TTS_VOICES || "").trim();
-  if (!raw) {
-    return DEFAULT_VOICES;
-  }
-  const voices = raw
-    .split(",")
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-  return voices.length ? voices : DEFAULT_VOICES;
+function upstreamUrl(env) {
+  return String(env.ECHO_TTS_WORKER_URL || DEFAULT_UPSTREAM).trim() || DEFAULT_UPSTREAM;
 }
 
-function defaultConfig(env) {
-  return {
-    model: (env.ECHO_TTS_MODEL || DEFAULT_MODEL).trim(),
-    voice: (env.ECHO_TTS_DEFAULT_VOICE || DEFAULT_VOICE).trim(),
-    format: (env.ECHO_TTS_FORMAT || DEFAULT_FORMAT).trim().toLowerCase(),
-    voices: parseVoices(env),
-  };
-}
-
-function providerBase(env) {
-  return (env.ECHO_TTS_API_BASE || "https://api.openai.com/v1").replace(/\/+$/, "");
-}
-
-function providerPath(env) {
-  const path = (env.ECHO_TTS_API_PATH || "/audio/speech").trim();
-  return path.startsWith("/") ? path : `/${path}`;
-}
-
-function allowedOrigins(request, env) {
-  const configured = (env.ECHO_TTS_ALLOWED_ORIGINS || "").trim();
-  if (!configured) {
-    return [new URL(request.url).origin];
-  }
-  return configured
-    .split(",")
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-}
-
-function isOriginAllowed(request, env) {
-  const requestOrigin = request.headers.get("Origin");
-  if (!requestOrigin) {
-    return false;
-  }
-  const allowed = allowedOrigins(request, env);
-  return allowed.includes(requestOrigin);
-}
-
-function normalizeRate(rawRate) {
-  const numeric = Number.parseInt(String(rawRate ?? "0"), 10);
-  if (Number.isNaN(numeric)) {
-    return 0;
-  }
-  return Math.max(-75, Math.min(75, numeric));
-}
-
-function rateToSpeed(rate) {
-  const speed = 1 + rate / 100;
-  return Math.max(0.25, Math.min(4, Number(speed.toFixed(2))));
-}
-
-function safeFilename(name) {
-  const cleaned = String(name || "echo-output")
-    .replace(/[^A-Za-z0-9._-]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-  const base = cleaned || "echo-output";
-  return base.toLowerCase().endsWith(".mp3") ? base : `${base}.mp3`;
-}
-
-async function callProvider(env, payload) {
-  const apiKey = env.OPENAI_API_KEY || env.ECHO_TTS_API_KEY;
-  if (!apiKey) {
-    return {
-      ok: false,
-      response: jsonResponse(
-        {
-          ok: false,
-          error: "Missing OPENAI_API_KEY (or ECHO_TTS_API_KEY) in runtime environment.",
-        },
-        500,
-      ),
-    };
-  }
-
-  const url = `${providerBase(env)}${providerPath(env)}`;
+function passthroughHeaders(upstream, origin) {
   const headers = {
-    Authorization: `Bearer ${apiKey}`,
-    "Content-Type": "application/json",
+    ...corsHeaders(origin || "*"),
+    "X-Echo-Proxy": "martin-lepage-site-pages-function",
   };
 
-  const firstAttempt = await fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(payload),
-  });
-
-  if (firstAttempt.ok) {
-    return { ok: true, response: firstAttempt };
+  const contentType = upstream.headers.get("Content-Type");
+  if (contentType) {
+    headers["Content-Type"] = contentType;
   }
 
-  const firstErrorBody = await firstAttempt.text();
-  const shouldRetryWithResponseFormat = /response_format|format|unknown/i.test(firstErrorBody);
-
-  if (!shouldRetryWithResponseFormat) {
-    return {
-      ok: false,
-      response: jsonResponse(
-        {
-          ok: false,
-          error: "Upstream synthesis request failed.",
-          status: firstAttempt.status,
-          details: firstErrorBody.slice(0, 600),
-        },
-        502,
-      ),
-    };
+  const disposition = upstream.headers.get("Content-Disposition");
+  if (disposition) {
+    headers["Content-Disposition"] = disposition;
   }
 
-  const retryPayload = { ...payload };
-  delete retryPayload.format;
-  retryPayload.response_format = payload.format || DEFAULT_FORMAT;
+  const echoBackend = upstream.headers.get("X-Echo-Backend");
+  const echoModel = upstream.headers.get("X-Echo-Model");
+  const echoVoice = upstream.headers.get("X-Echo-Voice");
+  const echoSpeed = upstream.headers.get("X-Echo-Speed");
+  if (echoBackend) headers["X-Echo-Backend"] = echoBackend;
+  if (echoModel) headers["X-Echo-Model"] = echoModel;
+  if (echoVoice) headers["X-Echo-Voice"] = echoVoice;
+  if (echoSpeed) headers["X-Echo-Speed"] = echoSpeed;
 
-  const secondAttempt = await fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(retryPayload),
-  });
+  return headers;
+}
 
-  if (secondAttempt.ok) {
-    return { ok: true, response: secondAttempt };
+async function proxyRequest(method, context) {
+  const origin = context.request.headers.get("Origin") || "*";
+  const target = upstreamUrl(context.env);
+  const headers = { "Content-Type": "application/json" };
+  if (origin && origin !== "*") {
+    headers.Origin = origin;
   }
 
-  const secondErrorBody = await secondAttempt.text();
-  return {
-    ok: false,
-    response: jsonResponse(
-      {
-        ok: false,
-        error: "Upstream synthesis request failed.",
-        status: secondAttempt.status,
-        details: secondErrorBody.slice(0, 600),
-      },
-      502,
-    ),
-  };
-}
+  let body = undefined;
+  if (method === "POST") {
+    body = await context.request.text();
+  }
 
-export async function onRequestOptions() {
-  return new Response(null, { status: 204, headers: corsHeaders() });
-}
-
-export async function onRequestGet(context) {
-  const defaults = defaultConfig(context.env);
-  return jsonResponse({
-    ok: true,
-    mode: "online-only",
-    backend: "OpenAI-compatible TTS",
-    defaults,
-  });
-}
-
-export async function onRequestPost(context) {
-  if (!isOriginAllowed(context.request, context.env)) {
+  let upstream;
+  try {
+    upstream = await fetch(target, {
+      method,
+      headers,
+      body,
+    });
+  } catch (error) {
     return jsonResponse(
       {
         ok: false,
-        error: "Origin is not allowed for this endpoint.",
+        error: "Upstream ECHO worker is unavailable.",
+        details: String(error?.message || error).slice(0, 300),
       },
-      403,
+      502,
+      origin,
     );
   }
 
-  let body;
-  try {
-    body = await context.request.json();
-  } catch (_error) {
-    return jsonResponse({ ok: false, error: "Request body must be valid JSON." }, 400);
-  }
-
-  const text = String(body.text || "").trim();
-  if (!text) {
-    return jsonResponse({ ok: false, error: "`text` is required." }, 400);
-  }
-  if (text.length > 4000) {
-    return jsonResponse({ ok: false, error: "`text` exceeds 4000 characters." }, 400);
-  }
-
-  const defaults = defaultConfig(context.env);
-  const rate = normalizeRate(body.rate);
-  const speed = rateToSpeed(rate);
-  const filename = safeFilename(body.filename);
-
-  const payload = {
-    model: String(body.model || defaults.model),
-    voice: String(body.voiceId || body.voice || defaults.voice),
-    input: text,
-    format: defaults.format,
-    speed,
-  };
-
-  if (body.instructions) {
-    payload.instructions = String(body.instructions);
-  }
-
-  const upstream = await callProvider(context.env, payload);
-  if (!upstream.ok) {
-    return upstream.response;
-  }
-
-  const contentType = upstream.response.headers.get("content-type") || "audio/mpeg";
-  return new Response(upstream.response.body, {
-    status: 200,
-    headers: {
-      ...corsHeaders(),
-      "Content-Type": contentType,
-      "Content-Disposition": `inline; filename="${filename}"`,
-      "X-Echo-Backend": "OpenAI-compatible TTS",
-      "X-Echo-Model": payload.model,
-      "X-Echo-Voice": payload.voice,
-      "X-Echo-Speed": String(speed),
-    },
+  return new Response(upstream.body, {
+    status: upstream.status,
+    headers: passthroughHeaders(upstream, origin),
   });
+}
+
+export async function onRequestOptions(context) {
+  const origin = context.request.headers.get("Origin") || "*";
+  return new Response(null, { status: 204, headers: corsHeaders(origin) });
+}
+
+export async function onRequestGet(context) {
+  return proxyRequest("GET", context);
+}
+
+export async function onRequestPost(context) {
+  return proxyRequest("POST", context);
 }

@@ -1,0 +1,66 @@
+case_id: CASE-<UNIQUE-ID>
+case_version: "1.0.0"
+opened_at: "<ISO8601>"
+trigger_type: <procurement_review|vendor_onboarding|audit_request|launch_approval|material_model_change|incident|executive_assurance_request|external_claim_challenge>
+requesting_function: <function>
+accountable_reviewer: <role>
+
+target_system:
+  name: <system_name>
+  version: <version>
+  owner: <owner_role>
+  intended_use: <plain_language_intended_use>
+
+pressure_source: <one paragraph pressure source>
+governing_question: "This review determines whether ..."
+
+scope:
+  in_scope_surfaces: []
+  out_of_scope_surfaces: []
+  users: []
+  environments: []
+  inputs: []
+  outputs: []
+  dependencies: []
+  adjacent_systems: []
+
+route:
+  input_source: <node>
+  preprocessing_layer: <node>
+  model_or_rules_layer: <node>
+  retrieval_or_tool_layer: <node>
+  human_review_point: <node>
+  output_destination: <node>
+  logging_layer: <node>
+  override_path: <node>
+  incident_shutdown_path: <node>
+
+claims:
+  supported:
+    - claim_id: C-001
+      text: <claim>
+      mechanism_ref: <route or mechanism ref>
+      workflow_ref: <workflow ref>
+      controls_refs: []
+      evidence_refs: []
+  unsupported: []
+
+thresholds: []
+decision_rights: []
+
+evidence_refs: []
+
+disposition:
+  status: <canonical_status_enum>
+  rationale: <rationale>
+  decided_by: <role or committee>
+  decided_at: "<ISO8601>"
+
+re_entry_triggers: []
+
+implementation_actions: []
+
+provenance:
+  repository_commit: <git_commit>
+  artifact_index_hash: <sha256>
+  packet_digest_sha256: <sha256>

@@ -1,0 +1,122 @@
+register_version: "1.0.0"
+artifacts:
+  - artifact_id: EV-001
+    artifact_type: model_output_log
+    supports: {thresholds: [T003], claims: [C-001], decisions: []}
+    owner_role: system_owner
+    storage_uri: "cases/${case_id}/artifacts/output-log.ndjson"
+    retention_policy: "24_months"
+    retrieval_method: "query by case_id + timestamp"
+    sensitivity: internal
+    human_signoff_required: false
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: output_pipeline
+  - artifact_id: EV-002
+    artifact_type: legal_review_record
+    supports: {thresholds: [T001], claims: [C-001], decisions: [T001]}
+    owner_role: legal_approver
+    storage_uri: "cases/${case_id}/artifacts/legal-review.md"
+    retention_policy: "84_months"
+    retrieval_method: "case folder index"
+    sensitivity: confidential
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: legal_workflow
+  - artifact_id: EV-003
+    artifact_type: governance_release_approval
+    supports: {thresholds: [T002], claims: [C-001, C-002], decisions: [T002]}
+    owner_role: governance_approver
+    storage_uri: "cases/${case_id}/artifacts/release-approval.yaml"
+    retention_policy: "84_months"
+    retrieval_method: "case folder index"
+    sensitivity: confidential
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: governance_workflow
+  - artifact_id: EV-004
+    artifact_type: provenance_snapshot
+    supports: {thresholds: [T004], claims: [], decisions: [T004]}
+    owner_role: evidence_steward
+    storage_uri: "cases/${case_id}/artifacts/provenance.json"
+    retention_policy: "84_months"
+    retrieval_method: "hash-index lookup"
+    sensitivity: internal
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: evidence_registry
+  - artifact_id: EV-005
+    artifact_type: provenance_drift_ticket
+    supports: {thresholds: [T004], claims: [], decisions: [T004]}
+    owner_role: evidence_steward
+    storage_uri: "cases/${case_id}/artifacts/provenance-drift-ticket.md"
+    retention_policy: "84_months"
+    retrieval_method: "case folder index"
+    sensitivity: internal
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: validator_runtime
+  - artifact_id: EV-006
+    artifact_type: claim_language_scan
+    supports: {thresholds: [T001], claims: [C-001], decisions: []}
+    owner_role: policy_lead
+    storage_uri: "cases/${case_id}/artifacts/claim-language-scan.json"
+    retention_policy: "24_months"
+    retrieval_method: "case folder index"
+    sensitivity: internal
+    human_signoff_required: false
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: content_scanner
+  - artifact_id: EV-007
+    artifact_type: destination_classification_record
+    supports: {thresholds: [T002], claims: [C-001, C-002], decisions: [T002]}
+    owner_role: communications_lead
+    storage_uri: "cases/${case_id}/artifacts/destination-classification.yaml"
+    retention_policy: "24_months"
+    retrieval_method: "case folder index"
+    sensitivity: internal
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: release_pipeline
+  - artifact_id: EV-008
+    artifact_type: reviewer_decision_log
+    supports: {thresholds: [T003], claims: [], decisions: [T003]}
+    owner_role: policy_reviewer
+    storage_uri: "cases/${case_id}/artifacts/reviewer-decisions.csv"
+    retention_policy: "24_months"
+    retrieval_method: "query by threshold_id + case_id"
+    sensitivity: internal
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: reviewer_ui
+  - artifact_id: EV-009
+    artifact_type: model_change_record
+    supports: {thresholds: [T005], claims: [C-003], decisions: [T005]}
+    owner_role: system_owner
+    storage_uri: "cases/${case_id}/artifacts/model-change.yaml"
+    retention_policy: "84_months"
+    retrieval_method: "change-control index"
+    sensitivity: internal
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: mlops_registry
+  - artifact_id: EV-010
+    artifact_type: vendor_change_record
+    supports: {thresholds: [T005], claims: [C-003], decisions: [T005]}
+    owner_role: procurement_lead
+    storage_uri: "cases/${case_id}/artifacts/vendor-change.md"
+    retention_policy: "84_months"
+    retrieval_method: "contract-change index"
+    sensitivity: confidential
+    human_signoff_required: true
+    provenance:
+      linked_case_id: "${case_id}"
+      source_system: procurement_system

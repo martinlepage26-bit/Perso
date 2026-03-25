@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pharos.local/schemas/pharos_case.schema.json",
+  "title": "PHAROS Case",
+  "type": "object",
+  "required": [
+    "case_id",
+    "case_version",
+    "opened_at",
+    "trigger_type",
+    "requesting_function",
+    "accountable_reviewer",
+    "target_system",
+    "pressure_source",
+    "governing_question",
+    "scope",
+    "route",
+    "claims",
+    "thresholds",
+    "decision_rights",
+    "evidence_refs",
+    "disposition",
+    "re_entry_triggers",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^CASE-[A-Z0-9-]+$"
+    },
+    "case_version": { "type": "string", "minLength": 1 },
+    "opened_at": { "type": "string", "format": "date-time" },
+    "trigger_type": {
+      "type": "string",
+      "enum": [
+        "procurement_review",
+        "vendor_onboarding",
+        "audit_request",
+        "launch_approval",
+        "material_model_change",
+        "incident",
+        "executive_assurance_request",
+        "external_claim_challenge"
+      ]
+    },
+    "requesting_function": { "type": "string", "minLength": 2 },
+    "accountable_reviewer": { "type": "string", "minLength": 2 },
+    "target_system": {
+      "type": "object",
+      "required": ["name", "version", "owner", "intended_use"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "version": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 2 },
+        "intended_use": { "type": "string", "minLength": 10 }
+      }
+    },
+    "pressure_source": { "type": "string", "minLength": 20 },
+    "governing_question": {
+      "type": "string",
+      "minLength": 20,
+      "pattern": "^This review determines whether"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "in_scope_surfaces",
+        "out_of_scope_surfaces",
+        "users",
+        "environments",
+        "inputs",
+        "outputs",
+        "dependencies",
+        "adjacent_systems"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "in_scope_surfaces": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "out_of_scope_surfaces": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "users": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "environments": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "inputs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "outputs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "dependencies": { "type": "array", "items": { "type": "string" } },
+        "adjacent_systems": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "route": {
+      "type": "object",
+      "required": [
+        "input_source",
+        "preprocessing_layer",
+        "model_or_rules_layer",
+        "retrieval_or_tool_layer",
+        "human_review_point",
+        "output_destination",
+        "logging_layer",
+        "override_path",
+        "incident_shutdown_path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "input_source": { "type": "string", "minLength": 2 },
+        "preprocessing_layer": { "type": "string", "minLength": 2 },
+        "model_or_rules_layer": { "type": "string", "minLength": 2 },
+        "retrieval_or_tool_layer": { "type": "string", "minLength": 2 },
+        "human_review_point": { "type": "string", "minLength": 2 },
+        "output_destination": { "type": "string", "minLength": 2 },
+        "logging_layer": { "type": "string", "minLength": 2 },
+        "override_path": { "type": "string", "minLength": 2 },
+        "incident_shutdown_path": { "type": "string", "minLength": 2 }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "required": ["supported", "unsupported"],
+      "additionalProperties": false,
+      "properties": {
+        "supported": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["claim_id", "text", "mechanism_ref", "workflow_ref", "controls_refs", "evidence_refs"],
+            "additionalProperties": false,
+            "properties": {
+              "claim_id": { "type": "string", "pattern": "^C-[0-9]{3}$" },
+              "text": { "type": "string", "minLength": 10 },
+              "mechanism_ref": { "type": "string", "minLength": 3 },
+              "workflow_ref": { "type": "string", "minLength": 3 },
+              "controls_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "evidence_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+            }
+          }
+        },
+        "unsupported": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "thresholds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["threshold_id", "condition", "required_action", "decision_holder", "evidence_required"],
+        "additionalProperties": false,
+        "properties": {
+          "threshold_id": { "type": "string", "pattern": "^T[0-9]{3}$" },
+          "condition": { "type": "string", "minLength": 5 },
+          "trigger_value_or_state": { "type": ["string", "number", "boolean"] },
+          "required_action": { "type": "string", "minLength": 5 },
+          "decision_holder": { "type": "string", "minLength": 2 },
+          "evidence_required": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+        }
+      }
+    },
+    "decision_rights": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["threshold_id", "recommends", "approves", "overrides", "halts_suspends"],
+        "additionalProperties": false,
+        "properties": {
+          "threshold_id": { "type": "string", "pattern": "^T[0-9]{3}$" },
+          "recommends": { "type": "string", "minLength": 2 },
+          "approves": { "type": "string", "minLength": 2 },
+          "overrides": { "type": "string", "minLength": 2 },
+          "halts_suspends": { "type": "string", "minLength": 2 },
+          "notified": { "type": "array", "items": { "type": "string" } },
+          "post_hoc_review": { "type": "string" },
+          "remediation_owner": { "type": "string" }
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "disposition": {
+      "type": "object",
+      "required": ["status", "rationale", "decided_by", "decided_at"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "approve",
+            "approve_with_conditions",
+            "defer_pending_evidence",
+            "restrict_scope",
+            "reject",
+            "suspend_pending_remediation"
+          ]
+        },
+        "rationale": { "type": "string", "minLength": 10 },
+        "decided_by": { "type": "string", "minLength": 2 },
+        "decided_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "re_entry_triggers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^CT[0-9]{3}$" }
+    },
+    "implementation_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action_id", "owner", "deadline", "evidence_ref"],
+        "additionalProperties": false,
+        "properties": {
+          "action_id": { "type": "string", "pattern": "^A[0-9]{3}$" },
+          "owner": { "type": "string", "minLength": 2 },
+          "deadline": { "type": "string", "format": "date" },
+          "evidence_ref": { "type": "string", "minLength": 3 }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["repository_commit", "artifact_index_hash", "packet_digest_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "repository_commit": { "type": "string", "pattern": "^[a-f0-9]{7,40}$" },
+        "artifact_index_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "packet_digest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}

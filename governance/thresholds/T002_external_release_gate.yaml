@@ -1,0 +1,18 @@
+threshold_id: T002
+title: external_audience_output_requires_governance_approval
+system_surface: release_or_distribution
+condition: output destination class equals external_audience
+trigger_type: state
+trigger_value_or_state: external
+required_action: require governance approval gate before release
+decision_holder_role: governance_approver
+notification_roles: [communications_lead, legal_approver]
+escalation_path: governance_approver -> executive_sponsor
+record_required: governance_release_approval
+evidence_required: [EV-003, EV-007]
+effect: blocking
+owner_role: governance_lead
+version: "1.0.0"
+change_control:
+  change_ticket_required: true
+  reviewer_role: governance_lead

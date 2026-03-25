@@ -1,0 +1,18 @@
+threshold_id: T001
+title: legal_or_compliance_claim_requires_legal_review
+system_surface: output_review_gate
+condition: generated text contains legal/compliance obligations or regulatory interpretation language
+trigger_type: state
+trigger_value_or_state: detected
+required_action: block publishing and require legal approval before route continuation
+decision_holder_role: legal_approver
+notification_roles: [governance_lead, policy_lead]
+escalation_path: legal_approver -> governance_lead -> halt_authority
+record_required: legal_review_record
+evidence_required: [EV-002, EV-006]
+effect: review_gating
+owner_role: legal_lead
+version: "1.0.0"
+change_control:
+  change_ticket_required: true
+  reviewer_role: governance_lead

@@ -1,0 +1,7 @@
+registry_version: "1.0.0"
+threshold_files:
+  - T001_legal_claim_review.yaml
+  - T002_external_release_gate.yaml
+  - T003_low_confidence_human_review.yaml
+  - T004_missing_provenance_block.yaml
+  - T005_model_or_vendor_change_reentry.yaml

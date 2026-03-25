@@ -1,0 +1,42 @@
+matrix_version: "1.0.0"
+threshold_bindings:
+  - threshold_id: T001
+    recommends: policy_lead
+    approves: legal_approver
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [security_lead, communications_lead]
+    post_hoc_review: audit_committee
+    remediation_owner: system_owner
+  - threshold_id: T002
+    recommends: communications_lead
+    approves: governance_approver
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [legal_approver, executive_sponsor]
+    post_hoc_review: audit_committee
+    remediation_owner: system_owner
+  - threshold_id: T003
+    recommends: policy_reviewer
+    approves: policy_lead
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [system_owner]
+    post_hoc_review: governance_committee
+    remediation_owner: policy_ops_lead
+  - threshold_id: T004
+    recommends: evidence_steward
+    approves: governance_lead
+    overrides: governance_lead
+    halts_suspends: governance_lead
+    notified: [system_owner, security_lead]
+    post_hoc_review: audit_committee
+    remediation_owner: evidence_steward
+  - threshold_id: T005
+    recommends: system_owner
+    approves: governance_lead
+    overrides: executive_sponsor
+    halts_suspends: governance_lead
+    notified: [procurement_lead, legal_lead]
+    post_hoc_review: governance_committee
+    remediation_owner: system_owner

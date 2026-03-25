@@ -1,0 +1,6 @@
+control_id,control_name,evidence_ids,owner_role,retrieval_method
+T001,legal_or_compliance_claim_requires_legal_review,"EV-002;EV-006",legal_lead,case_folder_index
+T002,external_audience_output_requires_governance_approval,"EV-003;EV-007",governance_lead,case_folder_index
+T003,low_confidence_or_ambiguous_output_requires_human_review,"EV-001;EV-008",policy_ops_lead,query_by_case_id
+T004,missing_provenance_metadata_blocks_progression,"EV-004;EV-005",evidence_steward,hash_index_lookup
+T005,model_or_vendor_change_forces_case_reentry,"EV-009;EV-010",governance_lead,change_control_index

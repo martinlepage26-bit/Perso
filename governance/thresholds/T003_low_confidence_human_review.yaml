@@ -1,0 +1,19 @@
+threshold_id: T003
+title: low_confidence_or_ambiguous_output_requires_human_review
+system_surface: model_output_admission
+condition: confidence score below policy minimum OR ambiguity flag true
+trigger_type: metric_or_state
+trigger_value_or_state: confidence_score < configured.minimum_confidence OR ambiguity_flag=true
+metric_source: telemetry.confidence_score
+required_action: route to human review and prohibit direct acceptance
+decision_holder_role: policy_reviewer
+notification_roles: [system_owner]
+escalation_path: policy_reviewer -> governance_lead
+record_required: reviewer_decision_log
+evidence_required: [EV-001, EV-008]
+effect: review_gating
+owner_role: policy_ops_lead
+version: "1.0.0"
+change_control:
+  change_ticket_required: true
+  reviewer_role: governance_lead

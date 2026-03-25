@@ -1,0 +1,16 @@
+{
+  "disposition": [
+    "approve",
+    "approve_with_conditions",
+    "defer_pending_evidence",
+    "restrict_scope",
+    "reject",
+    "suspend_pending_remediation"
+  ],
+  "threshold_effect": [
+    "blocking",
+    "review_gating",
+    "advisory",
+    "halt_suspend"
+  ]
+}

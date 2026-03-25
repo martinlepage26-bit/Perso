@@ -1,0 +1,58 @@
+registry_version: "1.0.0"
+triggers:
+  - trigger_id: CT001
+    name: model_swap
+    condition: model family/version change in production route
+    required_action: reopen_case
+    owner_role: governance_lead
+    evidence_artifact: EV-009
+    severity: high
+  - trigger_id: CT002
+    name: vendor_change
+    condition: vendor or contractual control surface changes
+    required_action: reopen_case
+    owner_role: procurement_lead
+    evidence_artifact: EV-010
+    severity: high
+  - trigger_id: CT003
+    name: new_data_source
+    condition: newly admitted source class affects route inputs
+    required_action: reopen_case_with_scope_reset
+    owner_role: data_governance_lead
+    evidence_artifact: EV-011
+    severity: high
+  - trigger_id: CT004
+    name: expanded_autonomy
+    condition: reduced human review or wider action authority requested
+    required_action: reopen_case_with_threshold_reset
+    owner_role: governance_lead
+    evidence_artifact: EV-012
+    severity: high
+  - trigger_id: CT005
+    name: incident_or_near_miss
+    condition: incident ticket severity >= configured incident threshold
+    required_action: suspend_or_restrict_pending_review
+    owner_role: incident_commander
+    evidence_artifact: EV-013
+    severity: critical
+  - trigger_id: CT006
+    name: claims_change
+    condition: public or internal claim text materially changes
+    required_action: rerun_claims_crosswalk
+    owner_role: communications_lead
+    evidence_artifact: EV-014
+    severity: medium
+  - trigger_id: CT007
+    name: jurisdiction_change
+    condition: deployment or use enters new legal jurisdiction
+    required_action: reopen_case_with_policy_crosswalk
+    owner_role: legal_lead
+    evidence_artifact: EV-015
+    severity: high
+  - trigger_id: CT008
+    name: evidence_failure
+    condition: required artifact missing, stale, or non-retrievable
+    required_action: defer_or_suspend
+    owner_role: evidence_steward
+    evidence_artifact: EV-016
+    severity: high

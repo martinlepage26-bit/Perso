@@ -32,7 +32,7 @@ import '../../styles/echo-standalone.css';
         <section class="echo-hero">
           <p class="echo-eyebrow">Text-to-Speech</p>
           <h1>ECHO</h1>
-          <p>ECHO now runs online-only through a hosted synthesis endpoint.</p>
+          <p>ECHO now runs online-only through a single ECHO API endpoint.</p>
           <p>No local Python, no local Voice11 bundle, no machine-bound runtime.</p>
           <div class="echo-actions">
             <a class="echo-button secondary" href="/projects/echo/">Project details</a>
@@ -91,8 +91,8 @@ import '../../styles/echo-standalone.css';
 
           <div class="echo-lines">
             <h3>Online setup</h3>
-            <p>Deploy with Cloudflare Pages Functions enabled, then set <code>OPENAI_API_KEY</code> in runtime secrets.</p>
-            <p>Default endpoint: <code>/api/echo-tts</code></p>
+            <p>Use this site endpoint: <code>/api/echo-tts</code>.</p>
+            <p>It proxies to the dedicated <code>echo-tts-online</code> Worker backend.</p>
           </div>
         </section>
       </main>
@@ -137,7 +137,7 @@ import '../../styles/echo-standalone.css';
         const normalizeBridge = () => {
           const value = bridgeInput.value.trim() || '/api/echo-tts';
           if (value.startsWith('/')) {
-            return value;
+            return window.location.origin + value;
           }
           return value.replace(/\/+$/, '');
         };

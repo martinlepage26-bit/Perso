@@ -1,0 +1,18 @@
+threshold_id: T005
+title: model_or_vendor_change_forces_case_reentry
+system_surface: dependency_change_control
+condition: model family/version, provider, or vendor contract control set changes
+trigger_type: state
+trigger_value_or_state: changed
+required_action: reopen PHAROS case and reset thresholds/decision-rights review
+decision_holder_role: governance_lead
+notification_roles: [procurement_lead, legal_lead, system_owner]
+escalation_path: governance_lead -> executive_sponsor
+record_required: reentry_activation_record
+evidence_required: [EV-009, EV-010]
+effect: halt_suspend
+owner_role: governance_lead
+version: "1.0.0"
+change_control:
+  change_ticket_required: true
+  reviewer_role: governance_lead

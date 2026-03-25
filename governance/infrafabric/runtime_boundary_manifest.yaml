@@ -1,0 +1,26 @@
+manifest_version: "1.0.0"
+conceptual_identifiers:
+  - pharos
+  - infrafabric
+  - case
+  - threshold
+  - evidence
+runtime_sensitive_identifiers:
+  - route.input_source
+  - route.output_destination
+  - route.logging_layer
+  - threshold_id
+  - evidence.artifact_id
+  - case_id
+  - disposition.status
+  - trigger_id
+load_bearing_surfaces:
+  - validators/
+  - thresholds/
+  - decision_rights/
+  - evidence/
+  - cases/
+rename_policy:
+  runtime_sensitive_requires_migration_plan: true
+  migration_plan_requires_evidence: true
+  rename_without_plan_is_flag: true

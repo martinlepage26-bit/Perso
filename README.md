@@ -96,23 +96,36 @@ This binds to `http://127.0.0.1:4510` with `--strictPort`.
 
 ## ECHO Online TTS
 
-`/echo/` is wired for online-only synthesis through `functions/api/echo-tts.js`.
+Canonical public endpoint:
 
-### Required runtime secret (Cloudflare Pages)
+- `https://martin.govern-ai.ca/api/echo-tts`
+- site-local path: `/api/echo-tts`
 
-- `OPENAI_API_KEY`
+`/echo/` should call `/api/echo-tts` only. The Pages Function then proxies to the dedicated Worker backend (`workers/echo-tts-online/`).
 
-### Optional runtime vars
+### Deploy the ECHO TTS Worker
 
-- `ECHO_TTS_MODEL` (default: `gpt-4o-mini-tts`)
-- `ECHO_TTS_DEFAULT_VOICE` (default: `alloy`)
-- `ECHO_TTS_VOICES` (comma-separated voice list for UI, default: `alloy,echo,sage`)
+```bash
+cd workers/echo-tts-online
+npx wrangler deploy
+```
+
+Then deploy the site/pages bundle so `/echo/` + `/api/echo-tts` stay in sync:
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name martin-lepage-site --branch main --commit-dirty=true
+```
+
+The worker uses Cloudflare Workers AI via binding `AI` and defaults to `@cf/deepgram/aura-2-en`.
+
+### Optional worker vars
+
+- `ECHO_TTS_WORKER_URL` (Pages Function upstream override; default points to `echo-tts-online`)
+- `ECHO_TTS_MODEL` (default: `@cf/deepgram/aura-2-en`)
+- `ECHO_TTS_VOICES` (comma-separated voice list for UI)
 - `ECHO_TTS_FORMAT` (default: `mp3`)
-- `ECHO_TTS_API_BASE` (default: `https://api.openai.com/v1`)
-- `ECHO_TTS_API_PATH` (default: `/audio/speech`)
-- `ECHO_TTS_ALLOWED_ORIGINS` (comma-separated origins allowed to call POST; default is same-origin only)
-
-The ECHO page calls `/api/echo-tts` by default when deployed.
+- `ECHO_TTS_ALLOWED_ORIGINS` (comma-separated origins allowed for `POST`)
 
 ## Verification
 

@@ -1,0 +1,18 @@
+threshold_id: T004
+title: missing_provenance_metadata_blocks_progression
+system_surface: case_and_artifact_integrity
+condition: required provenance fields missing or inconsistent
+trigger_type: state
+trigger_value_or_state: missing_or_mismatched
+required_action: block progression and require evidence steward remediation
+decision_holder_role: evidence_steward
+notification_roles: [governance_lead, system_owner]
+escalation_path: evidence_steward -> governance_lead -> halt_authority
+record_required: provenance_integrity_ticket
+evidence_required: [EV-004, EV-005]
+effect: blocking
+owner_role: evidence_steward
+version: "1.0.0"
+change_control:
+  change_ticket_required: true
+  reviewer_role: governance_lead
