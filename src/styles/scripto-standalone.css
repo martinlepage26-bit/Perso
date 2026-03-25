@@ -9,6 +9,7 @@
   --scripto-border-soft: rgba(98, 64, 28, 0.2);
   --scripto-panel: rgba(244, 231, 203, 0.84);
   --scripto-shadow: 0 18px 40px rgba(48, 30, 11, 0.2);
+  --scripto-shadow-deep: 0 24px 48px rgba(44, 28, 11, 0.24);
 }
 
 *,
@@ -28,9 +29,9 @@ body.scripto-standalone {
   font-family: "IBM Plex Sans", "Space Grotesk Variable", "Segoe UI", sans-serif;
   color: var(--scripto-carbon);
   background:
-    radial-gradient(circle at 14% 10%, rgba(169, 117, 52, 0.2), rgba(169, 117, 52, 0) 42%),
-    radial-gradient(circle at 85% 12%, rgba(109, 73, 31, 0.16), rgba(109, 73, 31, 0) 44%),
-    linear-gradient(180deg, #dac19a 0%, #cfae7f 44%, #c19862 100%);
+    radial-gradient(circle at 14% 10%, rgba(169, 117, 52, 0.22), rgba(169, 117, 52, 0) 44%),
+    radial-gradient(circle at 85% 12%, rgba(109, 73, 31, 0.2), rgba(109, 73, 31, 0) 46%),
+    linear-gradient(180deg, #d7bc94 0%, #cda877 44%, #bb8e55 100%);
   position: relative;
 }
 
@@ -87,6 +88,7 @@ body.scripto-standalone::after {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.92rem 1.08rem;
+  box-shadow: var(--scripto-shadow-deep);
 }
 
 .scripto-brand {
@@ -127,13 +129,14 @@ body.scripto-standalone::after {
   border: 1px solid transparent;
   border-radius: 0.72rem;
   padding: 0.5rem 0.8rem;
-  transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
+  transition: border-color 140ms ease, background 140ms ease, color 140ms ease, transform 140ms ease;
 }
 
 .scripto-nav a:hover {
   border-color: var(--scripto-border);
   background: rgba(247, 233, 205, 0.65);
   color: var(--scripto-carbon);
+  transform: translateY(-1px);
 }
 
 .scripto-main {
@@ -142,6 +145,7 @@ body.scripto-standalone::after {
 
 .scripto-hero {
   padding: 1.28rem 1.18rem;
+  box-shadow: var(--scripto-shadow-deep);
 }
 
 .scripto-hero-grid {
@@ -191,6 +195,7 @@ body.scripto-standalone::after {
   padding: 0.62rem 0.95rem;
   font-size: 0.88rem;
   font-weight: 700;
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
 }
 
 .scripto-button.primary {
@@ -203,6 +208,11 @@ body.scripto-standalone::after {
   border-color: var(--scripto-border);
   background: rgba(249, 237, 212, 0.8);
   color: var(--scripto-ink);
+}
+
+.scripto-button:hover {
+  transform: translateY(-1px);
+  filter: saturate(108%);
 }
 
 .scripto-meta-panel {
@@ -280,7 +290,11 @@ body.scripto-standalone::after {
 .scripto-grid {
   display: grid;
   gap: 0.74rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.scripto-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .scripto-card {
@@ -288,6 +302,12 @@ body.scripto-standalone::after {
   border-radius: 0.88rem;
   background: var(--scripto-panel);
   padding: 0.95rem 0.9rem;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.scripto-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(55, 33, 12, 0.14);
 }
 
 .scripto-step {
@@ -340,6 +360,15 @@ body.scripto-standalone::after {
   font-family: "Newsreader Variable", "Newsreader", Georgia, serif;
   font-size: 1.24rem;
   color: var(--scripto-carbon);
+}
+
+.scripto-sheet-subhead {
+  margin: 0 0 0.64rem;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: #7d5427;
 }
 
 .sheet-line {
@@ -419,6 +448,10 @@ input:focus-visible {
 
 @media (max-width: 900px) {
   .scripto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scripto-grid-2 {
     grid-template-columns: 1fr;
   }
 }
