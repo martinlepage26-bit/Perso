@@ -106,7 +106,7 @@ export const pageMeta = {
 export const navigation = [
   { href: '/', label: 'Home' },
   { href: '/papers/', label: 'Institutional Analysis' },
-  { href: '/governance/', label: 'AI Governance' },
+  { href: '/governance/', label: 'AI\u00A0Governance' },
   { href: '/writing/', label: 'Public Writing' },
   { href: '/projects/', label: 'Apps' },
   { href: '/talks/', label: 'Talks' },
@@ -195,7 +195,6 @@ export const audienceRoutes = [
 ] as const;
 
 export const governanceProjectSlugs = [
-  'govern-ai-practice',
   'ai-governance',
   'compassai-governance-engine',
   'aurorai',

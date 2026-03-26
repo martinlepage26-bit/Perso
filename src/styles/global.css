@@ -804,6 +804,18 @@
       ) !important;
   }
 
+  .site-header-inner {
+    min-height: 4.25rem;
+  }
+
+  .site-brand-link {
+    max-width: 100%;
+  }
+
+  .site-monogram-image {
+    display: block;
+  }
+
   .site-header::after {
     content: "";
     position: absolute;

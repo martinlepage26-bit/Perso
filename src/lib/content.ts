@@ -73,15 +73,7 @@ export function contentSlug(id: string) {
   return id.replace(/\.(md|mdx)$/i, '');
 }
 
-const titleOverrides: Record<string, string> = {
-  'govern-ai': 'Govern-AI Practice Environment',
-};
-
 export function normalizeTitle(sourceTitle: string) {
-  if (titleOverrides[sourceTitle]) {
-    return titleOverrides[sourceTitle];
-  }
-
   if (sourceTitle.toUpperCase() === sourceTitle) {
     return sourceTitle
       .toLowerCase()

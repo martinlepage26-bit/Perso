@@ -12,7 +12,7 @@ import { collectTags, contentSlug, isPublishedPaper, prioritizeEntriesBySlug, so
 const allProjects = sortByYear(await getCollection('projects'));
 const hiddenProjectArchiveSlugSet = new Set<string>(hiddenProjectArchiveSlugs);
 const promotedPaperSlugSet = new Set<string>(projectArchivePromotedPaperSlugs);
-const suppressedProjectArchiveSlugs = new Set<string>(['govern-ai-practice', 'ai-governance']);
+const suppressedProjectArchiveSlugs = new Set<string>(['ai-governance']);
 const projects = prioritizeEntriesBySlug(
   allProjects.filter(
     (project) =>

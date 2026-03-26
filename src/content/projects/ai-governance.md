@@ -19,8 +19,8 @@ featured: false
 image: "/assets/geometric-motif-bottomleft.png"
 imageAlt: "A governance-facing project organized around readable controls, review pathways, and institutional accountability."
 links:
-  - label: "GitHub"
-    url: "https://github.com/martinlepage26-bit/govern-ai"
+  - label: "Practice page"
+    url: "/governance/"
 ---
 
 This project addresses a practical governance problem: how to make AI systems operationally legible before procurement pressure, audit review, or institutional mistrust turns documentation into emergency repair.
