@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 160" role="img" aria-labelledby="title desc">
+  <title id="title">ML monogram alt 02 teal rose</title>
+  <desc id="desc">Balanced framed ML monogram rendered in muted teal and muted scarlet rose.</desc>
+  <defs>
+    <linearGradient id="frameStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c7d5d2" />
+      <stop offset="100%" stop-color="#9aa9a7" />
+    </linearGradient>
+    <linearGradient id="mStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9dbdb8" />
+      <stop offset="100%" stop-color="#5f8480" />
+    </linearGradient>
+    <linearGradient id="lStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c59296" />
+      <stop offset="100%" stop-color="#8d626a" />
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-40%" width="180%" height="220%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#0b1319" flood-opacity="0.28" />
+    </filter>
+  </defs>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#softShadow)">
+    <rect x="18" y="18" width="244" height="124" rx="13" stroke="url(#frameStroke)" stroke-width="3.5" />
+    <path d="M56 118V42L88 82L120 42V118" stroke="url(#mStroke)" stroke-width="12" />
+    <path d="M156 42V118H230" stroke="url(#lStroke)" stroke-width="14" />
+    <path d="M156 42H224" stroke="url(#lStroke)" stroke-width="12" />
+  </g>
+
+  <path d="M132 35V125" stroke="rgba(164, 180, 177, 0.38)" stroke-width="1.4" stroke-linecap="round" />
+  <path d="M148 35V125" stroke="rgba(176, 150, 154, 0.34)" stroke-width="1.4" stroke-linecap="round" />
+</svg>
