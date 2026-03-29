@@ -46,7 +46,18 @@ const appData = {
 };
 ---
 
-<div class="gaia-surface" id="gaia-app-shell" style={`--gaia-sign-color: ${initialProfile.sign.color};`}>
+<!--
+  GAIA design lock:
+  Preserve the dark full-screen reading surface, centered single-column composition,
+  sign grid -> preview card -> action -> reading output order, and restrained gold-on-charcoal palette.
+  Change this visual contract only on explicit user request, then update the smoke lock markers.
+-->
+<div
+  class="gaia-surface"
+  id="gaia-app-shell"
+  data-gaia-design-lock="reference-surface-2026-03-29"
+  style={`--gaia-sign-color: ${initialProfile.sign.color};`}
+>
   <div class="gaia-background" aria-hidden="true"></div>
 
   <header class="gaia-header">
@@ -68,7 +79,7 @@ const appData = {
       General reading stays with season, temperament, relation, pressure, and repair.
     </p>
 
-    <section class="gaia-sign-section">
+    <section class="gaia-sign-section" data-gaia-lock-block="sign-grid">
       <p class="gaia-section-label">Select your sign</p>
       <div class="gaia-sign-grid">
         {signs.map((sign) => (
@@ -122,7 +133,7 @@ const appData = {
       </select>
     </div>
 
-    <section class="gaia-preview-card">
+    <section class="gaia-preview-card" data-gaia-lock-block="preview-card">
       <div class="gaia-preview-header">
         <div class="gaia-preview-glyph" id="gaia-preview-glyph">{initialProfile.sign.glyph}</div>
         <div class="gaia-preview-copy">
@@ -161,11 +172,11 @@ const appData = {
 
     <p id="astral-entry-mode" class="gaia-helper-text">Currently showing the direct sign reading.</p>
 
-    <button id="gaia-generate" type="button" class="gaia-generate-button">
+    <button id="gaia-generate" type="button" class="gaia-generate-button" data-gaia-lock-block="generate-action">
       Generate {initialProfile.sign.name} Reading
     </button>
 
-    <section id="gaia-output" class="gaia-output" hidden>
+    <section id="gaia-output" class="gaia-output" data-gaia-lock-block="reading-output" hidden>
       <div class="gaia-output-toolbar">
         <div>
           <p id="astral-result-mode" class="gaia-section-label">Direct sign reading</p>

@@ -27,6 +27,26 @@ const baseRoutes = [
   '/projects/from-ai-anxiety-to-recursive-governance-under-constraint/',
 ];
 
+const contentChecks = {
+  '/gaia/': {
+    includes: [
+      'data-gaia-page-lock="full-bleed-app"',
+      'data-gaia-page-shell="reference-surface"',
+      'data-gaia-design-lock="reference-surface-2026-03-29"',
+      'data-gaia-lock-block="sign-grid"',
+      'data-gaia-lock-block="preview-card"',
+      'data-gaia-lock-block="generate-action"',
+      'data-gaia-lock-block="reading-output"',
+    ],
+    excludes: [
+      'gaia-cosmos-shell',
+      'Use GAIA directly from this page.',
+      'GAIA surfaces',
+      'How it works',
+    ],
+  },
+};
+
 function runNpm(args) {
   return new Promise((resolve, reject) => {
     const child = spawn(npmCmd, args, { stdio: 'inherit' });
@@ -146,6 +166,24 @@ async function run() {
       if (response.status < 200 || response.status >= 400) {
         throw new Error(`Route failed: ${route} -> HTTP ${response.status}`);
       }
+
+      const contentCheck = contentChecks[route];
+      if (contentCheck) {
+        const html = await response.text();
+
+        for (const needle of contentCheck.includes) {
+          if (!html.includes(needle)) {
+            throw new Error(`Route failed content check: ${route} is missing "${needle}"`);
+          }
+        }
+
+        for (const needle of contentCheck.excludes) {
+          if (html.includes(needle)) {
+            throw new Error(`Route failed content check: ${route} should not include "${needle}"`);
+          }
+        }
+      }
+
       console.log(`ok ${route} -> ${response.status}`);
     }
 

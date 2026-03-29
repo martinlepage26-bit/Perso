@@ -3,8 +3,9 @@ import AstralGaialogyApp from '../astral/AstralGaialogyApp.astro';
 import { gaialogySigns } from '../../data/astralYear';
 ---
 
-<section id="gaia-tool" class="gaia-app-page">
-  <div class="gaia-app-bleed">
+<!-- GAIA design lock: keep this route as a direct full-bleed app surface unless an explicit redesign is requested. -->
+<section id="gaia-tool" class="gaia-app-page" data-gaia-page-lock="full-bleed-app">
+  <div class="gaia-app-bleed" data-gaia-page-shell="reference-surface">
     <AstralGaialogyApp signs={gaialogySigns} />
   </div>
 </section>
