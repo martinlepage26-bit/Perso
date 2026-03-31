@@ -13,6 +13,12 @@ export interface LotusSampleNote {
   text: string;
 }
 
+export interface LotusBloomQuestion {
+  id: string;
+  prompt: string;
+  note: string;
+}
+
 const UNTITLED_NOTE = 'Untitled Lotus note';
 
 export const lotusSignalGroups: readonly LotusSignalGroup[] = [
@@ -133,20 +139,20 @@ export const lotusSignalGroups: readonly LotusSignalGroup[] = [
 
 export const lotusSurfaces = [
   {
-    eyebrow: 'For people',
-    title: 'Map what is exhausting you.',
+    eyebrow: 'Bloom flow',
+    title: 'Enter the one-bloom Lotus ascent.',
     description:
-      'If life feels too heavy, too confusing, or too hard to explain, LOTUS can help you see the shape of what is happening — what you are carrying, where options have closed, and what kinds of support might help.',
-    href: '#lotus-workbench',
-    cta: 'Open the workbench',
+      'The primary Lotus surface is now a sequential journaling experience: one question, one bloom, one writing surface, and one upward movement at a time.',
+    href: '/lotus/',
+    cta: 'Enter Lotus',
   },
   {
     eyebrow: 'For researchers',
     title: 'Analyze constrained agency across scales.',
     description:
       'LOTUS offers a structured, non-reductionist framework for mapping how regulatory load, perceptual narrowing, blocked access, and social legibility interact under conditions of stress, trauma, precarity, or institutional mismatch.',
-    href: '#lotus-vector',
-    cta: 'Run the vector model',
+    href: '/lotus/research/#lotus-vector',
+    cta: 'Run the research tools',
   },
   {
     eyebrow: 'Framework paper',
@@ -161,7 +167,7 @@ export const lotusSurfaces = [
     title: 'Understand what LOTUS does not do.',
     description:
       'LOTUS does not diagnose, predict fixed futures, or replace therapy, crisis care, or medical treatment. Any high-stakes use should include human judgment and appropriate ethical safeguards.',
-    href: '#lotus-boundary',
+    href: '/lotus/research/#lotus-boundary',
     cta: 'Read the limits',
   },
 ] as const;
@@ -205,6 +211,44 @@ export const lotusSampleNotes: readonly LotusSampleNote[] = [
     title: 'Workflow handoff and monitoring memo',
     text:
       'The team needs a clearer implementation process before the next delivery cycle. Current workflow and coordination patterns leave too much ambiguity at the scheduling and monitoring stage, which weakens execution capacity and creates governance risk. The recommendation is a small operational control set: name the owner, document the process, preserve accountability, and keep the review path legible across the whole project team.',
+  },
+] as const;
+
+export const lotusBloomQuestions: readonly LotusBloomQuestion[] = [
+  {
+    id: 'weight',
+    prompt: 'What feels heaviest right now?',
+    note: 'Name the pressure plainly. You do not need to explain everything at once.',
+  },
+  {
+    id: 'narrowing',
+    prompt: 'Where have your options narrowed?',
+    note: 'Describe where movement, choice, or flexibility has become harder to reach.',
+  },
+  {
+    id: 'hidden-load',
+    prompt: 'What are you carrying that other people may not see?',
+    note: 'Let the invisible part become visible here, even if only in fragments.',
+  },
+  {
+    id: 'support',
+    prompt: 'What kind of support would change the shape of this moment?',
+    note: 'Think in concrete terms: a person, a condition, a pause, a resource, a boundary.',
+  },
+  {
+    id: 'agency',
+    prompt: 'Where do you still feel some agency, even if it is small?',
+    note: 'Look for the smallest real place where choice, refusal, care, or direction still exists.',
+  },
+  {
+    id: 'next-step',
+    prompt: 'What would a kinder next step look like?',
+    note: 'Name the next move that feels survivable, not the perfect move.',
+  },
+  {
+    id: 'carry-forward',
+    prompt: 'What do you want to carry upward with you?',
+    note: 'Let this final bloom hold what should remain present as you continue.',
   },
 ] as const;
 

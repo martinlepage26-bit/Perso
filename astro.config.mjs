@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { resolveSiteUrl } from './site-config.js';
@@ -21,6 +22,7 @@ export default defineConfig({
     collectionsBackwardsCompat: true,
   },
   integrations: [
+    react(),
     mdx(),
     sitemap({
       filter: (page) => {

@@ -1,33 +1,35 @@
 ---
 title: "Lotus"
-subtitle: "Local-first note scoring app in development"
+subtitle: "Sequential bloom journaling app with a separate research route"
 year: 2026
-status: "App in development · browser workbench"
-description: "A local-first note scoring app in development across agency, strategy, governance, operational, creative, and meaning signals."
+status: "App in development · bloom journaling route + research tooling"
+description: "A local-first bloom journaling app with a separate Lotus research route for scoring, vector analysis, and signal-library work."
 role: "Creator"
 outputs:
-  - "Canonical note-scoring model"
-  - "Browser-side scoring workbench"
-  - "Local-first desktop and CLI line"
+  - "Sequential one-bloom journaling flow"
+  - "Browser-side Lotus research workbench"
+  - "Vector model and signal-library route"
 tags:
   - App in development
   - Local-first
-  - Agency scoring
-  - Archive systems
+  - Bloom journaling
+  - Reflective UX
   - Research tooling
-  - Note scoring
+  - Agency analysis
 featured: false
 image: "/assets/geometric-motif-bottomleft.png"
-imageAlt: "A local-first scoring app for reading notes through agency, strategy, governance, and meaning signals."
+imageAlt: "A local-first bloom journaling app with a separate research route for agency, strategy, governance, and meaning signals."
 links:
   - label: "Open Lotus"
     url: "/lotus/"
+  - label: "Open Lotus research"
+    url: "/lotus/research/"
   - label: "Read the framework paper"
     url: "/projects/bonded-intelligence-under-constraint/"
   - label: "GitHub repo"
     url: "https://github.com/martinlepage26-bit/Agency"
 ---
 
-*Lotus* is a local-first app in development with a defined scoring model and an active browser workbench. It reads notes through agency, strategy, governance, operational, creative, and meaning signals without overstating its current state.
+*Lotus* is a local-first app in development built around a sequential bloom journaling experience. The public `/lotus/` route now holds the ritual surface: one question, one writing zone, one upward movement at a time.
 
-The website workbench consolidates the public naming. *Lotus* is the app.
+The analytical workbench still exists, but it now lives on `/lotus/research/` so the reflective bloom flow can stay singular and legible. *Lotus* is the app; the research route is its supporting method surface.
