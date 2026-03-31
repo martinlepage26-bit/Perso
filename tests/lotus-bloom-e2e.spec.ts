@@ -11,6 +11,10 @@ test.describe('Lotus agency scorer', () => {
     await expect(page.locator('#lotus-text-input')).toBeVisible();
     await expect(page.locator('#lotus-score-button')).toBeVisible();
     await expect(page.locator('#lotus-result-title')).toBeVisible();
+    await expect(page.locator('#lotus-title-input')).toHaveValue('');
+    await expect(page.locator('#lotus-text-input')).toHaveValue('');
+    await expect(page.locator('#lotus-result-title')).toHaveText('Paste or load a Lotus note');
+    await expect(page.locator('#lotus-result-summary')).toContainText('Paste a note or load a public sample');
 
     await page.locator('#lotus-title-input').fill('Regression recovery note');
     await page
@@ -35,6 +39,7 @@ test.describe('Lotus agency scorer', () => {
     await expect(page.locator('#lotus-preview')).toContainText('The team needs a clearer implementation process');
 
     await page.locator('#lotus-reset-button').click();
+    await expect(page.getByRole('button', { name: 'Load starter sample', exact: true })).toBeVisible();
     await expect(page.locator('#lotus-title-input')).toHaveValue('Bonded intelligence under constraint');
     await expect(page.locator('[data-lotus-sample="bonded-intelligence"]')).toHaveAttribute('aria-pressed', 'true');
 

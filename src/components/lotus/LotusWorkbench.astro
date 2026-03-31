@@ -1,14 +1,21 @@
 ---
 import { buildLotusAssessment, lotusDefaultState, lotusSampleNotes, lotusSignalGroups } from '../../data/lotus';
 
-const defaultState = {
+const initialState = {
+  title: '',
+  text: '',
+  sample: '',
+};
+
+const starterSample = {
   ...lotusDefaultState,
   sample: lotusSampleNotes[0]?.slug ?? '',
 };
 
-const initialAssessment = buildLotusAssessment(defaultState);
+const initialAssessment = buildLotusAssessment(initialState);
 const appData = {
-  defaultState,
+  initialState,
+  starterSample,
   sampleNotes: lotusSampleNotes,
   signalGroups: lotusSignalGroups,
 };
@@ -27,7 +34,7 @@ const appData = {
             id="lotus-title-input"
             class="lotus-input"
             type="text"
-            value={defaultState.title}
+            value={initialState.title}
             placeholder="Optional title. Lotus can infer one from the note."
           />
         </div>
@@ -37,7 +44,7 @@ const appData = {
             <label class="lotus-label" for="lotus-text-input">Note body</label>
             <p class="text-xs uppercase tracking-[0.18em] text-slate-400">Markdown or plain text</p>
           </div>
-          <textarea id="lotus-text-input" class="lotus-input lotus-textarea">{defaultState.text}</textarea>
+          <textarea id="lotus-text-input" class="lotus-input lotus-textarea">{initialState.text}</textarea>
           <p class="mt-3 text-sm leading-6 text-slate-400">
             LOTUS strips markdown noise before scoring. The reading stays in your browser; this public surface does not
             upload or save the note.
@@ -47,13 +54,13 @@ const appData = {
         <div class="lotus-input-card">
           <p class="lotus-label">Load a public sample</p>
           <div class="mt-4 lotus-sample-row">
-            {lotusSampleNotes.map((sample, index) => (
+            {lotusSampleNotes.map((sample) => (
               <button
                 type="button"
                 class="lotus-sample-button"
                 data-lotus-sample={sample.slug}
-                data-selected={index === 0 ? 'true' : 'false'}
-                aria-pressed={index === 0 ? 'true' : 'false'}
+                data-selected="false"
+                aria-pressed="false"
               >
                 {sample.label}
               </button>
@@ -64,14 +71,14 @@ const appData = {
 
       <div class="mt-8 flex flex-wrap gap-3">
         <button id="lotus-score-button" type="button" class="button-primary">Score note</button>
-        <button id="lotus-reset-button" type="button" class="button-secondary">Restore default sample</button>
+        <button id="lotus-reset-button" type="button" class="button-secondary">Load starter sample</button>
       </div>
     </section>
 
     <aside class="veil-panel lotus-result-panel" aria-live="polite" aria-atomic="true">
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p id="lotus-source-label" class="lotus-mini-label">Default sample</p>
+          <p id="lotus-source-label" class="lotus-mini-label">Paste a note or load a sample</p>
           <h3 id="lotus-result-title" class="mt-3 text-[1.52rem] leading-tight md:text-[1.92rem]">{initialAssessment.title}</h3>
           <p class="mt-2 text-sm uppercase tracking-[0.18em] text-slate-400">Browser-side Lotus reading</p>
         </div>
@@ -166,7 +173,8 @@ const appData = {
       const lotusData = JSON.parse(lotusDataElement.textContent || '{}');
       const signalGroups = lotusData.signalGroups || [];
       const sampleNotes = lotusData.sampleNotes || [];
-      const defaultState = lotusData.defaultState || {};
+      const initialState = lotusData.initialState || {};
+      const starterSample = lotusData.starterSample || {};
 
       const titleInput = document.getElementById('lotus-title-input');
       const textInput = document.getElementById('lotus-text-input');
@@ -322,8 +330,11 @@ const appData = {
       const buildAssessment = (state) => {
         const rawText = state.text || '';
         const extracted = extractMarkdownParts(rawText);
-        const resolvedTitle = inferLotusTitle(state.title, rawText);
         const cleanedText = extracted.cleanedText;
+        const hasMeaningfulText = cleanedText.trim().length > 0;
+        const resolvedTitle = hasMeaningfulText || cleanCandidateText(state.title || '')
+          ? inferLotusTitle(state.title, rawText)
+          : 'Paste or load a Lotus note';
         const fullText = [resolvedTitle, cleanedText.slice(0, 24000)].join('\n');
 
         const groups = signalGroups.map((group) => {
@@ -356,9 +367,11 @@ const appData = {
           .filter((group) => group.score > 0)
           .slice(0, 3);
         const totalMatchedTerms = groups.reduce((sum, group) => sum + group.matchedTerms.length, 0);
-        const summary = dominantGroups.length
-          ? `This note currently reads strongest through ${joinHumanList(dominantGroups.map((group) => group.label))} signals.`
-          : 'This note does not yet strongly activate the Lotus signal library. Add more concrete governance, agency, operational, creative, or meaning-rich language to shift the score.';
+        const summary = !hasMeaningfulText
+          ? 'Paste a note or load a public sample to see which Lotus signals rise to the surface.'
+          : dominantGroups.length
+            ? `This note currently reads strongest through ${joinHumanList(dominantGroups.map((group) => group.label))} signals.`
+            : 'This note does not yet strongly activate the Lotus signal library. Add more concrete governance, agency, operational, creative, or meaning-rich language to shift the score.';
         const boundaryText =
           'The website workbench scores only the text pasted into the browser. The canonical desktop and local repo line still owns file imports, local workspaces, and deeper note review.';
         const exportMarkdown = [
@@ -481,10 +494,10 @@ const appData = {
       scoreButton?.addEventListener('click', renderCurrentNote);
 
       resetButton?.addEventListener('click', () => {
-        titleInput.value = defaultState.title || '';
-        textInput.value = defaultState.text || '';
-        setSelectedSample(defaultState.sample || sampleNotes[0]?.slug || '');
-        renderAssessment(buildAssessment(defaultState), 'Default sample');
+        titleInput.value = starterSample.title || '';
+        textInput.value = starterSample.text || '';
+        setSelectedSample(starterSample.sample || sampleNotes[0]?.slug || '');
+        renderAssessment(buildAssessment(starterSample), 'Starter sample');
       });
 
       sampleButtons.forEach((button) => {
@@ -508,13 +521,8 @@ const appData = {
         }
       });
 
-      if (defaultState.sample) {
-        applySample(defaultState.sample);
-      } else if (sampleNotes[0]) {
-        applySample(sampleNotes[0].slug);
-      } else {
-        renderAssessment(buildAssessment(defaultState), 'Current browser note');
-      }
+      setSelectedSample('');
+      renderAssessment(buildAssessment(initialState), 'Paste a note or load a sample');
     }
   </script>
 </div>

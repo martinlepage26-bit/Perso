@@ -20,6 +20,7 @@ export interface LotusBloomQuestion {
 }
 
 const UNTITLED_NOTE = 'Untitled Lotus note';
+const EMPTY_NOTE_TITLE = 'Paste or load a Lotus note';
 
 export const lotusSignalGroups: readonly LotusSignalGroup[] = [
   {
@@ -407,8 +408,11 @@ export function buildLotusAssessment({
 }) {
   const rawText = text ?? '';
   const extracted = extractMarkdownParts(rawText);
-  const resolvedTitle = inferLotusTitle(title, rawText);
   const cleanedText = extracted.cleanedText;
+  const hasMeaningfulText = cleanedText.trim().length > 0;
+  const resolvedTitle = hasMeaningfulText || cleanCandidateText(title ?? '')
+    ? inferLotusTitle(title, rawText)
+    : EMPTY_NOTE_TITLE;
   const fullText = [resolvedTitle, cleanedText.slice(0, 24000)].join('\n');
 
   const groups = lotusSignalGroups.map((group) => {
@@ -436,9 +440,11 @@ export function buildLotusAssessment({
   const activeSignals = groups.filter((group) => group.matchedTerms.length > 0).map((group) => group.label);
   const dominantGroups = [...groups].sort((left, right) => right.score - left.score).filter((group) => group.score > 0).slice(0, 3);
   const totalMatchedTerms = groups.reduce((sum, group) => sum + group.matchedTerms.length, 0);
-  const summary = dominantGroups.length
-    ? `This note currently reads strongest through ${joinHumanList(dominantGroups.map((group) => group.label))} signals.`
-    : 'This note does not yet strongly activate the Lotus signal library. Add more concrete governance, agency, operational, creative, or meaning-rich language to shift the score.';
+  const summary = !hasMeaningfulText
+    ? 'Paste a note or load a public sample to see which Lotus signals rise to the surface.'
+    : dominantGroups.length
+      ? `This note currently reads strongest through ${joinHumanList(dominantGroups.map((group) => group.label))} signals.`
+      : 'This note does not yet strongly activate the Lotus signal library. Add more concrete governance, agency, operational, creative, or meaning-rich language to shift the score.';
   const boundary =
     'The website workbench scores only the text pasted into the browser. The canonical desktop and local repo line still owns file imports, local workspaces, and deeper note review.';
 
