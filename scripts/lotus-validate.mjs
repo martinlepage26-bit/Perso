@@ -92,6 +92,11 @@ async function runRouteContractChecks() {
   );
   assert.match(
     lotusBloomJourney,
+    /window\.addEventListener\('pagehide', handlePageHide\)/,
+    'LOTUS bloom flow should flush pending draft persistence on page hide.',
+  );
+  assert.match(
+    lotusBloomJourney,
     /showFullStalk = state\.completed \|\| state\.mode === 'review'/,
     'LOTUS should render the full stalk in completion and review contexts.',
   );

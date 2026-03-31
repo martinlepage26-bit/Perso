@@ -265,6 +265,16 @@ const appData = {
         }, 500);
       };
 
+      const flushPendingDraftSave = () => {
+        if (draftTimer === null) {
+          return;
+        }
+
+        window.clearTimeout(draftTimer);
+        draftTimer = null;
+        persistState();
+      };
+
       const currentQuestionIndex = () =>
         state.mode === 'review'
           ? Math.max(0, state.reviewIndex ?? 0)
@@ -735,9 +745,21 @@ const appData = {
         }
       });
 
+      const handlePageHide = () => {
+        flushPendingDraftSave();
+      };
+
       state = readStoredState();
       render();
       syncKeyboardOffset();
+
+      window.addEventListener('pagehide', handlePageHide);
+      window.addEventListener('beforeunload', handlePageHide);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          handlePageHide();
+        }
+      });
 
       if (window.visualViewport) {
         viewportResizeHandler = () => {
