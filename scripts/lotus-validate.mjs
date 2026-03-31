@@ -30,15 +30,15 @@ async function runRouteContractChecks() {
   assert.match(lotusRoute, /canonical="\/lotus\/"/, 'LOTUS route should keep the primary canonical path.');
   assert.match(
     lotusRoute,
-    /When life gets harder to carry, LOTUS helps make the pattern clearer\./,
-    'LOTUS route should restore the analytical Lotus hero copy.',
+    /Agency scorer and reflective workbench\./,
+    'LOTUS route should lead with an app-first Lotus heading.',
   );
   assert.match(lotusRoute, /id="lotus-workbench"/, 'LOTUS route should expose the workbench anchor.');
   assert.match(lotusRoute, /id="lotus-vector"/, 'LOTUS route should expose the vector model anchor.');
   assert.match(
     lotusRoute,
-    /Run the vector model/,
-    'LOTUS route should foreground the scorer and vector workflow on the main route.',
+    /Jump to the questions/,
+    'LOTUS route should keep the vector questions reachable from the main route.',
   );
 
   assert.match(

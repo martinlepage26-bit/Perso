@@ -6,7 +6,7 @@ test.describe('Lotus agency scorer', () => {
 
     await page.goto('/lotus/');
 
-    await expect(page.getByRole('heading', { level: 1, name: /when life gets harder to carry/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /agency scorer and reflective workbench/i })).toBeVisible();
     await expect(page.locator('#lotus-title-input')).toBeVisible();
     await expect(page.locator('#lotus-text-input')).toBeVisible();
     await expect(page.locator('#lotus-score-button')).toBeVisible();

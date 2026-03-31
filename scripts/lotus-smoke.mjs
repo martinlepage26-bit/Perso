@@ -120,9 +120,10 @@ async function main() {
       '/lotus',
       /<title>Lotus \| LOTUS<\/title>/,
       [
-        /When life gets harder to carry, LOTUS helps make the pattern clearer\./,
+        /Agency scorer and reflective workbench\./,
         /id="lotus-workbench"/,
         /id="lotus-vector"/,
+        /Jump to the questions/,
       ],
       [/Open the first bloom\./],
     );
@@ -130,9 +131,10 @@ async function main() {
       '/lotus/',
       /<title>Lotus \| LOTUS<\/title>/,
       [
-        /When life gets harder to carry, LOTUS helps make the pattern clearer\./,
+        /Agency scorer and reflective workbench\./,
         /id="lotus-workbench"/,
         /id="lotus-vector"/,
+        /Jump to the questions/,
       ],
       [/Open the first bloom\./],
     );
