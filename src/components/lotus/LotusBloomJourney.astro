@@ -722,11 +722,13 @@ const appData = {
         }
       });
 
-      elements.submit.addEventListener('pointerdown', () => {
-        beginHold();
+      ['pointerdown', 'mousedown'].forEach((eventName) => {
+        elements.submit.addEventListener(eventName, () => {
+          beginHold();
+        });
       });
 
-      ['pointerup', 'pointerleave', 'pointercancel'].forEach((eventName) => {
+      ['pointerup', 'pointerleave', 'pointercancel', 'mouseup', 'mouseleave'].forEach((eventName) => {
         elements.submit.addEventListener(eventName, () => {
           resetHold();
         });

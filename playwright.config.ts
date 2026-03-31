@@ -21,9 +21,9 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
   webServer: {
-    command: 'npm run preview -- --host 127.0.0.1 --port 4519 --strictPort',
+    command: 'npm run build && npm run preview -- --host 127.0.0.1 --port 4519 --strictPort',
     url: 'http://127.0.0.1:4519/lotus/',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });
