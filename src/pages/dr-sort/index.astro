@@ -135,29 +135,10 @@ import '../../styles/drsort-standalone.css';
     </div>
 
     <script>
-      // Inlined state logic for simplicity in one file, but following the defined models
-      const STORAGE_KEY = 'dr_sort_state_v1';
-      const SEED_QUEUE = [
-        { id: 'q-001', fileName: 'policy_draft_v2.pdf', relativePath: '/inbox/governance/', fileType: 'pdf', size: 46080, modifiedAt: '2026-03-28T14:20:00Z', textSnippet: 'This policy outlines the governance framework for agentic systems...', suggestedBin: 'Policy Frameworks', confidence: 0.88, status: 'ready', riskFlags: [] },
-        { id: 'q-002', fileName: 'literature_review_notes.md', relativePath: '/inbox/research/', fileType: 'md', size: 12288, modifiedAt: '2026-03-29T09:15:00Z', textSnippet: 'Key themes identified in the 2025 AI ethics survey include...', suggestedBin: 'Research Literature', confidence: 0.65, status: 'needs_review', riskFlags: ['missing_tags'] },
-        { id: 'q-003', fileName: 'contradictory_evidence_A.docx', relativePath: '/inbox/audit/', fileType: 'docx', size: 90112, modifiedAt: '2026-03-30T16:45:00Z', textSnippet: 'The audit logs show a discrepancy between the reported and actual...', suggestedBin: 'Audit Logs', confidence: 0.42, status: 'contradiction', riskFlags: ['high_risk', 'arbitration_required'] },
-        { id: 'q-004', fileName: 'duplicate_report_final.pdf', relativePath: '/inbox/reports/', fileType: 'pdf', size: 159744, modifiedAt: '2026-03-31T08:00:00Z', textSnippet: 'Final summary of the quarterly performance review...', suggestedBin: 'Quarterly Reports', confidence: 0.95, status: 'duplicate_risk', riskFlags: ['potential_duplicate'] }
-      ];
+      import { loadState, saveState, getReadinessScore } from '../../lib/dr-sort/state';
 
-      let state = { currentPass: null, queue: SEED_QUEUE, notes: [], moves: [] };
-
-      function load() {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-          try { state = JSON.parse(stored); } catch (e) { console.error(e); }
-        }
-        render();
-      }
-
-      function save() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        render();
-      }
+      let state = loadState();
+      let currentItemId = null;
 
       function render() {
         // Update Pass UI
@@ -202,15 +183,12 @@ import '../../styles/drsort-standalone.css';
 
         // Render Readiness
         const rList = document.getElementById('readiness-list');
-        const total = state.queue.length;
-        const staged = state.queue.filter(i => i.status === 'staged').length;
-        const contradictions = state.queue.filter(i => i.status === 'contradiction').length;
-        const score = total > 0 ? Math.round((staged / total) * 100) : 0;
+        const score = getReadinessScore(state);
 
         rList.innerHTML = `
-          <li>Classification: ${score}%</li>
-          <li>Unresolved: ${total - staged}</li>
-          <li>Contradictions: ${contradictions}</li>
+          <li>Classification: ${score.percentage}%</li>
+          <li>Unresolved: ${score.unresolved}</li>
+          <li>Contradictions: ${score.contradictions}</li>
         `;
       }
 
@@ -221,14 +199,14 @@ import '../../styles/drsort-standalone.css';
         } else {
           state.currentPass = {
             id: 'pass-' + Date.now(),
-            scopeLabel: document.getElementById('scope-input').value,
+            scopeLabel: document.getElementById('scope-input').value || 'Untitled Pass',
             openedAt: new Date().toISOString()
           };
         }
-        save();
+        saveState(state);
+        render();
       };
 
-      let currentItemId = null;
       function inspect(id) {
         currentItemId = id;
         const item = state.queue.find(i => i.id === id);
@@ -249,6 +227,7 @@ import '../../styles/drsort-standalone.css';
 
       document.getElementById('ins-close').onclick = () => {
         document.getElementById('inspector').style.display = 'none';
+        currentItemId = null;
       };
 
       document.getElementById('btn-accept').onclick = () => {
@@ -276,28 +255,34 @@ import '../../styles/drsort-standalone.css';
         });
 
         item.status = 'staged';
-        save();
+        saveState(state);
+        render();
         document.getElementById('inspector').style.display = 'none';
+        currentItemId = null;
       };
 
       document.getElementById('btn-defer').onclick = () => {
         if (!currentItemId) return;
         const item = state.queue.find(i => i.id === currentItemId);
         item.status = 'deferred';
-        save();
+        saveState(state);
+        render();
         document.getElementById('inspector').style.display = 'none';
+        currentItemId = null;
       };
 
       document.getElementById('btn-contradiction').onclick = () => {
         if (!currentItemId) return;
         const item = state.queue.find(i => i.id === currentItemId);
         item.status = 'contradiction';
-        save();
+        saveState(state);
+        render();
         document.getElementById('inspector').style.display = 'none';
+        currentItemId = null;
       };
 
       // Init
-      load();
+      render();
     </script>
   </body>
 </html>
