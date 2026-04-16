@@ -32,6 +32,7 @@ const tags = collectTags([...projects, ...unpublishedPapers]);
 <BaseLayout
   title={pageMeta.projects.title}
   description={pageMeta.projects.description}
+  pageClass="page-projects"
 >
   <PracticeHero
     eyebrow="Projects"
@@ -81,6 +82,8 @@ const tags = collectTags([...projects, ...unpublishedPapers]);
     </div>
 
     <div class="mt-10 space-y-16" data-filter-scope="projects">
+
+      <!-- Project archive: bento grid — first card spans full width -->
       <section id="project-archive">
         <SectionIntro
           eyebrow="Project archive"
@@ -88,22 +91,26 @@ const tags = collectTags([...projects, ...unpublishedPapers]);
           description="This section foregrounds unfinished work where process visibility matters as much as outcomes, and where the five app lines stay visibly distinct."
         />
 
-        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <div class="project-bento mt-10">
           {projects.map((project) => <ProjectCard project={project} />)}
         </div>
       </section>
 
+      <!-- Research records: visually distinct container, separated from app builds -->
       <section id="unpublished-papers">
-        <SectionIntro
-          eyebrow="In-progress research"
-          title="Manuscripts and unresolved research leads."
-          description="These records stay public here until publication status is confirmed and metadata is stable."
-        />
+        <div class="projects-research-section">
+          <SectionIntro
+            eyebrow="In-progress research"
+            title="Manuscripts and unresolved research leads."
+            description="These records stay public here until publication status is confirmed and metadata is stable."
+          />
 
-        <div class="mt-10 grid gap-6 lg:grid-cols-2">
-          {unpublishedPapers.map((paper) => <PublicationCard paper={paper} />)}
+          <div class="mt-10 grid gap-6 lg:grid-cols-2">
+            {unpublishedPapers.map((paper) => <PublicationCard paper={paper} />)}
+          </div>
         </div>
       </section>
+
     </div>
   </section>
 </BaseLayout>

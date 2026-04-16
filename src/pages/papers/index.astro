@@ -2,10 +2,9 @@
 import { getCollection } from 'astro:content';
 import FilterBar from '../../components/FilterBar.astro';
 import PracticeHero from '../../components/PracticeHero.astro';
-import PublicationCard from '../../components/PublicationCard.astro';
 import SectionIntro from '../../components/SectionIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { collectTags, isPublishedPaper, sortByYear } from '../../lib/content';
+import { clampText, collectTags, contentSlug, isPublishedPaper, sortByYear } from '../../lib/content';
 import { researchOverview, researchProfile } from '../../data/research';
 import { pageMeta, siteMeta } from '../../data/site';
 
@@ -19,6 +18,7 @@ const tags = collectTags(publications);
 <BaseLayout
   title={pageMeta.publications.title}
   description={pageMeta.publications.description}
+  pageClass="page-papers"
 >
   <PracticeHero
     eyebrow="Publications"
@@ -101,6 +101,7 @@ const tags = collectTags(publications);
       ))}
     </div>
 
+    <!-- Bibliography list replaces card grid -->
     <div class="mt-14" id="publication-archive">
       <SectionIntro
         eyebrow="On-site index"
@@ -113,8 +114,32 @@ const tags = collectTags(publications);
       <FilterBar scopeId="papers" tags={tags} searchPlaceholder="Search publications" />
     </div>
 
-    <div class="mt-10 grid gap-6 lg:grid-cols-2" data-filter-scope="papers">
-      {publications.map((paper) => <PublicationCard paper={paper} />)}
+    <!-- Bibliography format: ruled list instead of card grid -->
+    <div class="biblio-list mt-4" data-filter-scope="papers">
+      {publications.map((paper) => {
+        const href = isPublishedPaper(paper) ? `/papers/${contentSlug(paper.id)}/` : `/projects/${contentSlug(paper.id)}/`;
+        const summary = clampText(paper.data.abstract, 200);
+        return (
+          <article
+            class="biblio-entry"
+            data-filter-item
+            data-tags={paper.data.tags.join('|').toLowerCase()}
+            data-search={`${paper.data.title} ${paper.data.venue} ${paper.data.abstract} ${paper.data.tags.join(' ')}`.toLowerCase()}
+          >
+            <div class="biblio-year-col">
+              {paper.data.year && <span class="biblio-year">{paper.data.year}</span>}
+              <span class="biblio-type-label">{paper.data.type}</span>
+            </div>
+            <div class="biblio-body">
+              <a class="biblio-title-link" href={href}>{paper.data.title}</a>
+              <p class="biblio-venue">{paper.data.venue}</p>
+              <span class="biblio-status-tag">{paper.data.status}</span>
+              {summary && <p class="biblio-summary">{summary}</p>}
+              <a class="biblio-cta" href={href}>Open record →</a>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>
