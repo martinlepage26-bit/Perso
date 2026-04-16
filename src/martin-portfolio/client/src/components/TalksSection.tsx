@@ -120,7 +120,7 @@ export default function TalksSection() {
                   lineHeight: 1.15,
                 }}
               >
-                Presentations, workshops, and public argument.
+                Talks, workshops, and public argument.
               </h2>
               <p
                 style={{
@@ -131,7 +131,7 @@ export default function TalksSection() {
                   color: "oklch(0.58 0.018 255)",
                 }}
               >
-                Talks are organized around the same principles as written work: bounded claims, explicit evidence, and practical consequence for the audience.
+                The same method, spoken: bounded claims, explicit evidence, practical consequence.
               </p>
             </motion.div>
 

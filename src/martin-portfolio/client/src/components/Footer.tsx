@@ -4,13 +4,13 @@ import { ExternalLink } from "lucide-react";
 
 const footerLinks = {
   explore: [
-    { label: "Institutional Analysis", href: "https://martin.govern-ai.ca/papers/" },
-    { label: "AI Governance", href: "https://martin.govern-ai.ca/governance/" },
-    { label: "Public Writing", href: "https://martin.govern-ai.ca/writing/" },
+    { label: "Analysis", href: "https://martin.govern-ai.ca/papers/" },
+    { label: "Governance", href: "https://martin.govern-ai.ca/governance/" },
+    { label: "Writing", href: "https://martin.govern-ai.ca/writing/" },
     { label: "Apps", href: "https://martin.govern-ai.ca/projects/" },
     { label: "Talks", href: "https://martin.govern-ai.ca/talks/" },
     { label: "About", href: "https://martin.govern-ai.ca/about/" },
-    { label: "Resume and CV", href: "https://martin.govern-ai.ca/resume/" },
+    { label: "Resume / CV", href: "https://martin.govern-ai.ca/resume/" },
   ],
   elsewhere: [
     { label: "martinlepage.ai@gmail.com", href: "mailto:martinlepage.ai@gmail.com" },
@@ -97,14 +97,14 @@ export default function Footer() {
                 maxWidth: "22rem",
               }}
             >
-              The site links governance practice, publications, writing, and talks as one continuous record of how institutions make claims, justify decisions, and distribute consequence.
+              Governance practice, publications, writing, and talks held in one public record.
             </p>
             <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <a href="https://martin.govern-ai.ca/contact/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: "0.68rem", padding: "0.45rem 0.875rem" }}>
-                Start a conversation
+                Get in touch
               </a>
               <a href="https://martin.govern-ai.ca/governance/" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ fontSize: "0.68rem", padding: "0.45rem 0.875rem" }}>
-                Open governance practice
+                Open governance work
               </a>
             </div>
           </div>
@@ -222,7 +222,7 @@ export default function Footer() {
               fontStyle: "italic",
             }}
           >
-            Precise claims. Reviewable method. Serious collaboration.
+            Precise claims. Traceable decisions. Serious collaboration.
           </span>
         </div>
       </div>

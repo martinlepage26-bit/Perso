@@ -5,21 +5,33 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { number: "4", label: "Governance records", desc: "Operational governance structures with explicit decision-rights and control logic." },
-  { number: "16", label: "Publication records", desc: "Published research records with bounded claims and source visibility." },
-  { number: "5", label: "Writing records", desc: "Public argument and institutional interpretation in accessible, reviewable form." },
+  {
+    number: "24",
+    label: "Paper records",
+    desc: "Published, circulating, and in-development paper records kept visible across the site.",
+  },
+  {
+    number: "16",
+    label: "Published records",
+    desc: "Verified articles, chapters, reviews, editorials, and dissertation records with stable metadata.",
+  },
+  {
+    number: "5",
+    label: "Public app surfaces",
+    desc: "LOTUS, ECHO, SCRIPTO, GAIA, and Dr.Sort each held as a distinct public route.",
+  },
 ];
 
 const methods = [
   {
     id: "01",
-    title: "Claim boundary discipline",
-    desc: "Separate verified evidence, structured inference, and unresolved uncertainty.",
+    title: "Archive boundary discipline",
+    desc: "Keep published work, manuscripts in circulation, and unresolved leads in different claim lanes.",
   },
   {
     id: "02",
-    title: "Relational analysis",
-    desc: "Read technical systems together with policy language and institutional constraints.",
+    title: "Research genealogy mapping",
+    desc: "Show how queer ritual studies, media analysis, and governance work remain one continuous line.",
   },
   {
     id: "03",
@@ -68,7 +80,7 @@ export default function InstitutionalSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55 }}
         >
-          <p className="eyebrow">Institutional Framing</p>
+          <p className="eyebrow">Institutional Analysis</p>
           <h2
             style={{
               fontFamily: "'Cormorant Garamond', serif",
@@ -80,7 +92,7 @@ export default function InstitutionalSection() {
               lineHeight: 1.15,
             }}
           >
-            Research architecture for governance decisions that must hold under scrutiny.
+            Research that holds under scrutiny.
           </h2>
           <p
             style={{
@@ -91,7 +103,8 @@ export default function InstitutionalSection() {
               color: "oklch(0.58 0.018 255)",
             }}
           >
-            The work follows an institutional-research logic: bounded claims, explicit method, traceable evidence, and selective routes for high-consequence readers.
+            A fuller paper line, explicit genealogies, and route design built for readers who need both continuity and
+            claim boundary.
           </p>
         </motion.div>
 

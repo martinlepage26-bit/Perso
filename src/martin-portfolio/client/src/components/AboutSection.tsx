@@ -95,16 +95,16 @@ export default function AboutSection() {
                 }}
               >
                 <p style={{ fontSize: "0.92rem", lineHeight: 1.75, color: "oklch(0.72 0.012 255)" }}>
-                  Martin Lepage is a Montreal-based institutional analyst, AI governance strategist, and writer working where institutional design, public meaning, and operational accountability meet.
+                  Martin Lepage is a Montreal-based institutional analyst, governance strategist, and writer working where institutional design, public meaning, and operational accountability meet.
                 </p>
                 <p style={{ fontSize: "0.88rem", lineHeight: 1.75, color: "oklch(0.62 0.015 255)" }}>
-                  His academic formation spans ritual studies, queer theory, media analysis, digital culture, and contemporary spiritualities. He completed a PhD in Religious Sciences at Université du Québec à Montréal after earlier degrees in literary studies at Université Laval. That trajectory trained close reading, conceptual discipline, and sensitivity to how categories shape what institutions can see.
+                  His academic formation spans ritual studies, queer theory, media analysis, digital culture, and contemporary spiritualities. After earlier degrees in literary studies at Université Laval, he completed a PhD in Religious Sciences at UQAM. That trajectory trained close reading, conceptual discipline, and sensitivity to how categories shape what institutions can see.
                 </p>
                 <p style={{ fontSize: "0.88rem", lineHeight: 1.75, color: "oklch(0.62 0.015 255)" }}>
-                  He has also worked in research operations, archives, AI-assisted quality evaluation, and clinical trial coordination. These roles demanded audit-ready documentation, multi-stakeholder judgment under pressure, and defensible decision pathways. The governance practice is grounded in that operational reality, not in abstract policy language alone.
+                  He has also worked in research operations, archives, AI-assisted quality evaluation, and clinical trial coordination. Those roles demanded audit-ready documentation, multi-stakeholder judgment under pressure, and defensible decision pathways. The governance practice is grounded in that operational reality, not abstract policy language alone.
                 </p>
                 <p style={{ fontSize: "0.88rem", lineHeight: 1.75, color: "oklch(0.62 0.015 255)" }}>
-                  The through-line is legitimacy: how authority becomes credible, how systems distribute consequence, and how language can either clarify or conceal responsibility.
+                  The through-line is legitimacy: how authority becomes credible, how systems distribute consequence, and how language clarifies or conceals responsibility.
                 </p>
               </div>
             </motion.div>
@@ -245,7 +245,7 @@ export default function AboutSection() {
                     color: "oklch(0.62 0.015 255)",
                   }}
                 >
-                  Institutional analysis, AI governance systems, public writing, and autodidact app development for decision traceability and documentation workflows.
+                  Institutional analysis, AI governance, public writing, and tools built for traceability.
                 </p>
                 <div style={{ marginTop: "1.25rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   <a href="https://martin.govern-ai.ca/governance/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ justifyContent: "center", fontSize: "0.72rem" }}>

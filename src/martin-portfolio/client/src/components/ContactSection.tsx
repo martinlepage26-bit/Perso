@@ -98,7 +98,7 @@ export default function ContactSection() {
               color: "oklch(0.58 0.018 255)",
             }}
           >
-            Email is the clearest channel. A concise first message with your context, objective, and timeline usually produces the fastest useful reply.
+            Email is the clearest channel. A concise first message with context, objective, and timeline usually gets the fastest useful reply.
           </p>
         </motion.div>
 
@@ -177,7 +177,7 @@ export default function ContactSection() {
                       onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                     >
                       <Mail size={11} />
-                      Email about {path.label.split(" ")[0].toLowerCase()} work
+                      Start this inquiry
                     </a>
                   </div>
                 </AnimatedCard>

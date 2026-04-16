@@ -37,3 +37,10 @@ The stack is governed as a dual-engine system:
 2. Map: context retrieval and tool routing.
 
 Together these units function as the HEPHAISTOS operating layer.
+
+## Current runtime baseline
+
+- Governance is primary for constraints, admissibility, escalation, and validation.
+- `philosopher` and `fully-rounded-power-analyst` are the two co-equal right-arms.
+- Public Hephaistos narratives and the authored tree artifacts publish from `https://martin.govern-ai.ca`.
+- PHAROS product, service, and mail operations stay on `https://pharos-ai.ca` and in `pharos-suite`.

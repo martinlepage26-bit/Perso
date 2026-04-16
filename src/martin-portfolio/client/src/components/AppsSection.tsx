@@ -10,38 +10,43 @@ const APPS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663476813471/hqNg7
 const apps = [
   {
     name: "LOTUS",
-    tagline: "Document analysis and governance annotation",
-    desc: "A governance-focused document analysis tool for annotating, tagging, and structuring institutional records with traceability.",
+    tagline: "Agency scorer and reflective workbench",
+    focus: "Notes, vector passes, and signal-library reading",
+    desc: "Local-first note scoring and vector analysis for situations where pressure, support, meaning, and room to move need clearer shape.",
     href: "https://martin.govern-ai.ca/lotus/",
-    tag: "Document Analysis",
+    tag: "Agency",
   },
   {
     name: "ECHO",
-    tagline: "Institutional voice and response drafting",
-    desc: "A drafting assistant for institutional communications that maintains tone consistency and accountability framing across documents.",
+    tagline: "Browser-native draft listening surface",
+    focus: "Cadence checks, revision listening, and bilingual playback",
+    desc: "A browser-local reading deck for hearing drafts back through system voices, live word tracking, and delivery presets shaped for revision work.",
     href: "https://martin.govern-ai.ca/echo/",
-    tag: "Writing Tool",
+    tag: "Draft listening",
   },
   {
     name: "SCRIPTO",
-    tagline: "Editorial workflow and manuscript management",
-    desc: "A manuscript management interface for editorial workflows, revision tracking, and publication-ready document preparation.",
+    tagline: "Deterministic packet builder",
+    focus: "Manuscripts, packet logic, and reviewer-pressure checks",
+    desc: "Turns topics, archives, and governance problems into bounded writing packets with claim mapping, recursive checks, control extraction, and export.",
     href: "https://martin.govern-ai.ca/scripto/",
-    tag: "Editorial",
+    tag: "Packet builder",
   },
   {
     name: "GAIA",
-    tagline: "Governance architecture and decision mapping",
-    desc: "A decision mapping tool for governance architecture work — visualizing authority chains, escalation logic, and accountability pathways.",
+    tagline: "Grounded gaialogy reading surface",
+    focus: "Sign profiles, glossary, and daily modulation",
+    desc: "The public app line built from Breath of the Astral Year, translating sign grammar into grounded seasonal and daily readings without drifting into distant sky mechanics.",
     href: "https://martin.govern-ai.ca/gaia/",
-    tag: "Governance",
+    tag: "Gaialogy",
   },
   {
     name: "Dr.Sort",
-    tagline: "Research classification and evidence sorting",
-    desc: "A research classification interface for sorting, tagging, and organizing evidence records for governance and institutional analysis work.",
+    tagline: "Document triage and review board",
+    focus: "Queues, sorting windows, and decision notes",
+    desc: "A darker queue-and-cabinet surface for batching document sets, reserving sorting passes, and keeping review accountability visible while the corpus gets organized.",
     href: "https://martin.govern-ai.ca/dr-sort/",
-    tag: "Research",
+    tag: "Corpus triage",
   },
 ];
 
@@ -105,7 +110,7 @@ export default function AppsSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55 }}
         >
-          <p className="eyebrow">Autodidact Apps</p>
+          <p className="eyebrow">Apps / Tools</p>
           <h2
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -118,7 +123,7 @@ export default function AppsSection() {
                 textShadow: "0 2px 6px oklch(0 0 0 / 30%)",
               }}
           >
-            Governance and writing tools built in practice.
+            Five public app surfaces, each with a different job.
           </h2>
           <p
             style={{
@@ -129,7 +134,8 @@ export default function AppsSection() {
               color: "oklch(0.58 0.018 255)",
             }}
           >
-            Self-built applications and method interfaces developed to support governance work, documentation, and interpretive workflows under real institutional pressure.
+            LOTUS, ECHO, SCRIPTO, GAIA, and Dr.Sort stay on the Martin surface as distinct tools for agency scoring,
+            draft listening, packet building, grounded gaialogy, and corpus triage.
           </p>
         </motion.div>
 
@@ -212,6 +218,31 @@ export default function AppsSection() {
                   {app.tagline}
                 </p>
 
+                <div style={{ marginBottom: "0.6rem" }}>
+                  <p
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.56rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "oklch(0.72 0.09 65 / 70%)",
+                    }}
+                  >
+                    Built for
+                  </p>
+                  <p
+                    style={{
+                      marginTop: "0.25rem",
+                      fontSize: "0.73rem",
+                      lineHeight: 1.55,
+                      color: "oklch(0.68 0.014 255)",
+                    }}
+                  >
+                    {app.focus}
+                  </p>
+                </div>
+
                 <p
                   style={{
                     fontSize: "0.78rem",
@@ -226,6 +257,24 @@ export default function AppsSection() {
             </AnimatedCard>
           ))}
         </div>
+
+        <AnimatedCard delay={0.45}>
+          <div className="veil-panel" style={{ marginTop: "1.5rem" }}>
+            <p className="eyebrow">Surface boundary</p>
+            <p
+              style={{
+                marginTop: "0.8rem",
+                maxWidth: "52rem",
+                fontSize: "0.84rem",
+                lineHeight: 1.7,
+                color: "oklch(0.62 0.015 255)",
+              }}
+            >
+              These five live on Martin&apos;s public surface. PHAROS, COMPASSai, and AurorA remain on the PHAROS
+              surface, so the app family stays legible instead of collapsing into one blurred product story.
+            </p>
+          </div>
+        </AnimatedCard>
 
         <AnimatedCard delay={0.5}>
           <div style={{ marginTop: "2rem" }}>

@@ -96,8 +96,8 @@ This binds to `http://127.0.0.1:4510` with `--strictPort`.
 
 ## ECHO Local TTS
 
-`/echo/` is a browser-local file-to-MP3 app.
-No API key, Worker binding, or backend endpoint is required for synthesis/export.
+`/echo/` is a browser-local voice reader.
+No API key, Worker binding, or backend endpoint is required for playback.
 
 Consolidated entry points:
 
@@ -108,14 +108,15 @@ Consolidated entry points:
 Behavior notes:
 
 - Drag-and-drop upload supports `.txt`, `.md`, `.docx`, and `.pdf`.
-- Text extraction and synthesis run in-browser.
-- Voice selection is backed by local meSpeak voice modules.
-- Export is encoded client-side to MP3 (`@breezystack/lamejs`).
+- Text extraction and playback run in-browser.
+- Voice selection comes from the browser and operating system (`speechSynthesis`).
+- ECHO, Ariel, and Voice11 act as local delivery presets for rate, pitch, volume, and voice matching heuristics.
+- Draft text and controls persist in local storage for return visits.
 
 Implementation files:
 
 - `src/pages/echo/index.astro`
-- `src/scripts/echo-file-to-mp3.js`
+- `src/scripts/echo-reader.js`
 - `src/styles/echo-standalone.css`
 
 ## Verification

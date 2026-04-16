@@ -139,7 +139,7 @@ export default function GovernanceSection() {
                   color: "oklch(0.58 0.018 255)",
                 }}
               >
-                Design decision rights, evidence pathways, and accountability controls that remain legible under audit, procurement, and public challenge.
+                Decision rights, evidence pathways, and accountability controls that stay legible under audit, procurement, and public challenge.
               </p>
             </motion.div>
 
@@ -236,7 +236,7 @@ export default function GovernanceSection() {
                   color: "oklch(0.58 0.018 255)",
                 }}
               >
-                Governance records are presented as working structures that can be read, tested, and contested.
+                Working structures: readable, testable, contestable.
               </p>
             </motion.div>
 

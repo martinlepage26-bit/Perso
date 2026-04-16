@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Institutional Analysis", href: "#analysis" },
-  { label: "AI Governance", href: "#governance" },
-  { label: "Public Writing", href: "#writing" },
+  { label: "Analysis", href: "#analysis" },
+  { label: "Governance", href: "#governance" },
+  { label: "Papers", href: "#papers" },
   { label: "Apps", href: "#apps" },
   { label: "Talks", href: "#talks" },
   { label: "About", href: "#about" },

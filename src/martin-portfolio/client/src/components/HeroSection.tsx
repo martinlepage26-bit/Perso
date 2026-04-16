@@ -16,19 +16,17 @@ const apps = [
 ];
 
 const routes = [
-  { label: "Institutional analysis & publications", href: "https://martin.govern-ai.ca/papers/" },
-  { label: "AI governance engagements", href: "https://martin.govern-ai.ca/governance/" },
-  { label: "Public writing & commentary", href: "https://martin.govern-ai.ca/writing/" },
-  { label: "Autodidact apps & tools", href: "https://martin.govern-ai.ca/projects/" },
+  { label: "Full paper list & research genealogies", href: "https://martin.govern-ai.ca/papers/" },
+  { label: "Governance practice", href: "https://martin.govern-ai.ca/governance/" },
+  { label: "Public writing & books", href: "https://martin.govern-ai.ca/writing/" },
+  { label: "Five public app surfaces", href: "https://martin.govern-ai.ca/projects/" },
 ];
 
 const facts = [
-  "Institutional analysis across language, culture, and power",
-  "AI governance architecture and decision traceability",
-  "Public writing for contested institutional decisions",
-  "Autodidact app development for governance workflows",
-  "PhD, Religious Sciences (UQAM)",
-  "English and French",
+  "24 paper records across ritual, media, and governance lines",
+  "16 published articles, chapters, reviews, editorials, and dissertation records",
+  "5 public apps shaped by workflow pressure",
+  "English and French research and public writing",
 ];
 
 const containerVariants = {
@@ -124,11 +122,11 @@ export default function HeroSection() {
                 textShadow: "0 2px 8px oklch(0 0 0 / 40%)",
               }}
             >
-              Institutional analysis,{" "}
+              Institutional analysis.{" "}
               <span style={{ color: "oklch(0.72 0.09 65)", fontStyle: "italic" }}>
-                AI governance,
+                AI governance.
               </span>{" "}
-              and public writing.
+              Public writing.
             </motion.h1>
 
             <motion.p
@@ -141,7 +139,9 @@ export default function HeroSection() {
                 color: "oklch(0.75 0.012 255)",
               }}
             >
-              Martin Lepage analyzes institutions, legitimacy structures, and consequence pathways, then translates those findings into governance design, decision documentation, and public argument.
+              Martin Lepage reads institutions, ritual worlds, media objects, and decision systems for legitimacy,
+              failure points, and consequence, then turns that reading into governance design, paper records, and
+              public writing.
             </motion.p>
 
             <motion.p
@@ -154,7 +154,9 @@ export default function HeroSection() {
                 color: "oklch(0.58 0.018 255)",
               }}
             >
-              The work combines operational rigor with cultural and philosophical reading, plus autodidact app development for traceability and editorial workflows under real institutional pressure.
+              The site keeps the fuller paper line in view, names the research genealogies that connect queer ritual
+              studies to media analysis and recursive governance, and gives each of the five public apps a distinct
+              role.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -163,11 +165,11 @@ export default function HeroSection() {
               style={{ marginTop: "2rem", display: "flex", flexWrap: "wrap", gap: "0.75rem" }}
             >
               <a href="https://martin.govern-ai.ca/papers/" target="_blank" rel="noopener noreferrer" className="btn-primary">
-                Read Institutional Analysis
+                Open full paper list
                 <ArrowRight size={14} />
               </a>
-              <a href="https://martin.govern-ai.ca/governance/" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                Review AI Governance Work
+              <a href="https://martin.govern-ai.ca/projects/" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                Browse the five apps
               </a>
             </motion.div>
 
@@ -241,7 +243,7 @@ export default function HeroSection() {
                 lineHeight: 1.3,
               }}
             >
-              Choose a route by decision need.
+              Choose an entry point.
             </h2>
             <p
               style={{
@@ -251,7 +253,7 @@ export default function HeroSection() {
                 color: "oklch(0.62 0.015 255)",
               }}
             >
-              Each path is organized for a different reader: governance partners, researchers, editors, speaking organizers, and first-time visitors.
+              Different routes for governance partners, researchers, editors, and first-time readers.
             </p>
             <ul
               style={{

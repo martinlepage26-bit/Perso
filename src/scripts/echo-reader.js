@@ -1,4 +1,13 @@
 import pdfWorkerUrl from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url';
+import {
+  buildEchoTranscriptFilename,
+  buildEchoTranscriptMarkdown,
+  encodeMonoPcm16Wav,
+  mixAudioChannelsToMono,
+  replaceFileExtension,
+  resampleMonoAudio,
+  shouldNormalizeAudioForTranscription,
+} from './echo-dictation-utils.js';
 
 const SAMPLE_TEXT =
   'ECHO is a browser-native reading surface for listening to drafts out loud. Paste text or import a document, choose a voice profile, and hear the language back with live word tracking.';
@@ -11,6 +20,21 @@ const DEFAULT_SURFACE_BATCH_SIZE = 420;
 const LARGE_SURFACE_BATCH_SIZE = 240;
 const LARGE_DRAFT_WORD_THRESHOLD = 4000;
 const HIGHLIGHT_SCROLL_THROTTLE_MS = 140;
+const DICTATION_ENDPOINT = '/api/echo-transcribe';
+const DICTATION_TIMESLICE_MS = 250;
+const DICTATION_PLACEHOLDER = [
+  '> microphone standby',
+  '> press Record to capture a voice note',
+  '> export the resulting transcript as markdown when ready',
+].join('\n');
+const RECORDING_MIME_CANDIDATES = [
+  'audio/webm;codecs=opus',
+  'audio/webm',
+  'audio/mp4',
+  'audio/ogg;codecs=opus',
+];
+const IMPORT_AUDIO_ACCEPT = '.m4a,.mp4,.mp3,.wav,.ogg,.webm,audio/*';
+const NORMALIZED_TRANSCRIPTION_SAMPLE_RATE = 16000;
 
 const SUPPORTED_EXTENSIONS = new Set(['txt', 'md', 'markdown', 'docx', 'pdf']);
 const TEXT_EXTENSIONS = new Set(['txt', 'md', 'markdown']);
@@ -65,6 +89,75 @@ function extensionFromFilename(filename) {
   const name = String(filename || '').trim().toLowerCase();
   const idx = name.lastIndexOf('.');
   return idx >= 0 ? name.slice(idx + 1) : '';
+}
+
+function pickRecordingMimeType() {
+  if (typeof window === 'undefined' || typeof window.MediaRecorder !== 'function') {
+    return '';
+  }
+
+  if (typeof window.MediaRecorder.isTypeSupported !== 'function') {
+    return '';
+  }
+
+  return RECORDING_MIME_CANDIDATES.find((candidate) => window.MediaRecorder.isTypeSupported(candidate)) || '';
+}
+
+function mimeTypeToExtension(mimeType) {
+  const value = String(mimeType || '').toLowerCase();
+  if (value.includes('m4a') || value.includes('x-m4a')) return 'm4a';
+  if (value.includes('mp4')) return 'mp4';
+  if (value.includes('webm')) return 'webm';
+  if (value.includes('ogg')) return 'ogg';
+  if (value.includes('wav')) return 'wav';
+  if (value.includes('mpeg') || value.includes('mp3')) return 'mp3';
+  return 'bin';
+}
+
+function fileNameStem(filename, fallback = 'echo-dictation') {
+  const cleaned = String(filename || '').trim();
+  if (!cleaned) {
+    return fallback;
+  }
+
+  return cleaned.replace(/\.[a-z0-9]+$/i, '') || fallback;
+}
+
+function buildDictationTitle(filename) {
+  const stem = fileNameStem(filename, 'ECHO Dictation')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!stem) {
+    return 'ECHO Dictation';
+  }
+
+  return stem
+    .split(' ')
+    .map((part) => (part ? part.charAt(0).toUpperCase() + part.slice(1) : part))
+    .join(' ');
+}
+
+function closeAudioContext(context) {
+  if (!context || typeof context.close !== 'function') {
+    return Promise.resolve();
+  }
+
+  try {
+    const result = context.close();
+    return result && typeof result.then === 'function' ? result.catch(() => {}) : Promise.resolve();
+  } catch {
+    return Promise.resolve();
+  }
+}
+
+function formatRecordingClock(milliseconds) {
+  const safeMilliseconds = Math.max(0, Math.round(Number(milliseconds) || 0));
+  const minutes = Math.floor(safeMilliseconds / 60000);
+  const seconds = Math.floor((safeMilliseconds % 60000) / 1000);
+  const tenths = Math.floor((safeMilliseconds % 1000) / 100);
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${tenths}`;
 }
 
 function clampNumber(value, min, max, fallback) {
@@ -488,6 +581,16 @@ export function initEchoReaderApp() {
   const progressNode = appNode.querySelector('[data-echo-progress]');
   const progressLabelNode = appNode.querySelector('[data-echo-progress-label]');
   const outputNode = appNode.querySelector('[data-echo-output]');
+  const recordButton = appNode.querySelector('[data-echo-record]');
+  const importAudioButton = appNode.querySelector('[data-echo-audio-load]');
+  const audioInput = appNode.querySelector('[data-echo-audio-input]');
+  const stopRecordButton = appNode.querySelector('[data-echo-record-stop]');
+  const clearTranscriptButton = appNode.querySelector('[data-echo-transcript-clear]');
+  const downloadTranscriptButton = appNode.querySelector('[data-echo-transcript-download]');
+  const dictationStatusNode = appNode.querySelector('[data-echo-dictation-status]');
+  const dictationMetaNode = appNode.querySelector('[data-echo-dictation-meta]');
+  const dictationDurationNode = appNode.querySelector('[data-echo-dictation-duration]');
+  const dictationOutputNode = appNode.querySelector('[data-echo-dictation-output]');
 
   if (
     !dropZone ||
@@ -538,6 +641,35 @@ export function initEchoReaderApp() {
   let voicePollTimer = 0;
   let voicePollAttempts = 0;
   let lastHighlightScrollAt = 0;
+  const dictationEnabled = Boolean(
+    recordButton &&
+    stopRecordButton &&
+    clearTranscriptButton &&
+    downloadTranscriptButton &&
+    dictationStatusNode &&
+    dictationMetaNode &&
+    dictationDurationNode &&
+    dictationOutputNode
+  );
+  const audioImportEnabled = Boolean(importAudioButton && audioInput);
+  let dictationRecorder = null;
+  let dictationStream = null;
+  let dictationChunks = [];
+  let dictationRecording = false;
+  let dictationTranscribing = false;
+  let dictationStartedAt = 0;
+  let dictationTimer = 0;
+  let dictationCapturedDurationMs = 0;
+  let transcriptState = {
+    title: 'ECHO Dictation',
+    transcript: '',
+    language: '',
+    durationSeconds: 0,
+    wordCount: 0,
+    sourceLabel: 'Browser dictation console',
+    createdAt: '',
+    segments: [],
+  };
 
   const setStatus = (message, tone = 'info') => {
     statusNode.textContent = message;
@@ -550,6 +682,68 @@ export function initEchoReaderApp() {
     progressLabelNode.textContent = label;
   };
 
+  const setDictationStatus = (message, tone = 'info') => {
+    if (!dictationEnabled) {
+      return;
+    }
+    dictationStatusNode.textContent = message;
+    dictationStatusNode.dataset.tone = tone;
+  };
+
+  const setDictationMeta = (message) => {
+    if (!dictationEnabled) {
+      return;
+    }
+    dictationMetaNode.textContent = message;
+  };
+
+  const updateDictationDuration = (milliseconds) => {
+    if (!dictationEnabled) {
+      return;
+    }
+    dictationDurationNode.textContent = formatRecordingClock(milliseconds);
+  };
+
+  const renderDictationOutput = () => {
+    if (!dictationEnabled) {
+      return;
+    }
+    dictationOutputNode.textContent = transcriptState.transcript || DICTATION_PLACEHOLDER;
+  };
+
+  const clearDictationTimer = () => {
+    if (dictationTimer) {
+      window.clearInterval(dictationTimer);
+      dictationTimer = 0;
+    }
+  };
+
+  const releaseDictationStream = () => {
+    if (!dictationStream) {
+      return;
+    }
+    dictationStream.getTracks().forEach((track) => track.stop());
+    dictationStream = null;
+  };
+
+  const setDictationButtons = () => {
+    if (!dictationEnabled) {
+      return;
+    }
+
+    const dictationSupported =
+      Boolean(window.navigator.mediaDevices?.getUserMedia) && typeof window.MediaRecorder === 'function';
+
+    recordButton.disabled = !dictationSupported || dictationRecording || dictationTranscribing;
+    if (audioImportEnabled) {
+      importAudioButton.disabled = dictationRecording || dictationTranscribing;
+      audioInput.disabled = dictationRecording || dictationTranscribing;
+    }
+    stopRecordButton.disabled = !dictationRecording;
+    clearTranscriptButton.disabled = dictationRecording || dictationTranscribing || !transcriptState.transcript;
+    downloadTranscriptButton.disabled = dictationRecording || dictationTranscribing || !transcriptState.transcript;
+  };
+
   const setButtons = () => {
     const hasText = normalizeText(textArea.value).length > 0;
     const speechUnavailable = !synth || typeof window.SpeechSynthesisUtterance !== 'function';
@@ -559,6 +753,7 @@ export function initEchoReaderApp() {
     pauseButton.disabled = speechUnavailable || !playing || paused;
     stopButton.disabled = speechUnavailable || (!playing && !paused);
     playButton.textContent = paused ? 'Resume' : 'Play';
+    setDictationButtons();
   };
 
   const clearHighlights = () => {
@@ -654,6 +849,329 @@ export function initEchoReaderApp() {
     previewRenderTimer = window.setTimeout(() => {
       void renderPreviewSurface(textArea.value);
     }, PREVIEW_RENDER_DEBOUNCE_MS);
+  };
+
+  const maybeLoadTranscriptIntoDraft = async (transcript) => {
+    if (normalizeText(textArea.value)) {
+      return;
+    }
+
+    textArea.value = transcript;
+    fileMetaNode.textContent = `Loaded from ${String(transcriptState.sourceLabel || 'transcript').toLowerCase()}.`;
+    updateTextMeta();
+    await renderPreviewSurface(transcript);
+    persistState();
+    setButtons();
+    setStatus('Transcript loaded into the draft intake. Press Play to hear it back.', 'ok');
+    setProgress(0, 'Ready');
+  };
+
+  const normalizeAudioBlobForTranscription = async (blob, fileName = '') => {
+    if (!shouldNormalizeAudioForTranscription({ mimeType: blob?.type, filename: fileName })) {
+      return {
+        blob,
+        mimeType: blob?.type || 'application/octet-stream',
+        fileName,
+        normalized: false,
+      };
+    }
+
+    const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+    if (typeof AudioContextCtor !== 'function') {
+      throw new Error('This browser cannot normalize M4A audio yet. Use WAV, MP3, WebM, or another browser.');
+    }
+
+    const audioContext = new AudioContextCtor();
+    try {
+      const sourceBuffer = await blob.arrayBuffer();
+      const decoded = await audioContext.decodeAudioData(sourceBuffer.slice(0));
+      const monoSamples = mixAudioChannelsToMono(
+        Array.from({ length: decoded.numberOfChannels }, (_, index) => decoded.getChannelData(index)),
+      );
+      const resampled = resampleMonoAudio(monoSamples, decoded.sampleRate, NORMALIZED_TRANSCRIPTION_SAMPLE_RATE);
+      const wavBytes = encodeMonoPcm16Wav(resampled, NORMALIZED_TRANSCRIPTION_SAMPLE_RATE);
+
+      return {
+        blob: new Blob([wavBytes], { type: 'audio/wav' }),
+        mimeType: 'audio/wav',
+        fileName: replaceFileExtension(fileName || 'echo-dictation.wav', 'wav'),
+        normalized: true,
+      };
+    } catch (error) {
+      throw new Error(
+        error instanceof Error
+          ? `Audio normalization failed: ${error.message}`
+          : 'Audio normalization failed before transcription.',
+      );
+    } finally {
+      await closeAudioContext(audioContext);
+    }
+  };
+
+  const transcribeDictationBlob = async (blob, options = {}) => {
+    if (!dictationEnabled) {
+      return;
+    }
+
+    const {
+      fileName: requestedFileName = '',
+      sourceLabel = 'Browser dictation console',
+    } = options;
+    const languageHint = String(window.navigator.language || '')
+      .slice(0, 2)
+      .toLowerCase();
+    const createdAt = new Date().toISOString();
+    const fallbackFileName = `echo-dictation-${createdAt.replace(/[:.]/g, '-')}.${mimeTypeToExtension(blob.type || 'audio/webm')}`;
+    const targetUrl = languageHint
+      ? `${DICTATION_ENDPOINT}?language=${encodeURIComponent(languageHint)}`
+      : DICTATION_ENDPOINT;
+
+    dictationTranscribing = true;
+    setDictationStatus('Preparing audio for transcription...', 'info');
+    setDictationMeta(
+      `${Math.max(1, Math.round(blob.size / 1024)).toLocaleString()} KB captured · awaiting transcript`,
+    );
+    updateDictationDuration(dictationCapturedDurationMs);
+    setButtons();
+
+    try {
+      const preparedAudio = await normalizeAudioBlobForTranscription(blob, requestedFileName || fallbackFileName);
+      setDictationStatus('Uploading audio clip to the ECHO transcription worker...', 'info');
+      setDictationMeta(
+        preparedAudio.normalized
+          ? `${Math.max(1, Math.round(preparedAudio.blob.size / 1024)).toLocaleString()} KB WAV normalized locally · uploading`
+          : `${Math.max(1, Math.round(preparedAudio.blob.size / 1024)).toLocaleString()} KB captured · uploading`,
+      );
+
+      const response = await fetch(targetUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': preparedAudio.mimeType,
+          'X-Echo-Filename': preparedAudio.fileName,
+          'X-Echo-Language': languageHint,
+        },
+        body: preparedAudio.blob,
+      });
+
+      let payload = null;
+      try {
+        payload = await response.json();
+      } catch {
+        throw new Error(`Transcription returned a non-JSON response (${response.status}).`);
+      }
+
+      if (!response.ok || !payload?.ok) {
+        throw new Error(payload?.error || `Transcription failed (${response.status}).`);
+      }
+
+      const transcript = normalizeText(payload.text);
+      if (!transcript) {
+        throw new Error('Transcription returned no readable text.');
+      }
+
+      transcriptState = {
+        title: buildDictationTitle(requestedFileName || preparedAudio.fileName),
+        transcript,
+        language: String(payload?.transcription_info?.language || languageHint || '').trim(),
+        durationSeconds: Number(payload?.transcription_info?.duration || 0),
+        wordCount: Number(payload?.word_count || countWords(transcript)),
+        sourceLabel,
+        createdAt,
+        segments: Array.isArray(payload?.segments) ? payload.segments : [],
+      };
+
+      renderDictationOutput();
+      updateDictationDuration(
+        transcriptState.durationSeconds > 0
+          ? transcriptState.durationSeconds * 1000
+          : dictationCapturedDurationMs,
+      );
+
+      const languageLabel = transcriptState.language || 'auto-detected';
+      const durationLabel =
+        transcriptState.durationSeconds > 0
+          ? `${transcriptState.durationSeconds.toFixed(1)} seconds`
+          : `${(dictationCapturedDurationMs / 1000).toFixed(1)} seconds`;
+      setDictationStatus('Transcript ready. Download the markdown file or continue in the intake deck.', 'ok');
+      setDictationMeta(
+        `${transcriptState.wordCount.toLocaleString()} words · ${languageLabel} · ${durationLabel}`,
+      );
+      await maybeLoadTranscriptIntoDraft(transcript);
+    } catch (error) {
+      setDictationStatus(error instanceof Error ? error.message : 'Transcription failed.', 'error');
+      setDictationMeta('Check microphone permissions or clip format and try another short capture.');
+    } finally {
+      dictationTranscribing = false;
+      setButtons();
+    }
+  };
+
+  const importAudioClip = async (file) => {
+    if (!dictationEnabled || !file) {
+      return;
+    }
+
+    if (!String(file.type || '').startsWith('audio/') && !/\.(m4a|mp4|mp3|wav|ogg|webm)$/i.test(file.name || '')) {
+      setDictationStatus('Choose an audio clip such as M4A, MP3, WAV, OGG, or WebM.', 'error');
+      setDictationMeta('The imported file must be an audio recording that can be normalized for transcription.');
+      setButtons();
+      return;
+    }
+
+    dictationCapturedDurationMs = 0;
+    updateDictationDuration(0);
+    setDictationStatus('Clip selected. Preparing import...', 'info');
+    setDictationMeta(`${file.name} · ${Math.max(1, Math.round(file.size / 1024)).toLocaleString()} KB`);
+    setButtons();
+
+    await transcribeDictationBlob(file, {
+      fileName: file.name || 'echo-imported-audio',
+      sourceLabel: `Imported audio clip (${file.name || 'audio file'})`,
+    });
+  };
+
+  const startDictation = async () => {
+    if (!dictationEnabled) {
+      return;
+    }
+
+    if (!window.navigator.mediaDevices?.getUserMedia || typeof window.MediaRecorder !== 'function') {
+      setDictationStatus('Microphone recording is not available in this browser.', 'error');
+      setDictationMeta('Use a compatible browser with MediaRecorder support to capture dictation.');
+      setButtons();
+      return;
+    }
+
+    const mimeType = pickRecordingMimeType();
+
+    try {
+      dictationChunks = [];
+      dictationCapturedDurationMs = 0;
+      dictationStream = await window.navigator.mediaDevices.getUserMedia({ audio: true });
+      dictationRecorder = mimeType
+        ? new window.MediaRecorder(dictationStream, { mimeType })
+        : new window.MediaRecorder(dictationStream);
+
+      dictationRecorder.addEventListener('dataavailable', (event) => {
+        if (event.data && event.data.size > 0) {
+          dictationChunks.push(event.data);
+        }
+      });
+
+      dictationRecorder.addEventListener('stop', async () => {
+        const recordedMimeType = dictationRecorder?.mimeType || mimeType || 'application/octet-stream';
+        const audioBlob = new Blob(dictationChunks, { type: recordedMimeType });
+        dictationChunks = [];
+        dictationRecorder = null;
+        releaseDictationStream();
+
+        if (!audioBlob.size) {
+          dictationTranscribing = false;
+          setDictationStatus('Recording finished, but no audio was captured.', 'error');
+          setDictationMeta('Try again and speak a little closer to the microphone.');
+          setButtons();
+          return;
+        }
+
+        await transcribeDictationBlob(audioBlob, {
+          fileName: `echo-dictation-${new Date().toISOString().replace(/[:.]/g, '-')}.${mimeTypeToExtension(recordedMimeType)}`,
+          sourceLabel: 'Browser dictation console',
+        });
+      });
+
+      dictationRecorder.addEventListener('error', () => {
+        dictationRecording = false;
+        dictationTranscribing = false;
+        clearDictationTimer();
+        releaseDictationStream();
+        dictationRecorder = null;
+        setDictationStatus('Microphone recording failed.', 'error');
+        setDictationMeta('The recording surface reported an error before the clip could be transcribed.');
+        setButtons();
+      });
+
+      dictationRecorder.start(DICTATION_TIMESLICE_MS);
+      dictationRecording = true;
+      dictationTranscribing = false;
+      dictationStartedAt = Date.now();
+      updateDictationDuration(0);
+      clearDictationTimer();
+      dictationTimer = window.setInterval(() => {
+        updateDictationDuration(Date.now() - dictationStartedAt);
+      }, 100);
+
+      const formatLabel = mimeTypeToExtension(dictationRecorder.mimeType || mimeType || 'audio/webm').toUpperCase();
+      setDictationStatus('Recording... press Stop when ready.', 'ok');
+      setDictationMeta(`${formatLabel} microphone capture armed.`);
+      setButtons();
+    } catch (error) {
+      dictationRecording = false;
+      dictationTranscribing = false;
+      clearDictationTimer();
+      releaseDictationStream();
+      dictationRecorder = null;
+      setDictationStatus(
+        error instanceof Error ? error.message : 'Unable to access the microphone for dictation.',
+        'error',
+      );
+      setDictationMeta('Allow microphone access and try again.');
+      setButtons();
+    }
+  };
+
+  const stopDictation = () => {
+    if (!dictationEnabled || !dictationRecorder || dictationRecorder.state === 'inactive') {
+      return;
+    }
+
+    dictationCapturedDurationMs = Math.max(0, Date.now() - dictationStartedAt);
+    dictationRecording = false;
+    dictationTranscribing = true;
+    clearDictationTimer();
+    updateDictationDuration(dictationCapturedDurationMs);
+    setDictationStatus('Finishing recording and preparing transcription...', 'info');
+    setDictationMeta('Wrapping microphone buffer...');
+    dictationRecorder.stop();
+    setButtons();
+  };
+
+  const clearTranscript = () => {
+    if (!dictationEnabled) {
+      return;
+    }
+
+    transcriptState = {
+      title: 'ECHO Dictation',
+      transcript: '',
+      language: '',
+      durationSeconds: 0,
+      wordCount: 0,
+      sourceLabel: 'Browser dictation console',
+      createdAt: '',
+      segments: [],
+    };
+    dictationCapturedDurationMs = 0;
+    renderDictationOutput();
+    updateDictationDuration(0);
+    setDictationStatus('Transcript cleared.', 'info');
+    setDictationMeta('Capture a clip to render transcript text here.');
+    setButtons();
+  };
+
+  const downloadTranscriptMarkdown = () => {
+    if (!dictationEnabled || !transcriptState.transcript) {
+      return;
+    }
+
+    const markdown = buildEchoTranscriptMarkdown(transcriptState);
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = buildEchoTranscriptFilename(transcriptState.title);
+    link.click();
+    window.setTimeout(() => URL.revokeObjectURL(link.href), 0);
+    setDictationStatus('Transcript markdown downloaded.', 'ok');
+    setDictationMeta('The transcript packet was written as a local .md file.');
   };
 
   const refreshVoiceMeta = () => {
@@ -971,6 +1489,12 @@ export function initEchoReaderApp() {
   syncSliderLabels();
   fileMetaNode.textContent = 'No file selected yet.';
   void renderPreviewSurface(textArea.value);
+  renderDictationOutput();
+  updateDictationDuration(0);
+  if (dictationEnabled) {
+    setDictationStatus('Microphone idle.', 'info');
+    setDictationMeta('Capture a clip to render transcript text here.');
+  }
   applyProfile(activeProfileId, false);
   if (!queryProfile && storedState) {
     rateInput.value = clampNumber(storedState.rate, 0.6, 1.6, 1).toFixed(2);
@@ -983,11 +1507,7 @@ export function initEchoReaderApp() {
     setStatus('Speech synthesis is not available in this browser.', 'error');
     setVoiceSelectPlaceholder(voiceSelect, 'Speech synthesis unavailable');
     refreshVoiceMeta();
-    setButtons();
-    return;
-  }
-
-  if (populateVoices(true)) {
+  } else if (populateVoices(true)) {
     setStatus('Paste text or import a file, then press Play.', 'info');
     setProgress(0, 'Idle');
   } else {
@@ -1000,9 +1520,9 @@ export function initEchoReaderApp() {
     populateVoices(true);
   };
 
-  if (typeof synth.addEventListener === 'function') {
+  if (synth && typeof synth.addEventListener === 'function') {
     synth.addEventListener('voiceschanged', onVoicesChanged);
-  } else if (typeof synth.onvoiceschanged !== 'undefined') {
+  } else if (synth && typeof synth.onvoiceschanged !== 'undefined') {
     synth.onvoiceschanged = onVoicesChanged;
   }
 
@@ -1115,9 +1635,40 @@ export function initEchoReaderApp() {
     stopPlayback();
   });
 
+  if (dictationEnabled) {
+    recordButton.addEventListener('click', () => {
+      void startDictation();
+    });
+
+    if (audioImportEnabled) {
+      importAudioButton.addEventListener('click', () => {
+        audioInput.value = '';
+        audioInput.click();
+      });
+
+      audioInput.addEventListener('change', () => {
+        const [file] = Array.from(audioInput.files || []);
+        if (!file) {
+          return;
+        }
+
+        void importAudioClip(file);
+      });
+    }
+
+    stopRecordButton.addEventListener('click', stopDictation);
+    clearTranscriptButton.addEventListener('click', clearTranscript);
+    downloadTranscriptButton.addEventListener('click', downloadTranscriptMarkdown);
+  }
+
   window.addEventListener('beforeunload', () => {
     window.clearTimeout(previewRenderTimer);
     clearVoicePolling();
+    clearDictationTimer();
+    releaseDictationStream();
+    if (dictationRecorder && dictationRecorder.state !== 'inactive') {
+      dictationRecorder.stop();
+    }
     if (synth) {
       if (typeof synth.removeEventListener === 'function') {
         synth.removeEventListener('voiceschanged', onVoicesChanged);
